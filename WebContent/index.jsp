@@ -43,7 +43,7 @@
             + "</td><td>" + unTrajet.getDate() 
             + "</td><td>" + unTrajet.getDestination() 
             + "</td><td>" + unTrajet.getImage() 
-        	+ "</td><td><a href='index.jsp?numero='" + unTrajet.getId() + "> X </a></td></tr>");
+        	+ "</td><td><a href='index.jsp?id='" + unTrajet.getId() + "> X </a></td></tr>");
         }
 		out.print("</table>");
 		if ( request.getParameter("id") != null )
