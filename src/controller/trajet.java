@@ -1,18 +1,18 @@
-package index;
+package controller;
 
-public class trajet 
+public class Trajet 
 {
 	private int id, prix;
 	private String heure_dep, heure_arr, aeroport, date, destination, image;
 	
-	public trajet()
+	public Trajet()
 	{
 		this.heure_dep = this.heure_arr = this.aeroport = this.date = this.destination = this.image = "";
 		this.id = 0;
 		this.prix = 0;
 	}
 
-	public trajet(int id, int prix, String heure_dep, String heure_arr, String aeroport, String date, String destination, String image) 
+	public Trajet(int id, int prix, String heure_dep, String heure_arr, String aeroport, String date, String destination, String image) 
 	{
 		super();
 		this.id = id;
@@ -25,9 +25,17 @@ public class trajet
 		this.image = image;
 	}
 	
-	public void ajouter()
+	public String consulter()
 	{
-	
+		return "ID : " + this.id 
+				+ "<br/> Prix : " + this.prix 
+				+ "<br/> Heure de départ : " + this.heure_dep
+				+ "<br/> Heure d'arrivée : " + this.heure_arr
+				+ "<br/> Aéroport : " + this.aeroport
+				+ "<br/> Date : " + this.date
+				+ "<br/> Destination : " + this.destination
+				+ "<br/> Image : " + this.image
+				+ "<br/>";
 	}
 
 	public int getId() {
