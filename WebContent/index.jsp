@@ -14,11 +14,11 @@
 		<form method="post" action="">
 		Prix : <input type="text" name="prix"><br/>
 		Heure de départ : <input type="text" name="heure_dep"><br/>
-		Heure d'arrivée : <input type="number" name="heure_arr"><br/>
-		Aéroport de départ : <input type="number" name="aeroport"><br/>
+		Heure d'arrivée : <input type="text" name="heure_arr"><br/>
+		Aéroport de départ : <input type="text" name="aeroport"><br/>
 		Date : <input type="number" name="date"><br/>
-		Destination : <input type="number" name="destination"><br/>
-		Image : <input type="number" name="image"><br/>
+		Destination : <input type="text" name="destination"><br/>
+		Image : <input type="text" name="image"><br/>
 		<input type="submit" name="enregistrer" value="enregistrer"><br/>
 		</form>
 		<br/>
