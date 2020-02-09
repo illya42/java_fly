@@ -6,27 +6,31 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Réseau @Fly</title>
+<title>Gestion des Trajets</title>
 </head>
 <body>
 	<%@ include file="entete.jsp" %>
-		<h1>Accueil</h1>
-		<h3>Identification</h3>
+		<h1>Gestion des Trajets</h1>
 		<form method="post" action="">
-		Identifiant : <input type="text" name="prix"><br/>
-		Mot de passe : <input type="text" name="heure_dep"><br/>
-		<input type="submit" name="valider" value="valider"><br/>
+		Prix : <input type="text" name="prix"><br/>
+		Heure de départ : <input type="text" name="heure_dep"><br/>
+		Heure d'arrivée : <input type="text" name="heure_arr"><br/>
+		Aéroport de départ : <input type="text" name="aeroport"><br/>
+		Date : <input type="number" name="date"><br/>
+		Destination : <input type="text" name="destination"><br/>
+		Image : <input type="text" name="image"><br/>
+		<input type="submit" name="enregistrer" value="enregistrer"><br/>
 		</form>
 		<br/>
 		<br/>
 		<%!
 		//partie déclaration
-		Administrateur unAdministrateur;
+		Trajet unTrajet;
 		%>
 		
 		<%
 		//partie éxecution
-		ArrayList<Administrateur> lesAdministrateurs = Controller.selectAllAdministrateurs();
+		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
 		//parcourir les compte
 		out.print("<table border =1> <tr><td>ID</td><td>Prix</td><td>Heure départ</td><td>Heure arrivée</td><td>Aéroport</td><td>Date</td><td>Destination</td><td>Image</td><td>Supprimer</td></tr>");
 		for (Trajet unTrajet : lesTrajets)
