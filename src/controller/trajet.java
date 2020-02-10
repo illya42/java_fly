@@ -7,9 +7,8 @@ public class Trajet
 	
 	public Trajet()
 	{
+		this.id = this.prix = 0;
 		this.heure_dep = this.heure_arr = this.aeroport = this.date = this.destination = this.image = "";
-		this.id = 0;
-		this.prix = 0;
 	}
 
 	public Trajet(int id, int prix, String heure_dep, String heure_arr, String aeroport, String date, String destination, String image) 

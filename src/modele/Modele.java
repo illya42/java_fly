@@ -7,17 +7,35 @@ import java.sql.SQLException;
 
 import controller.Administrateur;
 import controller.Trajet;
+import controller.Vol;
 
 public class Modele 
 {
 	private static Bdd uneBdd = new Bdd("localhost", "dbfly", "root", "root");
 	
-	//FONCTIONS CONNECTION
-	
-	public static Administrateur connection( String identifiant, String mdp )
+	public static void executer(String requete)
 	{
+		try
+		{
+			uneBdd.seConnecter();
+			Statement unStat = uneBdd.getMaConnexion().createStatement();
+			unStat.execute(requete);
+			unStat.close();
+			uneBdd.seDeconnecter();
+		}
+		catch( SQLException exp )
+		{
+			System.out.println("Erreur d'execution :" + requete);
+		}
+	}
+	
+	//FONCTIONS ADMINISTRATEUR
+	
+	public static ArrayList<Administrateur> selectAllAdministrateurs()
+	{
+		ArrayList<Administrateur> lesAdministrateurs = new ArrayList<Administrateur>();
 		
-		String requete = "select * from administrateur where identifiant = " + identifiant + " and mdp = " + mdp + ";";
+		String requete = "select * from administrateur;";
 		
 		try 
 		{
@@ -34,6 +52,7 @@ public class Modele
 						unRes.getString("identifiant"),
 						unRes.getString("mdp")
 						);
+				lesAdministrateurs.add(unAdministrateur);
 			}
 			
 			uneBdd.seDeconnecter();
@@ -42,9 +61,43 @@ public class Modele
 		{
 			exp.printStackTrace();
 		}
-
-		return ;
+		
+		return lesAdministrateurs;
 	}
+	
+	public static void insertAdministrateur( Administrateur unAdministrateur )
+	{
+		String requete="insert into administrateur values (null, '" 
+				+ unAdministrateur.getId() 
+		+ "','" + unAdministrateur.getNom_admin()
+		+"','" + unAdministrateur.getPrenom_admin() 
+		+"','" + unAdministrateur.getIdentifiant()
+		+"','" + unAdministrateur.getMdp()
+		+"');";
+		
+		executer (requete);
+	}
+	
+	public static void deleteAdministrateur( int id )
+	{
+		String requete ="delete from administrateur where id = " + id + ";";
+		
+		executer (requete);
+	}
+	
+	public static void updateAdministrateur( Administrateur unAdministrateur )
+	{
+		String requete="update administrateur set nom_admin = '" + unAdministrateur.getNom_admin()
+		+ "', prenom_admin = '" + unAdministrateur.getPrenom_admin()
+		+ "', identifiant = '" + unAdministrateur.getIdentifiant()
+		+ "', mdp = '" + unAdministrateur.getMdp()
+		+ " where id = '" 
+		+ unAdministrateur.getId() + "';";
+		
+		executer (requete);
+	}
+	
+	//FIN FONCTIONS ADMINISTRATEUR
 	
 	//FONCTIONS TRAJET
 	
@@ -120,19 +173,83 @@ public class Modele
 	
 	//FIN FONCTIONS TRAJET
 	
-	public static void executer(String requete)
+	//FONCTIONS VOL
+	
+	public static ArrayList<Vol> selectAllVols()
 	{
-		try
+		ArrayList<Vol> lesVols = new ArrayList<Vol>();
+		
+		String requete = "select * from vol;";
+		try 
 		{
 			uneBdd.seConnecter();
 			Statement unStat = uneBdd.getMaConnexion().createStatement();
-			unStat.execute(requete);
-			unStat.close();
+			ResultSet desRes = unStat.executeQuery(requete);
+			while(desRes.next())
+			{
+				Vol unVol = new Vol(
+						desRes.getInt("id"),
+						desRes.getInt("trajet_id"),
+						desRes.getString("date_vol"),
+						desRes.getString("heure_dep"),
+						desRes.getString("heure_arr"),
+						desRes.getString("aeroport_dep"),
+						desRes.getString("aeroport_arr")
+						);
+				lesVols.add(unVol);
+			}
 			uneBdd.seDeconnecter();
 		}
-		catch( SQLException exp )
+		catch(SQLException exp)
 		{
-			System.out.println("Erreur d'execution :" + requete);
+			exp.printStackTrace();
 		}
+		return lesVols;
 	}
+	
+	public static void insertVol( Vol unVol )
+	{
+		String requete="insert into vol values (null, '" 
+				+ unVol.getId() 
+		+ "','" + unVol.getTrajet_id() 
+		+"','" + unVol.getDate_vol() 
+		+"','" + unVol.getHeure_dep()
+		+"','" + unVol.getHeure_arr()
+		+"','" + unVol.getAeroport_dep()
+		+"','" + unVol.getAeroport_arr()
+		+"');";
+		
+		executer (requete);
+	}
+	
+	public static void deleteVol( int id )
+	{
+		String requete ="delete from vol where id = " + id + ";";
+		
+		executer (requete);
+	}
+	
+	public static void updateVol( Vol unVol )
+	{
+		String requete="update vol set trajet_id = '" + unVol.getTrajet_id()
+		+ "', date_vol = '" + unVol.getHeure_dep()
+		+ "', heure_dep = '" + unVol.getHeure_dep()
+		+ "', heure_arr = '" + unVol.getHeure_arr()
+		+ "', aeroport_dep = '" + unVol.getAeroport_dep()
+		+ "', aeroport_arr = '" + unVol.getAeroport_arr()
+		+ " where id = '" 
+		+ unVol.getId() + "';";
+		
+		executer (requete);
+	}
+	
+	//FIN FONCTIONS VOL
+	
+	//FONCTIONS GROUPE
+	
+	//FIN FONCTIONS GROUPE
+	
+	//FONCTIONS RESERVATION
+	
+	//FIN FONCTIONS RESERVATION
 }
