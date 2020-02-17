@@ -73,9 +73,43 @@ public class Controller
 	
 	//FONCTIONS GROUPE
 	
+	public static void insertGroupe(Groupe unGroupe)
+	{
+		Modele.insertGroupe(unGroupe);
+	}
+	public static void updateGroupe(Groupe unGroupe)
+	{
+		Modele.updateGroupe(unGroupe);
+	}
+	public static ArrayList<Groupe> selectAllGroupes()
+	{
+		return Modele.selectAllGroupes();
+	}
+	public static void deleteGroupe(int id)
+	{
+		Modele.deleteGroupe(id);
+	}
+	
 	//FIN FONCTIONS GROUPE
 	
 	//FONCTIONS RESERVATION
+	
+	public static void insertReservation(Reservation uneReservation)
+	{
+		Modele.insertReservation(uneReservation);
+	}
+	public static void updateReservation(Reservation uneReservation)
+	{
+		Modele.updateReservation(uneReservation);
+	}
+	public static ArrayList<Reservation> selectAllReservations()
+	{
+		return Modele.selectAllReservations();
+	}
+	public static void deleteReservation(int id)
+	{
+		Modele.deleteReservation(id);
+	}
 	
 	//FIN FONCTIONS RESERVATION
 }

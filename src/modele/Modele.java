@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import controller.Administrateur;
+import controller.Groupe;
+import controller.Reservation;
 import controller.Trajet;
 import controller.Vol;
 
@@ -247,9 +249,130 @@ public class Modele
 	
 	//FONCTIONS GROUPE
 	
+	public static ArrayList<Groupe> selectAllGroupes()
+	{
+		ArrayList<Groupe> lesGroupes = new ArrayList<Groupe>();
+		
+		String requete = "select * from groupe;";
+		try 
+		{
+			uneBdd.seConnecter();
+			Statement unStat = uneBdd.getMaConnexion().createStatement();
+			ResultSet desRes = unStat.executeQuery(requete);
+			while(desRes.next())
+			{
+				Groupe unGroupe = new Groupe(
+						desRes.getInt("id"),
+						desRes.getInt("administrateur_id"),
+						desRes.getString("destination"),
+						desRes.getString("date"),
+						desRes.getInt("id_trajet")
+						);
+				lesGroupes.add(unGroupe);
+			}
+			uneBdd.seDeconnecter();
+		}
+		catch(SQLException exp)
+		{
+			exp.printStackTrace();
+		}
+		return lesGroupes;
+	}
+	
+	public static void insertGroupe( Groupe unGroupe )
+	{
+		String requete="insert into groupe values (null, '" 
+				+ unGroupe.getId() 
+		+ "','" + unGroupe.getAdministrateur_id() 
+		+"','" + unGroupe.getDestination() 
+		+"','" + unGroupe.getDate()
+		+"','" + unGroupe.getId_trajet()
+		+"');";
+		
+		executer (requete);
+	}
+	
+	public static void deleteGroupe( int id )
+	{
+		String requete ="delete from groupe where id = " + id + ";";
+		
+		executer (requete);
+	}
+	
+	public static void updateGroupe( Groupe unGroupe )
+	{
+		String requete="update groupe set administrateur_id = '" + unGroupe.getAdministrateur_id()
+		+ "', destination = '" + unGroupe.getDestination()
+		+ "', date = '" + unGroupe.getDate()
+		+ "', id_trajet = '" + unGroupe.getId_trajet()
+		+ " where id = '" 
+		+ unGroupe.getId() + "';";
+		
+		executer (requete);
+	}
+	
 	//FIN FONCTIONS GROUPE
 	
 	//FONCTIONS RESERVATION
+	
+	public static ArrayList<Reservation> selectAllReservations()
+	{
+		ArrayList<Reservation> lesReservations = new ArrayList<Reservation>();
+		
+		String requete = "select * from reservation;";
+		try 
+		{
+			uneBdd.seConnecter();
+			Statement unStat = uneBdd.getMaConnexion().createStatement();
+			ResultSet desRes = unStat.executeQuery(requete);
+			while(desRes.next())
+			{
+				Reservation uneReservation = new Reservation(
+						desRes.getInt("id"),
+						desRes.getInt("groupe_id"),
+						desRes.getString("tarif"),
+						desRes.getInt("trajet_id")
+						);
+				lesReservations.add(uneReservation);
+			}
+			uneBdd.seDeconnecter();
+		}
+		catch(SQLException exp)
+		{
+			exp.printStackTrace();
+		}
+		return lesReservations;
+	}
+	
+	public static void insertReservation( Reservation uneReservation )
+	{
+		String requete="insert into vol values (null, '" 
+				+ uneReservation.getId() 
+		+ "','" + uneReservation.getGroupe_id() 
+		+"','" + uneReservation.getTarif() 
+		+"','" + uneReservation.getTrajet_id()
+		+"');";
+		
+		executer (requete);
+	}
+	
+	public static void deleteReservation( int id )
+	{
+		String requete ="delete from reservation where id = " + id + ";";
+		
+		executer (requete);
+	}
+	
+	public static void updateReservation( Reservation uneReservation )
+	{
+		String requete="update reservation set groupe_id = '" + uneReservation.getGroupe_id()
+		+ "', date_vol = '" + uneReservation.getTarif()
+		+ "', heure_dep = '" + uneReservation.getTrajet_id()
+		+ " where id = '" 
+		+ uneReservation.getId() + "';";
+		
+		executer (requete);
+	}
 	
 	//FIN FONCTIONS RESERVATION
 }
