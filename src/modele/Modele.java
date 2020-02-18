@@ -2,6 +2,7 @@ package modele;
 
 import java.sql.Statement;
 import java.util.ArrayList;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -10,6 +11,7 @@ import controller.Groupe;
 import controller.Reservation;
 import controller.Trajet;
 import controller.Vol;
+
 
 public class Modele 
 {
@@ -32,6 +34,39 @@ public class Modele
 	}
 	
 	//FONCTIONS ADMINISTRATEUR
+	
+	public static Administrateur selectWhereAdministrateur(String identifiant, String mdp) 
+    {
+	    Administrateur unAdministrateur = null;
+	    String requete = "select * from administrateur where identifiant = '" + identifiant + 
+	            "' and mdp = '" 
+	            + mdp + "';";
+	            
+	    uneBdd.seConnecter();
+	
+	    try
+	    {
+	        Statement unStat = uneBdd.getMaConnexion().createStatement();
+	        ResultSet unRes = unStat.executeQuery(requete);
+	        if(unRes.next())
+	        {
+	            unAdministrateur = new Administrateur(
+	                    unRes.getInt("id"),
+	                    unRes.getString("nom_admin"),
+	                    unRes.getString("prenom_admin"),
+	                    unRes.getString("identifiant"),
+	                    unRes.getString("mdp")
+	                    );
+	        }
+	    }
+	    catch(SQLException exp)
+	    {
+	        System.out.println("Erreur execution : " + requete);
+	    }
+	    uneBdd.seDeconnecter();
+	    
+	    return unAdministrateur;
+	    }
 	
 	public static ArrayList<Administrateur> selectAllAdministrateurs()
 	{

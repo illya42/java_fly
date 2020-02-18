@@ -21,12 +21,14 @@
 		<br/>
 		<%!
 		//partie déclaration
-		
+		Administrateur unAdministrateur;
 		%>
 		
 		<%
 		//partie éxecution
+		HttpSession uneSession = request.getSession();
 		
+		session.setAttribute("nom", unAdministrateur.getNom_admin());
 		%>
 	<%@ include file="footer.jsp" %>
 </body>

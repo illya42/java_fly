@@ -8,6 +8,27 @@ public class Controller
 {
 	//FONCTIONS ADMINISTRATEUR
 	
+	
+	public static void verifConnexion(String identifiant, String mdp) 
+	{	
+		if ( identifiant.equals("") || mdp.equals("") )
+		{
+			System.out.println("Champs incomplets");
+		}
+		else
+		{
+			Administrateur unAdministrateur = Modele.selectWhereAdministrateur( identifiant ,mdp );
+			if (unAdministrateur == null)
+			{
+				System.out.println("Veuillez vérifier les champs");
+			}
+			else 
+			{
+				System.out.println("Bienvenue " + unAdministrateur.getNom_admin()  +  unAdministrateur.getPrenom_admin());
+			}
+		}
+	}
+	
 	public static void insertAdministrateur(Administrateur unAdministrateur)
 	{
 		Modele.insertAdministrateur(unAdministrateur);
