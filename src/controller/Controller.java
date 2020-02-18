@@ -9,8 +9,10 @@ public class Controller
 	//FONCTIONS ADMINISTRATEUR
 	
 	
-	public static void verifConnexion(String identifiant, String mdp) 
+	public static boolean verifConnexion(String identifiant, String mdp) 
 	{	
+		boolean verif = false;
+		
 		if ( identifiant.equals("") || mdp.equals("") )
 		{
 			System.out.println("Champs incomplets");
@@ -25,8 +27,12 @@ public class Controller
 			else 
 			{
 				System.out.println("Bienvenue " + unAdministrateur.getNom_admin()  +  unAdministrateur.getPrenom_admin());
+				
+				verif = true;
 			}
 		}
+		
+		return verif;
 	}
 	
 	public static void insertAdministrateur(Administrateur unAdministrateur)
