@@ -35,6 +35,11 @@ public class Controller
 		return verif;
 	}
 	
+	public static Administrateur returnAdmin(String identifiant, String mdp)
+	{
+		return Modele.selectWhereAdministrateur(identifiant, mdp);
+	}
+	
 	public static void insertAdministrateur(Administrateur unAdministrateur)
 	{
 		Modele.insertAdministrateur(unAdministrateur);

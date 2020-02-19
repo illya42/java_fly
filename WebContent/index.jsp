@@ -22,12 +22,18 @@
 		<br/>
 		<%!
 		//partie déclaration
-		Administrateur unAdministrateur;
+		Administrateur unAdministrateur = new Administrateur();
 		%>
 		
 		<%
 		//partie éxecution
 		HttpSession uneSession = request.getSession();
+		
+		unAdministrateur.setNom_admin("X");
+		
+		uneSession.setAttribute("nom", unAdministrateur.getNom_admin());
+		
+
 		
 		if( request.getParameter("valider") != null )
 		{
@@ -36,7 +42,9 @@
 			
 			if( Controller.verifConnexion(identifiant, mdp) == true )
 			{
-				out.print("<h1>Bienvenue</h1>");
+				unAdministrateur = Controller.returnAdmin(identifiant, mdp);
+				
+				uneSession.setAttribute("nom", unAdministrateur.getNom_admin());
 			}
 		}
 		%>

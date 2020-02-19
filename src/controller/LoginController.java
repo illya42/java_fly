@@ -28,11 +28,12 @@ public class LoginController extends HttpServlet
       String mdp = request.getParameter("mdp");
       
       Administrateur unAdministrateur = Modele.selectWhereAdministrateur( identifiant ,mdp );
+      
       if (unAdministrateur == null)
       {
     	  RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
     	  
-          out.println("<font color=red>Either user name or password is wrong.</font>");
+          out.println("<font color=red>Identifiants ou mot de passe invalide</font>");
           rd.include(request, response);
       }
       else
@@ -40,7 +41,7 @@ public class LoginController extends HttpServlet
     	  
     	  out.print("Bienvenue, " + unAdministrateur.getNom_admin() + " " + unAdministrateur.getPrenom_admin() );
           
-          HttpSession session = request.getSession(true); 	// reuse existing
+          HttpSession session = request.getSession(); 		// reuse existing
                                               				// session if exist
                                               				// or create one
           

@@ -38,6 +38,7 @@ public class Modele
 	public static Administrateur selectWhereAdministrateur(String identifiant, String mdp) 
     {
 	    Administrateur unAdministrateur = null;
+	    
 	    String requete = "select * from administrateur where identifiant = '" + identifiant + 
 	            "' and mdp = '" 
 	            + mdp + "';";
