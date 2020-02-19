@@ -36,7 +36,7 @@
 			
 			if( Controller.verifConnexion(identifiant, mdp) == true )
 			{
-				uneSession.setAttribute("nom", unAdministrateur.getNom_admin());
+				out.print("<h1>Bienvenue</h1>");
 			}
 		}
 		%>
