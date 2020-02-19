@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import modele.Modele;
+
 
 @WebServlet("/Login")
 public class LoginController extends HttpServlet 
@@ -25,22 +27,28 @@ public class LoginController extends HttpServlet
       String identifiant = request.getParameter("identifiant");
       String mdp = request.getParameter("mdp");
       
-      if (identifiant.equals("candidjava")) 
+      Administrateur unAdministrateur = Modele.selectWhereAdministrateur( identifiant ,mdp );
+      if (unAdministrateur == null)
       {
-         out.print("Welcome, " + identifiant);
-         
-         HttpSession session = request.getSession(true); 	// reuse existing
-                                             				// session if exist
-                                             				// or create one
-         session.setAttribute("user", identifiant);
-         session.setMaxInactiveInterval(30); 				// 30 seconds
-         response.sendRedirect("home.jsp");
+    	  RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+    	  
+          out.println("<font color=red>Either user name or password is wrong.</font>");
+          rd.include(request, response);
       }
-      else 
+      else
       {
-         RequestDispatcher rd = request.getRequestDispatcher("login.html");
-         out.println("<font color=red>Either user name or password is wrong.</font>");
-         rd.include(request, response);
+    	  
+    	  out.print("Bienvenue, " + unAdministrateur.getNom_admin() + " " + unAdministrateur.getPrenom_admin() );
+          
+          HttpSession session = request.getSession(true); 	// reuse existing
+                                              				// session if exist
+                                              				// or create one
+          
+          session.setAttribute("nom", unAdministrateur.getNom_admin() );
+          
+          //session.setMaxInactiveInterval(30); 			// 30 seconds
+          
+          response.sendRedirect("trajet.jsp");
       }
    }
 }
