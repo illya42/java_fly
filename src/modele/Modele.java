@@ -184,6 +184,8 @@ public class Modele
 		+"','" + unTrajet.getImage()
 		+"');";
 		
+		System.out.println(" " + requete);
+		//1 champs en trop :(
 		executer (requete);
 	}
 	

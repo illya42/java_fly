@@ -29,12 +29,6 @@
 		//partie éxecution
 		HttpSession uneSession = request.getSession();
 		
-		unAdministrateur.setNom_admin("X");
-		
-		uneSession.setAttribute("nom", unAdministrateur.getNom_admin());
-		
-
-		
 		if( request.getParameter("valider") != null )
 		{
 			String identifiant = request.getParameter("identifiant");
@@ -45,6 +39,13 @@
 				unAdministrateur = Controller.returnAdmin(identifiant, mdp);
 				
 				uneSession.setAttribute("nom", unAdministrateur.getNom_admin());
+				uneSession.setAttribute("prenom", unAdministrateur.getPrenom_admin());
+				
+				String redirect = "trajet.jsp";
+				
+				out.print("<h3>Bienvenue " + uneSession.getAttribute("nom") + " " + uneSession.getAttribute("prenom"));
+				
+				out.print("<h2><a href=" + redirect + ">Menu des Trajets</a></h2>");
 			}
 		}
 		%>

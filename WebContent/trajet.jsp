@@ -16,7 +16,7 @@
 		Heure de départ : <input type="text" name="heure_dep"><br/>
 		Heure d'arrivée : <input type="text" name="heure_arr"><br/>
 		Aéroport de départ : <input type="text" name="aeroport"><br/>
-		Date : <input type="number" name="date"><br/>
+		Date : <input type="date" name="date"><br/>
 		Destination : <input type="text" name="destination"><br/>
 		Image : <input type="text" name="image"><br/>
 		<input type="submit" name="enregistrer" value="enregistrer"><br/>
@@ -32,7 +32,7 @@
 		//partie éxecution
 		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
 		//parcourir les compte
-		out.print("<table border =1> <tr><td>ID</td><td>Prix</td><td>Heure départ</td><td>Heure arrivée</td><td>Aéroport</td><td>Date</td><td>Destination</td><td>Image</td><td>Supprimer</td></tr>");
+		out.print("<table border =1> <tr><td>ID</td><td>Prix</td><td>Heure départ</td><td>Heure arrivée</td><td>Aéroport</td><td>Date</td><td>Destination</td><td>Image</td><td>Editer</td><td>Supprimer</td></tr>");
 		for (Trajet unTrajet : lesTrajets)
         {
             out.print("<tr><td>" + unTrajet.getId() 
@@ -43,10 +43,17 @@
             + "</td><td>" + unTrajet.getDate() 
             + "</td><td>" + unTrajet.getDestination() 
             + "</td><td>" + unTrajet.getImage() 
-        	+ "</td><td><a href='trajet.jsp?id='" + unTrajet.getId() + "> X </a></td></tr>");
+            
+            + "</td><td><a href='trajet.jsp?action=E&id=" + unTrajet.getId() + "'> EDITER </a></td>"
+        	+ "</td><td><a href='trajet.jsp?action=X&id=" + unTrajet.getId() + "'> SUPPRIMER </a></td></tr>");
         }
 		out.print("</table>");
-		if ( request.getParameter("id") != null )
+		if ( request.getParameter("id") != null && request.getParameter("action") == "E" )
+		{
+			int id = Integer.parseInt(request.getParameter("id"));
+			response.sendRedirect("update.jsp");
+		}
+		if ( request.getParameter("id") != null && request.getParameter("action") == "X" )
 		{
 			int id = Integer.parseInt(request.getParameter("id"));
 			Controller.deleteTrajet(id);
