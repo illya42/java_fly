@@ -67,7 +67,7 @@ public class Modele
 	    uneBdd.seDeconnecter();
 	    
 	    return unAdministrateur;
-	    }
+	}
 	
 	public static ArrayList<Administrateur> selectAllAdministrateurs()
 	{
@@ -152,13 +152,13 @@ public class Modele
 			{
 				Trajet unTrajet = new Trajet(
 						desRes.getInt("id"),
-						desRes.getInt("prix"),
 						desRes.getString("heure_dep"),
 						desRes.getString("heure_arr"),
 						desRes.getString("aeroport"),
 						desRes.getString("date"),
 						desRes.getString("destination"),
-						desRes.getString("image")
+						desRes.getString("image"),
+						desRes.getInt("prix")
 						);
 				lesTrajets.add(unTrajet);
 			}
@@ -174,8 +174,7 @@ public class Modele
 	public static void insertTrajet( Trajet unTrajet )
 	{
 		String requete="insert into trajet values (null, '" 
-				+ unTrajet.getId() 
-		+ "','" + unTrajet.getPrix() 
+				+ unTrajet.getPrix()
 		+"','" + unTrajet.getHeure_dep() 
 		+"','" + unTrajet.getHeure_arr()
 		+"','" + unTrajet.getAeroport()
@@ -185,7 +184,6 @@ public class Modele
 		+"');";
 		
 		System.out.println(" " + requete);
-		//1 champs en trop :(
 		executer (requete);
 	}
 	

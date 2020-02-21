@@ -11,29 +11,39 @@ public class Trajet
 		this.heure_dep = this.heure_arr = this.aeroport = this.date = this.destination = this.image = "";
 	}
 
-	public Trajet(int id, int prix, String heure_dep, String heure_arr, String aeroport, String date, String destination, String image) 
+	public Trajet(int id, String heure_dep, String heure_arr, String aeroport, String date, String destination, String image,  int prix) 
 	{
-		super();
 		this.id = id;
-		this.prix = prix;
 		this.heure_dep = heure_dep;
 		this.heure_arr = heure_arr;
 		this.aeroport = aeroport;
 		this.date = date;
 		this.destination = destination;
 		this.image = image;
+		this.prix = prix;
+	}
+	
+	public Trajet( String heure_dep, String heure_arr, String aeroport, String date, String destination, String image, int prix )
+	{
+		this.heure_dep = heure_dep;
+		this.heure_arr = heure_arr;
+		this.aeroport = aeroport;
+		this.date = date;
+		this.destination = destination;
+		this.image = image;
+		this.prix = prix;
 	}
 	
 	public String consulter()
 	{
 		return "ID : " + this.id 
-				+ "<br/> Prix : " + this.prix 
 				+ "<br/> Heure de départ : " + this.heure_dep
 				+ "<br/> Heure d'arrivée : " + this.heure_arr
 				+ "<br/> Aéroport : " + this.aeroport
 				+ "<br/> Date : " + this.date
 				+ "<br/> Destination : " + this.destination
 				+ "<br/> Image : " + this.image
+				+ "<br/> Prix : " + this.prix 
 				+ "<br/>";
 	}
 
@@ -43,14 +53,6 @@ public class Trajet
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public int getPrix() {
-		return prix;
-	}
-
-	public void setPrix(int prix) {
-		this.prix = prix;
 	}
 
 	public String getHeure_dep() {
@@ -100,6 +102,12 @@ public class Trajet
 	public void setImage(String image) {
 		this.image = image;
 	}
-
 	
+	public int getPrix() {
+		return prix;
+	}
+
+	public void setPrix(int prix) {
+		this.prix = prix;
+	}
 }
