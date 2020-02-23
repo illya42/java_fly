@@ -36,8 +36,7 @@ public class Trajet
 	
 	public String consulter()
 	{
-		return "ID : " + this.id 
-				+ "<br/> Heure de départ : " + this.heure_dep
+		return "Heure de départ : " + this.heure_dep
 				+ "<br/> Heure d'arrivée : " + this.heure_arr
 				+ "<br/> Aéroport : " + this.aeroport
 				+ "<br/> Date : " + this.date

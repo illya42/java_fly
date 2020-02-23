@@ -174,14 +174,14 @@ public class Modele
 	public static void insertTrajet( Trajet unTrajet )
 	{
 		String requete="insert into trajet values (null, '" 
-				+ unTrajet.getPrix()
-		+"','" + unTrajet.getHeure_dep() 
+				+ unTrajet.getHeure_dep() 
 		+"','" + unTrajet.getHeure_arr()
 		+"','" + unTrajet.getAeroport()
 		+"','" + unTrajet.getDate()
 		+"','" + unTrajet.getDestination()
 		+"','" + unTrajet.getImage()
-		+"');";
+		+"'," + unTrajet.getPrix()
+		+");";
 		
 		System.out.println(" " + requete);
 		executer (requete);
@@ -190,7 +190,7 @@ public class Modele
 	public static void deleteTrajet( int id )
 	{
 		String requete ="delete from trajet where id = " + id + ";";
-		
+		System.out.println(" " + requete);
 		executer (requete);
 	}
 	

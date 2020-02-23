@@ -19,7 +19,7 @@
 		Date : <input type="date" name="date"><br/>
 		Destination : <input type="text" name="destination"><br/>
 		Image : <input type="text" name="image"><br/>
-		<input type="submit" name="enregistrer" value="enregistrer"><br/>
+		<input type="button" id="bouton1" name="enregistrer" value="enregistrer"><br/>
 		</form>
 		<br/>
 		<br/>
@@ -44,21 +44,23 @@
             + "</td><td>" + unTrajet.getImage() 
             + "</td><td>" + unTrajet.getPrix() 
             
-            + "</td><td><a href='trajet.jsp?action=E&id=" + unTrajet.getId() + "'> EDITER </a></td>"
-        	+ "</td><td><a href='trajet.jsp?action=X&id=" + unTrajet.getId() + "'> SUPPRIMER </a></td></tr>");
+            + "</td><td><a onclick='change();' href='trajet.jsp?edit=E&id=" + unTrajet.getId() + "'> EDITER </a></td>"
+        	+ "</td><td><a href='trajet.jsp?supp=X&id=" + unTrajet.getId() + "'> SUPPRIMER </a></td></tr>");
         }
 		out.print("</table>");
 		
-		if ( request.getParameter("id") != null && request.getParameter("action") == "E" )
+		if ( request.getParameter("id") != null && request.getParameter("edit") != null )
 		{
 			int id = Integer.parseInt(request.getParameter("id"));
-			response.sendRedirect("update.jsp");
+			
+			//response.sendRedirect("update.jsp");
 		}
 		
-		if ( request.getParameter("id") != null && request.getParameter("action") == "X" )
+		if ( request.getParameter("id") != null && request.getParameter("supp") != null )
 		{
 			int id = Integer.parseInt(request.getParameter("id"));
 			Controller.deleteTrajet(id);
+			response.sendRedirect("trajet.jsp");
 		}
 		
 		if ( request.getParameter("enregistrer") != null )
@@ -82,6 +84,17 @@
 			out.print( "" + unTrajet.consulter() );
 		}
 		%>
+		
+		<script>
+		function change()
+		{
+		    if ( document.getElementById("bouton1").value == "enregistrer" )
+		    {
+		    	document.getElementById("bouton1").value = "modifier"
+		    }
+		}
+		</script>
+		
 	<%@ include file="footer.jsp" %>
 </body>
 </html>
