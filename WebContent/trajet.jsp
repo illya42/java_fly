@@ -1,3 +1,4 @@
+<%@page import="java.rmi.UnexpectedException"%>
 <%@ page import="controller.*"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -12,14 +13,14 @@
 	<%@ include file="entete.jsp" %>
 		<h1>Gestion des Trajets</h1>
 		<form method="post" action="">
-		Prix : <input type="text" name="prix"><br/>
-		Heure de départ : <input type="text" name="heure_dep"><br/>
-		Heure d'arrivée : <input type="text" name="heure_arr"><br/>
-		Aéroport de départ : <input type="text" name="aeroport"><br/>
-		Date : <input type="date" name="date"><br/>
-		Destination : <input type="text" name="destination"><br/>
-		Image : <input type="text" name="image"><br/>
-		<input type="button" id="bouton1" name="enregistrer" value="enregistrer"><br/>
+			Prix : <input type="text" name="prix"><br/>
+			Heure de départ : <input type="text" name="heure_dep"><br/>
+			Heure d'arrivée : <input type="text" name="heure_arr"><br/>
+			Aéroport de départ : <input type="text" name="aeroport"><br/>
+			Date : <input type="date" name="date"><br/>
+			Destination : <input type="text" name="destination"><br/>
+			Image : <input type="text" name="image"><br/>
+			<input type="submit" id="bouton1" name="enregistrer" value="enregistrer"><br/>
 		</form>
 		<br/>
 		<br/>
@@ -30,6 +31,8 @@
 		
 		<%
 		//partie éxecution
+		HttpSession uneSession = request.getSession();
+		
 		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
 		//parcourir les compte
 		out.print("<table border =1> <tr><td>ID</td><td>Prix</td><td>Heure départ</td><td>Heure arrivée</td><td>Aéroport</td><td>Date</td><td>Destination</td><td>Image</td><td>Editer</td><td>Supprimer</td></tr>");
@@ -44,7 +47,7 @@
             + "</td><td>" + unTrajet.getImage() 
             + "</td><td>" + unTrajet.getPrix() 
             
-            + "</td><td><a onclick='change();' href='trajet.jsp?edit=E&id=" + unTrajet.getId() + "'> EDITER </a></td>"
+            + "</td><td><a href='trajet.jsp?edit=E&id=" + unTrajet.getId() + "'> EDITER </a></td>"
         	+ "</td><td><a href='trajet.jsp?supp=X&id=" + unTrajet.getId() + "'> SUPPRIMER </a></td></tr>");
         }
 		out.print("</table>");
@@ -54,11 +57,14 @@
 			int id = Integer.parseInt(request.getParameter("id"));
 			
 			//response.sendRedirect("update.jsp");
+			
+			uneSession.setAttribute("id", id);
 		}
 		
 		if ( request.getParameter("id") != null && request.getParameter("supp") != null )
 		{
 			int id = Integer.parseInt(request.getParameter("id"));
+			
 			Controller.deleteTrajet(id);
 			response.sendRedirect("trajet.jsp");
 		}
@@ -84,16 +90,6 @@
 			out.print( "" + unTrajet.consulter() );
 		}
 		%>
-		
-		<script>
-		function change()
-		{
-		    if ( document.getElementById("bouton1").value == "enregistrer" )
-		    {
-		    	document.getElementById("bouton1").value = "modifier"
-		    }
-		}
-		</script>
 		
 	<%@ include file="footer.jsp" %>
 </body>
