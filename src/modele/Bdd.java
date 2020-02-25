@@ -36,11 +36,11 @@ public class Bdd
     public void seConnecter ()
     {
         this.chargerPilote();
-        String url = "jdbc:mysql://"+this.serveur+"/"+this.bdd;
+        String url = "jdbc:mysql://localhost:3308/dbfly";
         
         try 
         {
-            this.maConnexion = DriverManager.getConnection(url,this.user,this.mdp);
+            this.maConnexion = DriverManager.getConnection(url,"root", "");
         }
         
         catch (SQLException exp)
