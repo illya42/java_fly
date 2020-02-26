@@ -21,7 +21,7 @@
 		
 		out.print("<div id='connected'><h3>Bienvenue " + uneSession.getAttribute("nom") + " " + uneSession.getAttribute("prenom") + "</div>");
 				
-		String redirect = "trajet/trajet.jsp";
+		String redirect = "trajet.jsp";
 		out.print("<h2><a href=" + redirect + ">Menu des Trajets</a></h2>");
 		%>
 </body>
