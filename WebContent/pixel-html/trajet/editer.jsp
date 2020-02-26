@@ -10,7 +10,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file="../entete.jsp" %>
+<%@ include file="../header.jsp" %>
 		<h1>Edition</h1>
 		<br/>
 		<br/>
@@ -21,7 +21,6 @@
 		
 		<%
 		//partie éxecution
-		HttpSession uneSession = request.getSession();
 		
 		int id = (Integer) uneSession.getAttribute("id");
 		

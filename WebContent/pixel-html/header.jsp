@@ -35,13 +35,7 @@
 </head>
 
 <body>
-<% HttpSession uneSession = request.getSession();
 
-String nom =(String) uneSession.getAttribute("nom");
-String prenom = (String) uneSession.getAttribute("prenom");
-
-
-%>
     <!-- Preloader -->
     <div class="preloader">
         <div class="cssload-speeding-wheel"></div>
@@ -60,7 +54,7 @@ String prenom = (String) uneSession.getAttribute("prenom");
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
-                        <a class="profile-pic" href="#"> <img src="../plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><% out.print(nom + " " +prenom); %></b> </a>
+                        <a class="profile-pic" href="#"> <img src="../plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><% HttpSession uneSession = request.getSession(false); if(uneSession.isNew()){ uneSession = request.getSession();}else{ out.print((String) uneSession.getAttribute("nom") + " " +(String) uneSession.getAttribute("prenom"));} %></b> </a>
                     </li>
                 </ul>
             </div>
@@ -104,12 +98,8 @@ String prenom = (String) uneSession.getAttribute("prenom");
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h4 class="page-title">Dashboard</h4> </div>
-                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12"> <a href="http://wrappixel.com/templates/pixeladmin/" target="_blank" class="btn btn-danger pull-right m-l-20 btn-rounded btn-outline hidden-xs hidden-sm waves-effect waves-light">Upgrade to Pro</a>
-                        <ol class="breadcrumb">
-                            <li><a href="#">Dashboard</a></li>
-                        </ol>
-                    </div>
+                        <h2 class="page-title">Gestion @Fly</h2> </div>
+                    
                     <!-- /.col-lg-12 -->
                 </div>
         <!-- contenu page -->

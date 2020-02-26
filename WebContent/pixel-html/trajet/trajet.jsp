@@ -10,7 +10,7 @@
 <title>Gestion des Trajets</title>
 </head>
 <body>
-	<%@ include file="../entete.jsp" %>
+	<%@ include file="../header.jsp" %>
 		<h1>Gestion des Trajets</h1>
 		<form method="post" action="">
 			Prix : <input type="text" name="prix"><br/>
@@ -32,7 +32,6 @@
 		
 		<%
 		//partie éxecution
-		HttpSession uneSession = request.getSession();
 		
 		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
 		//parcourir les compte
