@@ -5,15 +5,17 @@
                         <div class="white-box">
 		<h2>Gestion des Trajets</h2>
 		<form method="post" action="">
-			Prix : <input type="text" name="prix"><br/>
-			Heure de départ : <input type="text" name="heure_dep"><br/>
-			Heure d'arrivée : <input type="text" name="heure_arr"><br/>
-			Aéroport de départ : <input type="text" name="aeroport"><br/>
-			Date : <input type="date" name="date"><br/>
-			Destination : <input type="text" name="destination"><br/>
-			Image : <input type="text" name="image"><br/>
-			<input type="submit" id="bouton1" name="enregistrer" value="enregistrer"><br/>
-			<input type="submit" name="retour" value="retour"><br/>
+		<table>
+				<tr><td> Prix : </td><td><input type="text" name="prix" placeholder="Rentrez un prix"></td></tr>
+				<tr><td>Heure de départ : </td><td><input type="text" name="heure_dep"></td></tr>
+				<tr><td>Heure d'arrivée : </td><td><input type="text" name="heure_arr"></td></tr>
+				<tr><td>Aéroport de départ : </td><td><input type="text" name="aeroport"></td></tr>
+				<tr><td>Date : </td><td><input type="date" name="date"></td></tr>
+				<tr><td>Destination : </td><td><input type="text" name="destination"></td></tr>
+				<tr><td>Image : </td><td><input type="text" name="image"></td></tr>
+				<tr><td><input type="submit" id="bouton1" name="enregistrer" value="enregistrer"></td>
+				<td><input type="submit" name="retour" value="retour"></td></tr>
+		</table>
 		</form>
 		<br/>
 		<br/></div></div></div>
