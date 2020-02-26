@@ -15,7 +15,7 @@ import controller.Vol;
 
 public class Modele 
 {
-	private static Bdd uneBdd = new Bdd("localhost", "dbfly", "root", "root");
+	private static Bdd uneBdd = new Bdd("localhost", "dbfly", "root", "");
 	
 	public static void executer(String requete)
 	{
