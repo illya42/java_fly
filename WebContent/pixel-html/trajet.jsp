@@ -1,21 +1,5 @@
-<%@page import="java.rmi.UnexpectedException"%>
-<%@ page import="controller.*"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Gestion des Trajets</title>
-</head>
-<body>
+
 	<%@ include file="header.jsp" %>
-	<div class="row">
-                    <div class="col-sm-12">
-                        <div class="white-box">
-                            <h3 class="box-title">Basic Table</h3>
-                            <p class="text-muted">Add class <code>.table</code></p>
 		<h1>Gestion des Trajets</h1>
 		<form method="post" action="">
 			Prix : <input type="text" name="prix"><br/>
@@ -26,6 +10,7 @@
 			Destination : <input type="text" name="destination"><br/>
 			Image : <input type="text" name="image"><br/>
 			<input type="submit" id="bouton1" name="enregistrer" value="enregistrer"><br/>
+			<input type="submit" name="retour" value="retour"><br/>
 		</form>
 		<br/>
 		<br/>
@@ -63,6 +48,7 @@
 			//response.sendRedirect("update.jsp");
 			
 			uneSession.setAttribute("id", id);
+			response.sendRedirect("editer.jsp");
 		}
 		
 		if ( request.getParameter("id") != null && request.getParameter("supp") != null )
@@ -93,10 +79,11 @@
 			out.print( "<br/> Nouveau Trajet : " );
 			out.print( "" + unTrajet.consulter() );
 		}
+		if ( request.getParameter("retour") != null )
+		{
+			response.sendRedirect("index.jsp");
+		}
 		%>
-		</div>
-		</div>
-		</div>
 		
 	<%@ include file="footer.jsp" %>
 </body>
