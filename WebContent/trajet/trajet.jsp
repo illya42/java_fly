@@ -10,7 +10,7 @@
 <title>Gestion des Trajets</title>
 </head>
 <body>
-	<%@ include file="entete.jsp" %>
+	<%@ include file="../entete.jsp" %>
 		<h1>Gestion des Trajets</h1>
 		<form method="post" action="">
 			Prix : <input type="text" name="prix"><br/>
@@ -21,6 +21,7 @@
 			Destination : <input type="text" name="destination"><br/>
 			Image : <input type="text" name="image"><br/>
 			<input type="submit" id="bouton1" name="enregistrer" value="enregistrer"><br/>
+			<input type="submit" name="retour" value="retour"><br/>
 		</form>
 		<br/>
 		<br/>
@@ -59,6 +60,7 @@
 			//response.sendRedirect("update.jsp");
 			
 			uneSession.setAttribute("id", id);
+			response.sendRedirect("editer.jsp");
 		}
 		
 		if ( request.getParameter("id") != null && request.getParameter("supp") != null )
@@ -89,8 +91,12 @@
 			out.print( "<br/> Nouveau Trajet : " );
 			out.print( "" + unTrajet.consulter() );
 		}
+		if ( request.getParameter("retour") != null )
+		{
+			response.sendRedirect("../index.jsp");
+		}
 		%>
 		
-	<%@ include file="footer.jsp" %>
+	<%@ include file="../footer.jsp" %>
 </body>
 </html>

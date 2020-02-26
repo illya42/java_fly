@@ -209,6 +209,41 @@ public class Modele
 		executer (requete);
 	}
 	
+	public static Trajet selectTrajet(int id)
+	{
+		Trajet unTrajet = null;
+		
+		String requete = "select * from trajet where id = " + id + ";";
+	            
+	    uneBdd.seConnecter();
+	
+	    try
+	    {
+	        Statement unStat = uneBdd.getMaConnexion().createStatement();
+	        ResultSet unRes = unStat.executeQuery(requete);
+	        if(unRes.next())
+	        {
+	            unTrajet = new Trajet(
+	                    unRes.getInt("id"),
+	                    unRes.getString("heure_dep"),
+	                    unRes.getString("heure_arr"),
+	                    unRes.getString("aeroport"),
+	                    unRes.getString("date"),
+	                    unRes.getString("destination"),
+	                    unRes.getString("image"),
+	                    unRes.getInt("prix")
+	                    );
+	        }
+	    }
+	    catch(SQLException exp)
+	    {
+	        System.out.println("Erreur execution : " + requete);
+	    }
+	    uneBdd.seDeconnecter();
+		
+		return unTrajet;
+	}
+	
 	//FIN FONCTIONS TRAJET
 	
 	//FONCTIONS VOL

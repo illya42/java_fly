@@ -10,16 +10,10 @@
 </head>
 <body>
 	<%@ include file="entete.jsp" %>
-		<h1>Accueil</h1>
+	<h1>Accueil</h1>
+			
 		<h3>Identification</h3>
-		<form method="post" action="">
-		Identifiant : <input type="text" name="identifiant"><br/>
-		Mot de passe : <input type="text" name="mdp"><br/>
-		<input type="submit" name="valider" value="valider"><br/>
-		<input type="reset" name="annuler" value="annuler"><br/>
-		</form>
-		<br/>
-		<br/>
+
 		<%!
 		//partie déclaration
 		Administrateur unAdministrateur = new Administrateur();
@@ -27,7 +21,34 @@
 		
 		<%
 		//partie éxecution
-		HttpSession uneSession = request.getSession();
+		
+		HttpSession uneSession = request.getSession(false);
+		
+		if (uneSession.isNew()) 
+		{
+			//Nouvelle Session
+		    uneSession = request.getSession();
+			
+			out.print("<form method='post' action=''>");
+			out.print("Identifiant : <input type='text' name='identifiant'><br/>");
+			out.print("Mot de passe : <input type='text' name='mdp'><br/>");
+			out.print("<input type='submit' name='valider' value='valider'><br/>");
+			out.print("<input type='reset' name='annuler' value='annuler'><br/>");
+			out.print("</form>");
+		} 
+		else 
+		{			
+			String identifiant = (String) uneSession.getAttribute("identifiant");
+			String mdp = (String) uneSession.getAttribute("mdp");
+			
+		    //Session déjà créée
+		    out.print("<form method='post' action=''>");
+			out.print("Identifiant : <input type='text' name='identifiant' value=" + identifiant + "><br/>");
+			out.print("Mot de passe : <input type='password' name='mdp' value=" + mdp + "><br/>");
+			out.print("<input type='submit' name='valider' value='valider'><br/>");
+			out.print("<input type='submit' name='déconnection' value='déconnection'><br/>");
+			out.print("</form>");
+		}
 		
 		if( request.getParameter("valider") != null )
 		{
@@ -40,13 +61,19 @@
 				
 				uneSession.setAttribute("nom", unAdministrateur.getNom_admin());
 				uneSession.setAttribute("prenom", unAdministrateur.getPrenom_admin());
+				uneSession.setAttribute("identifiant", unAdministrateur.getIdentifiant());
+				uneSession.setAttribute("mdp", unAdministrateur.getMdp());
 				
-				String redirect = "trajet.jsp";
-				
-				out.print("<h3>Bienvenue " + uneSession.getAttribute("nom") + " " + uneSession.getAttribute("prenom"));
-				
-				out.print("<h2><a href=" + redirect + ">Menu des Trajets</a></h2>");
+				response.sendRedirect("menu.jsp");
 			}
+		}
+		if( request.getParameter("déconnection") != null )
+		{
+			if(!uneSession.isNew())
+			{
+				uneSession.invalidate();
+			}
+			response.sendRedirect("index.jsp");
 		}
 		%>
 	<%@ include file="footer.jsp" %>

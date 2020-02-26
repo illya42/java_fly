@@ -80,6 +80,11 @@ public class Controller
 		Modele.deleteTrajet(id);
 	}
 	
+	public static Trajet returnTrajet(int id)
+	{
+		return Modele.selectTrajet(id);
+	}
+	
 	//FIN FONCTIONS TRAJET
 	
 	//FONCTIONS VOL
