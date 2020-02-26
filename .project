@@ -28,4 +28,16 @@
 		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.eclipse.wst.jsdt.core.jsNature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>WebContent/pixel-html</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Desktop/pixel-admin-lite-master/pixel-html</locationURI>
+		</link>
+		<link>
+			<name>WebContent/plugins</name>
+			<type>2</type>
+			<locationURI>PARENT-2-PROJECT_LOC/Desktop/pixel-admin-lite-master/plugins</locationURI>
+		</link>
+	</linkedResources>
 </projectDescription>
