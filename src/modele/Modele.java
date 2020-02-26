@@ -203,7 +203,7 @@ public class Modele
 		+ "', date = '" + unTrajet.getDate()
 		+ "', destination = '" + unTrajet.getDestination()
 		+ "', image = '" + unTrajet.getImage()
-		+ " where id = '" 
+		+ "' where id = '" 
 		+ unTrajet.getId() + "';";
 		
 		executer (requete);

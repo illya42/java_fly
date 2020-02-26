@@ -1,6 +1,9 @@
 
 	<%@ include file="header.jsp" %>
-		<h1>Gestion des Trajets</h1>
+		<div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+		<h2>Gestion des Trajets</h2>
 		<form method="post" action="">
 			Prix : <input type="text" name="prix"><br/>
 			Heure de départ : <input type="text" name="heure_dep"><br/>
@@ -13,12 +16,13 @@
 			<input type="submit" name="retour" value="retour"><br/>
 		</form>
 		<br/>
-		<br/>
+		<br/></div></div></div>
 		<%!
 		//partie déclaration
 		Trajet unTrajet = new Trajet();
 		%>
-		
+		<div class="white-box">
+                            <h3 class="box-title">Basic Table</h3>
 		<%
 		//partie éxecution
 		
@@ -84,6 +88,8 @@
 			response.sendRedirect("index.jsp");
 		}
 		%>
+		</div>
+		</div>
 		
 	<%@ include file="footer.jsp" %>
 </body>
