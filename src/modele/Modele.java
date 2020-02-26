@@ -377,8 +377,7 @@ public class Modele
 	public static void insertReservation( Reservation uneReservation )
 	{
 		String requete="insert into vol values (null, '" 
-				+ uneReservation.getId() 
-		+ "','" + uneReservation.getGroupe_id() 
+				+ uneReservation.getGroupe_id()
 		+"','" + uneReservation.getTarif() 
 		+"','" + uneReservation.getTrajet_id()
 		+"');";
@@ -402,6 +401,37 @@ public class Modele
 		+ uneReservation.getId() + "';";
 		
 		executer (requete);
+	}
+	
+	public static Reservation selectReservation(int id)
+	{
+		Reservation uneReservation = null;
+		
+		String requete = "select * from reservation where id = " + id + ";";
+	            
+	    uneBdd.seConnecter();
+	
+	    try
+	    {
+	        Statement unStat = uneBdd.getMaConnexion().createStatement();
+	        ResultSet unRes = unStat.executeQuery(requete);
+	        if(unRes.next())
+	        {
+	            uneReservation = new Reservation(
+	                    unRes.getInt("id"),
+	                    unRes.getInt("groupe_id"),
+	                    unRes.getString("tarif"),
+	                    unRes.getInt("trajet_id")
+	                    );
+	        }
+	    }
+	    catch(SQLException exp)
+	    {
+	        System.out.println("Erreur execution : " + requete);
+	    }
+	    uneBdd.seDeconnecter();
+		
+		return uneReservation;
 	}
 	
 	//FIN FONCTIONS RESERVATION

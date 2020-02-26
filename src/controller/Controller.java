@@ -89,10 +89,6 @@ public class Controller
 	
 	//FONCTIONS GROUPE
 	
-	public static void insertGroupe(Groupe unGroupe)
-	{
-		Modele.insertGroupe(unGroupe);
-	}
 	public static void updateGroupe(Groupe unGroupe)
 	{
 		Modele.updateGroupe(unGroupe);
@@ -130,6 +126,11 @@ public class Controller
 	public static void deleteReservation(int id)
 	{
 		Modele.deleteReservation(id);
+	}
+	
+	public static Reservation returnReservation(int id)
+	{
+		return Modele.selectReservation(id);
 	}
 	
 	//FIN FONCTIONS RESERVATION

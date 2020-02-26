@@ -20,14 +20,6 @@ public class Groupe
 		this.id_trajet = id_trajet;
 	}
 	
-	public Groupe(int administrateur_id, String destination, String date, int id_trajet)
-	{
-		this.administrateur_id = administrateur_id;
-		this.destination = destination;
-		this.date = date;
-		this.id_trajet = id_trajet;
-	}
-	
 	public String consulter()
 	{
 		return "ID : " + this.id 

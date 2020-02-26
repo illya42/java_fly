@@ -10,8 +10,7 @@
 				<tr><td>Destination : </td><td><input type="text" name="destination"></td></tr>
 				<tr><td>Date : </td><td><input type="date" name="date"></td></tr>
 				<tr><td>ID Trajet : </td><td><input type="number" name="id_trajet"></td></tr>
-				<tr><td><input type="submit" id="bouton" name="enregistrer" value="enregistrer"></td>
-				<td><input type="submit" name="retour" value="retour"></td></tr>
+				<tr><td><input type="submit" name="retour" value="retour"></td></tr>
 		</table>
 		</form>
 		<br/>
@@ -59,23 +58,7 @@
 			response.sendRedirect("groupe.jsp");
 		}
 		
-		if ( request.getParameter("enregistrer") != null )
-		{
-			int administrateur_id = Integer.parseInt(request.getParameter("administrateur_id"));
-			String destination = request.getParameter("destination");
-			String date = request.getParameter("date");
-			int id_trajet = Integer.parseInt(request.getParameter("id_trajet"));
-			
-			unGroupe = new Groupe( administrateur_id, destination, date, id_trajet);
-			
-			//insertion
-			
-			Controller.insertGroupe(unGroupe);
-			
-			out.print("Insertion dans la bdd réussie");
-			out.print( "<br/> Nouveau Trajet : " );
-			out.print( "" + unGroupe.consulter() );
-		}
+		
 		if ( request.getParameter("retour") != null )
 		{
 			response.sendRedirect("index.jsp");

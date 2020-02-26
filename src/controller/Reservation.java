@@ -21,6 +21,14 @@ public class Reservation
 		this.trajet_id = trajet_id;
 	}
 	
+	public Reservation(int groupe_id, String tarif, int trajet_id ) 
+	{
+		super();
+		this.groupe_id = groupe_id;
+		this.tarif = tarif;
+		this.trajet_id = trajet_id;
+	}
+
 	public String consulter()
 	{
 		return "ID : " + this.id 
