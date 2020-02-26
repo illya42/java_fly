@@ -13,8 +13,15 @@ public class Groupe
 
 	public Groupe(int id, int administrateur_id, String destination, String date, int id_trajet) 
 	{
-		super();
 		this.id = id;
+		this.administrateur_id = administrateur_id;
+		this.destination = destination;
+		this.date = date;
+		this.id_trajet = id_trajet;
+	}
+	
+	public Groupe(int administrateur_id, String destination, String date, int id_trajet)
+	{
 		this.administrateur_id = administrateur_id;
 		this.destination = destination;
 		this.date = date;
@@ -46,7 +53,7 @@ public class Groupe
 	public void setAdministrateur_id(int administrateur_id) {
 		this.administrateur_id = administrateur_id;
 	}
-
+	
 	public int getId_trajet() {
 		return id_trajet;
 	}
@@ -70,5 +77,4 @@ public class Groupe
 	public void setDate(String date) {
 		this.date = date;
 	}
-	
 }

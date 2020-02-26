@@ -246,78 +246,6 @@ public class Modele
 	
 	//FIN FONCTIONS TRAJET
 	
-	//FONCTIONS VOL
-	
-	public static ArrayList<Vol> selectAllVols()
-	{
-		ArrayList<Vol> lesVols = new ArrayList<Vol>();
-		
-		String requete = "select * from vol;";
-		try 
-		{
-			uneBdd.seConnecter();
-			Statement unStat = uneBdd.getMaConnexion().createStatement();
-			ResultSet desRes = unStat.executeQuery(requete);
-			while(desRes.next())
-			{
-				Vol unVol = new Vol(
-						desRes.getInt("id"),
-						desRes.getInt("trajet_id"),
-						desRes.getString("date_vol"),
-						desRes.getString("heure_dep"),
-						desRes.getString("heure_arr"),
-						desRes.getString("aeroport_dep"),
-						desRes.getString("aeroport_arr")
-						);
-				lesVols.add(unVol);
-			}
-			uneBdd.seDeconnecter();
-		}
-		catch(SQLException exp)
-		{
-			exp.printStackTrace();
-		}
-		return lesVols;
-	}
-	
-	public static void insertVol( Vol unVol )
-	{
-		String requete="insert into vol values (null, '" 
-				+ unVol.getId() 
-		+ "','" + unVol.getTrajet_id() 
-		+"','" + unVol.getDate_vol() 
-		+"','" + unVol.getHeure_dep()
-		+"','" + unVol.getHeure_arr()
-		+"','" + unVol.getAeroport_dep()
-		+"','" + unVol.getAeroport_arr()
-		+"');";
-		
-		executer (requete);
-	}
-	
-	public static void deleteVol( int id )
-	{
-		String requete ="delete from vol where id = " + id + ";";
-		
-		executer (requete);
-	}
-	
-	public static void updateVol( Vol unVol )
-	{
-		String requete="update vol set trajet_id = '" + unVol.getTrajet_id()
-		+ "', date_vol = '" + unVol.getHeure_dep()
-		+ "', heure_dep = '" + unVol.getHeure_dep()
-		+ "', heure_arr = '" + unVol.getHeure_arr()
-		+ "', aeroport_dep = '" + unVol.getAeroport_dep()
-		+ "', aeroport_arr = '" + unVol.getAeroport_arr()
-		+ " where id = '" 
-		+ unVol.getId() + "';";
-		
-		executer (requete);
-	}
-	
-	//FIN FONCTIONS VOL
-	
 	//FONCTIONS GROUPE
 	
 	public static ArrayList<Groupe> selectAllGroupes()
@@ -337,7 +265,7 @@ public class Modele
 						desRes.getInt("administrateur_id"),
 						desRes.getString("destination"),
 						desRes.getString("date"),
-						desRes.getInt("id_trajet")
+						desRes.getInt("trajet_id")
 						);
 				lesGroupes.add(unGroupe);
 			}
@@ -353,8 +281,7 @@ public class Modele
 	public static void insertGroupe( Groupe unGroupe )
 	{
 		String requete="insert into groupe values (null, '" 
-				+ unGroupe.getId() 
-		+ "','" + unGroupe.getAdministrateur_id() 
+				+ unGroupe.getAdministrateur_id() 
 		+"','" + unGroupe.getDestination() 
 		+"','" + unGroupe.getDate()
 		+"','" + unGroupe.getId_trajet()
@@ -380,6 +307,38 @@ public class Modele
 		+ unGroupe.getId() + "';";
 		
 		executer (requete);
+	}
+	
+	public static Groupe selectGroupe(int id)
+	{
+		Groupe unGroupe = null;
+		
+		String requete = "select * from groupe where id = " + id + ";";
+	            
+	    uneBdd.seConnecter();
+	
+	    try
+	    {
+	        Statement unStat = uneBdd.getMaConnexion().createStatement();
+	        ResultSet unRes = unStat.executeQuery(requete);
+	        if(unRes.next())
+	        {
+	            unGroupe = new Groupe(
+	                    unRes.getInt("id"),
+	                    unRes.getInt("administrateur_id"),
+	                    unRes.getString("destination"),
+	                    unRes.getString("date"),
+	                    unRes.getInt("trajet_id")
+	                    );
+	        }
+	    }
+	    catch(SQLException exp)
+	    {
+	        System.out.println("Erreur execution : " + requete);
+	    }
+	    uneBdd.seDeconnecter();
+		
+		return unGroupe;
 	}
 	
 	//FIN FONCTIONS GROUPE

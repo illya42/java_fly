@@ -87,27 +87,6 @@ public class Controller
 	
 	//FIN FONCTIONS TRAJET
 	
-	//FONCTIONS VOL
-	
-	public static void insertVol(Vol unVol)
-	{
-		Modele.insertVol(unVol);
-	}
-	public static void updateVol(Vol unVol)
-	{
-		Modele.updateVol(unVol);
-	}
-	public static ArrayList<Vol> selectAllVols()
-	{
-		return Modele.selectAllVols();
-	}
-	public static void deleteVol(int id)
-	{
-		Modele.deleteVol(id);
-	}
-	
-	//FIN FONCTIONS VOL
-	
 	//FONCTIONS GROUPE
 	
 	public static void insertGroupe(Groupe unGroupe)
@@ -125,6 +104,11 @@ public class Controller
 	public static void deleteGroupe(int id)
 	{
 		Modele.deleteGroupe(id);
+	}
+	
+	public static Groupe returnGroupe(int id)
+	{
+		return Modele.selectGroupe(id);
 	}
 	
 	//FIN FONCTIONS GROUPE
