@@ -1,10 +1,10 @@
 
 	<%@ include file="header.jsp" %>
 	
-	<h1>Accueil</h1>
-			
-		<h3>Identification</h3>
-
+	<div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+		<h2>Identification</h2>
 		<%!
 		//partie déclaration
 		Administrateur unAdministrateur = new Administrateur();
@@ -18,11 +18,14 @@
 			//Nouvelle Session
 		    uneSession = request.getSession();
 			
+			
 			out.print("<form method='post' action=''>");
-			out.print("Identifiant : <input type='text' name='identifiant'><br/>");
-			out.print("Mot de passe : <input type='password' name='mdp'><br/>");
-			out.print("<input type='submit' name='valider' value='valider'><br/>");
-			out.print("<input type='reset' name='annuler' value='annuler'><br/>");
+			out.print("<table>");
+			out.print("<tr><td>Identifiant : </td><td><input type='text' style='margin:10px;' name='identifiant'></td></tr>");
+			out.print("<tr><td>Mot de passe : </td><td><input type='password' style='margin:10px;' name='mdp'></td></tr>");
+			out.print("<input type='submit' class='button1' name='valider'  style='margin:10px;' value='valider'><br/>");
+			out.print("<input type='reset' class='button2' name='annuler' style='margin:10px;' value='annuler'><br/>");
+			out.print("</table>");
 			out.print("</form>");
 		}
 		else 
@@ -33,20 +36,26 @@
 				String mdp = (String) uneSession.getAttribute("mdp");
 				
 			    //Session déjà créée
-			    out.print("<form method='post' action=''>");
-				out.print("Identifiant : <input type='text' name='identifiant' value=" + identifiant + "><br/>");
-				out.print("Mot de passe : <input type='password' name='mdp' value=" + mdp + "><br/>");
-				out.print("<input type='submit' name='valider' value='valider'><br/>");
-				out.print("<input type='submit' name='déconnection' value='déconnection'><br/>");
+
+				
+				out.print("<form method='post' action=''>");
+				out.print("<table>");
+				out.print("<tr><td>Identifiant : </td><td><input type='text' style='margin:10px;' name='identifiant' value=" + identifiant + "></td></tr>");
+				out.print("<tr><td>Mot de passe : </td><td><input type='password' style='margin:10px;' name='mdp'value=" + mdp + "></td></tr>");
+				out.print("<tr><td><input class='button1' type='submit' name='valider'  style='margin:10px;' value='valider'></td>");
+				out.print("<td><input type='reset' class='button2' name='annuler' style='margin:10px;' value='annuler'></td></td>");
+				out.print("</table>");
 				out.print("</form>");
 			}
 			else
 			{
 				out.print("<form method='post' action=''>");
-				out.print("Identifiant : <input type='text' name='identifiant'><br/>");
-				out.print("Mot de passe : <input type='password' name='mdp'><br/>");
-				out.print("<input type='submit' name='valider' value='valider'><br/>");
-				out.print("<input type='reset' name='annuler' value='annuler'><br/>");
+				out.print("<table>");
+				out.print("<tr><td>Identifiant : </td><td><input type='text' style='margin:10px;' name='identifiant'></td></tr>");
+				out.print("<tr><td>Mot de passe : </td><td><input type='password' style='margin:10px;' name='mdp'></td></tr>");
+				out.print("<input type='submit' class='button1' name='valider'  style='margin:10px;' value='valider'><br/>");
+				out.print("<input type='reset' class='button2' name='annuler' style='margin:10px;' value='annuler'><br/>");
+				out.print("</table>");
 				out.print("</form>");
 			}
 		}
@@ -77,5 +86,5 @@
 			response.sendRedirect("index.jsp");
 		}
 		%>
-		
+		</div></div></div>
 		<%@ include file="footer.jsp" %>
