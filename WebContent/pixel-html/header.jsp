@@ -54,7 +54,26 @@
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
-                        <a class="profile-pic" href="#"> <img src="../plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs"><% HttpSession uneSession = request.getSession(false); if(uneSession.isNew()){ uneSession = request.getSession();}else{ out.print((String) uneSession.getAttribute("nom") + " " +(String) uneSession.getAttribute("prenom"));} %></b> </a>
+                        <a class="profile-pic" href="#"> <img src="../plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">
+                        <% 
+                        HttpSession uneSession = request.getSession(false);
+                        
+                        if(uneSession.isNew())
+                        { 
+                        	uneSession = request.getSession();
+                        }
+                        else
+                        {
+                        	if (uneSession.getAttribute("identifiant") != null && uneSession.getAttribute("mdp") != null)
+                			{
+                				String identifiant = (String) uneSession.getAttribute("identifiant");
+                				String mdp = (String) uneSession.getAttribute("mdp");
+                				
+                				out.print( (String) uneSession.getAttribute("nom") + " " + (String) uneSession.getAttribute("prenom"));
+                			}
+                        }
+                        %>
+                        </b> </a>
                     </li>
                 </ul>
             </div>
