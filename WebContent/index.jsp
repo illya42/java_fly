@@ -35,19 +35,31 @@
 			out.print("<input type='submit' name='valider' value='valider'><br/>");
 			out.print("<input type='reset' name='annuler' value='annuler'><br/>");
 			out.print("</form>");
-		} 
+		}
 		else 
-		{			
-			String identifiant = (String) uneSession.getAttribute("identifiant");
-			String mdp = (String) uneSession.getAttribute("mdp");
-			
-		    //Session déjà créée
-		    out.print("<form method='post' action=''>");
-			out.print("Identifiant : <input type='text' name='identifiant' value=" + identifiant + "><br/>");
-			out.print("Mot de passe : <input type='password' name='mdp' value=" + mdp + "><br/>");
-			out.print("<input type='submit' name='valider' value='valider'><br/>");
-			out.print("<input type='submit' name='déconnection' value='déconnection'><br/>");
-			out.print("</form>");
+		{
+			if (uneSession.getAttribute("identifiant") != null && uneSession.getAttribute("mdp") != null)
+			{
+				String identifiant = (String) uneSession.getAttribute("identifiant");
+				String mdp = (String) uneSession.getAttribute("mdp");
+				
+			    //Session déjà créée
+			    out.print("<form method='post' action=''>");
+				out.print("Identifiant : <input type='text' name='identifiant' value=" + identifiant + "><br/>");
+				out.print("Mot de passe : <input type='password' name='mdp' value=" + mdp + "><br/>");
+				out.print("<input type='submit' name='valider' value='valider'><br/>");
+				out.print("<input type='submit' name='déconnection' value='déconnection'><br/>");
+				out.print("</form>");
+			}
+			else
+			{
+				out.print("<form method='post' action=''>");
+				out.print("Identifiant : <input type='text' name='identifiant'><br/>");
+				out.print("Mot de passe : <input type='password' name='mdp'><br/>");
+				out.print("<input type='submit' name='valider' value='valider'><br/>");
+				out.print("<input type='reset' name='annuler' value='annuler'><br/>");
+				out.print("</form>");
+			}
 		}
 		
 		if( request.getParameter("valider") != null )
