@@ -32,12 +32,12 @@
 		<link>
 			<name>WebContent/pixel-html</name>
 			<type>2</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Desktop/pixel-admin-lite-master/pixel-html</locationURI>
+			<location>C:/Users/rossi/eclipse-workspace/java_fly/WebContent/pixel-html</location>
 		</link>
 		<link>
 			<name>WebContent/plugins</name>
 			<type>2</type>
-			<locationURI>PARENT-2-PROJECT_LOC/Desktop/pixel-admin-lite-master/plugins</locationURI>
+			<location>C:/Users/rossi/eclipse-workspace/java_fly/WebContent/plugins</location>
 		</link>
 	</linkedResources>
 </projectDescription>
