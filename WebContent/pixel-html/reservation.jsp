@@ -8,7 +8,7 @@
 		<table>
 				<tr><td>ID Groupe : </td><td><input type="number" name="groupe_id"></td></tr>
 				<tr><td>Tarif : </td><td><input type="text" name="tarif"></td></tr>
-				<tr><td>ID Trajet : </td><td><input type="number" name="id_trajet"></td></tr>
+				<tr><td>ID Trajet : </td><td><input type="number" name="trajet_id"></td></tr>
 				<tr><td><input type="submit" style="margin:10px;" id="bouton1" name="enregistrer" value="Enregistrer"></td>
 				<td><input type="submit" style="margin:10px;" name="retour" value="Retour"></td></tr>
 		</table>

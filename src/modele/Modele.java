@@ -260,7 +260,7 @@ public class Modele
 						desRes.getInt("administrateur_id"),
 						desRes.getString("destination"),
 						desRes.getString("date"),
-						desRes.getInt("trajet_id")
+						desRes.getInt("id_trajet")
 						);
 				lesGroupes.add(unGroupe);
 			}
@@ -286,7 +286,7 @@ public class Modele
 		+ "', destination = '" + unGroupe.getDestination()
 		+ "', date = '" + unGroupe.getDate()
 		+ "', id_trajet = '" + unGroupe.getId_trajet()
-		+ " where id = '" 
+		+ "' where id = '" 
 		+ unGroupe.getId() + "';";
 		
 		executer (requete);
@@ -311,7 +311,7 @@ public class Modele
 	                    unRes.getInt("administrateur_id"),
 	                    unRes.getString("destination"),
 	                    unRes.getString("date"),
-	                    unRes.getInt("trajet_id")
+	                    unRes.getInt("id_trajet")
 	                    );
 	        }
 	    }
@@ -359,12 +359,13 @@ public class Modele
 	
 	public static void insertReservation( Reservation uneReservation )
 	{
-		String requete="insert into vol values (null, '" 
+		String requete="insert into reservation values (null, '" 
 				+ uneReservation.getGroupe_id()
 		+"','" + uneReservation.getTarif() 
 		+"','" + uneReservation.getTrajet_id()
 		+"');";
 		
+		System.out.println(" " + requete);
 		executer (requete);
 	}
 	
@@ -378,9 +379,9 @@ public class Modele
 	public static void updateReservation( Reservation uneReservation )
 	{
 		String requete="update reservation set groupe_id = '" + uneReservation.getGroupe_id()
-		+ "', date_vol = '" + uneReservation.getTarif()
-		+ "', heure_dep = '" + uneReservation.getTrajet_id()
-		+ " where id = '" 
+		+ "', tarif = '" + uneReservation.getTarif()
+		+ "', trajet_id = '" + uneReservation.getTrajet_id()
+		+ "' where id = '" 
 		+ uneReservation.getId() + "';";
 		
 		executer (requete);

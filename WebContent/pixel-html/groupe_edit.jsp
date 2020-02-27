@@ -11,7 +11,7 @@
 		<%
 		//partie éxecution
 		
-		int id = (Integer) uneSession.getAttribute("id");
+		int id = (Integer) uneSession.getAttribute("id_g");
 		
 		unGroupe = Controller.returnGroupe(id);
 
@@ -29,10 +29,10 @@
 		
 		if ( request.getParameter("modifier") != null )
 		{
-			int admin_id = Integer.parseInt(request.getParameter("heure_dep"));
-			String destination = request.getParameter("heure_arr");
-			String date = request.getParameter("aeroport");
-			int id_trajet = Integer.parseInt(request.getParameter("date"));
+			int admin_id = Integer.parseInt(request.getParameter("admin_id"));
+			String destination = request.getParameter("destination");
+			String date = request.getParameter("date");
+			int id_trajet = Integer.parseInt(request.getParameter("id_trajet"));
 			
 			unGroupe = new Groupe( id, admin_id, destination, date, id_trajet );
 			
