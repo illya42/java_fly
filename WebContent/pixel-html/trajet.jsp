@@ -6,7 +6,7 @@
 		<h2>Gestion des Trajets</h2>
 		<form method="post" action="">
 		<table>
-				<tr><td> Prix : </td><td><input style="margin:10px;" type="text" name="prix" placeholder="Rentrez un prix"></td></tr>
+				<tr><td>Prix : </td><td><input style="margin:10px;" type="number" min="10" name="prix" placeholder="Rentrez un prix"></td></tr>
 				<tr><td>Heure de départ : </td><td><input style="margin:10px;" type="text" name="heure_dep"></td></tr>
 				<tr><td>Heure d'arrivée : </td><td><input style="margin:10px;" type="text" name="heure_arr"></td></tr>
 				<tr><td>Aéroport de départ : </td><td><input style="margin:10px;" type="text" name="aeroport"></td></tr>
@@ -14,7 +14,8 @@
 				<tr><td>Destination : </td><td><input style="margin:10px;" type="text" name="destination"></td></tr>
 				<tr><td>Image : </td><td><input style="margin:10px;" type="text" name="image"></td></tr>
 				<tr><td><input type="submit" style="margin:10px;" id="bouton1" name="enregistrer" value="Enregistrer"></td>
-				<td><input type="submit" style="margin:10px;" name="retour" value="Retour"></td></tr>
+				<td><input type="reset" style="margin:10px;" name="annuler" value="annuler"></td></tr>
+				<tr><td><input type="submit" style="margin:10px;" name="retour" value="Retour"></td></tr>
 		</table>
 		</form>
 		<br/>
@@ -24,7 +25,7 @@
 		Trajet unTrajet = new Trajet();
 		%>
 		<div class="white-box">
-                            <h3 class="box-title">Basic Table</h3>
+       	<h3 class="box-title">Table des trajets</h3>
 		<%
 		//partie éxecution
 		
@@ -87,7 +88,7 @@
 		}
 		if ( request.getParameter("retour") != null )
 		{
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("menu.jsp");
 		}
 		%>
 		</div>

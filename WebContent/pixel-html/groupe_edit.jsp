@@ -5,13 +5,13 @@
 		<br/>
 		<%!
 		//partie déclaration
-		Groupe unGroupe = null;
+		Groupe unGroupe = new Groupe();
 		%>
 		
 		<%
 		//partie éxecution
 		
-		int id = (Integer) uneSession.getAttribute("id_g");
+		int id = (Integer) uneSession.getAttribute("id");
 		
 		unGroupe = Controller.returnGroupe(id);
 

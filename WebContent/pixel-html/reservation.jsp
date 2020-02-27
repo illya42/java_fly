@@ -20,7 +20,7 @@
 		Reservation uneReservation = new Reservation();
 		%>
 		<div class="white-box">
-                            <h3 class="box-title">Basic Table</h3>
+        <h3 class="box-title">Table des réservations</h3>
 		<%
 		//partie éxecution
 		
@@ -75,7 +75,7 @@
 		}
 		if ( request.getParameter("retour") != null )
 		{
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("menu.jsp");
 		}
 		%>
 		</div>

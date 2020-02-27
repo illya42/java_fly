@@ -10,8 +10,6 @@ import controller.Administrateur;
 import controller.Groupe;
 import controller.Reservation;
 import controller.Trajet;
-import controller.Vol;
-
 
 public class Modele 
 {
@@ -211,7 +209,7 @@ public class Modele
 	
 	public static Trajet selectTrajet(int id)
 	{
-		Trajet unTrajet = null;
+		Trajet unTrajet = new Trajet();
 		
 		String requete = "select * from trajet where id = " + id + ";";
 	            
@@ -278,18 +276,6 @@ public class Modele
 		return lesGroupes;
 	}
 	
-	public static void insertGroupe( Groupe unGroupe )
-	{
-		String requete="insert into groupe values (null, '" 
-				+ unGroupe.getAdministrateur_id() 
-		+"','" + unGroupe.getDestination() 
-		+"','" + unGroupe.getDate()
-		+"','" + unGroupe.getId_trajet()
-		+"');";
-		
-		executer (requete);
-	}
-	
 	public static void deleteGroupe( int id )
 	{
 		String requete ="delete from groupe where id = " + id + ";";
@@ -311,7 +297,7 @@ public class Modele
 	
 	public static Groupe selectGroupe(int id)
 	{
-		Groupe unGroupe = null;
+		Groupe unGroupe = new Groupe();
 		
 		String requete = "select * from groupe where id = " + id + ";";
 	            

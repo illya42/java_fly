@@ -4,23 +4,13 @@
                     <div class="col-sm-12">
                         <div class="white-box">
 		<h2>Gestion des Groupes</h2>
-		<form method="post" action="">
-		<table>
-				<tr><td>ID Admin : </td><td><input type="number" name="administrateur_id"></td></tr>
-				<tr><td>Destination : </td><td><input type="text" name="destination"></td></tr>
-				<tr><td>Date : </td><td><input type="date" name="date"></td></tr>
-				<tr><td>ID Trajet : </td><td><input type="number" name="id_trajet"></td></tr>
-				<tr><td><input type="submit" name="retour" value="retour"></td></tr>
-		</table>
-		</form>
-		<br/>
-		<br/></div></div></div>
+		</div></div></div>
 		<%!
 		//partie déclaration
 		Groupe unGroupe = new Groupe();
 		%>
 		<div class="white-box">
-                            <h3 class="box-title">Basic Table</h3>
+        <h3 class="box-title">Table des groupes</h3>
 		<%
 		//partie éxecution
 		
@@ -44,8 +34,6 @@
 		{
 			int id = Integer.parseInt(request.getParameter("id"));
 			
-			//response.sendRedirect("update.jsp");
-			
 			uneSession.setAttribute("id_g", id);
 			response.sendRedirect("groupe_edit.jsp");
 		}
@@ -60,7 +48,7 @@
 		
 		if ( request.getParameter("retour") != null )
 		{
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("menu.jsp");
 		}
 		%>
 		</div>

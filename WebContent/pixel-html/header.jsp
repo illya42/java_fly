@@ -117,7 +117,7 @@
             <div class="container-fluid">
                 <div class="row bg-title">
                     <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                        <h2 class="page-title">Gestion @Fly</h2> </div>
+                        <a href='index.jsp'><h2 class="page-title">Gestion @Fly</h2></a> </div>
                     
                     <!-- /.col-lg-12 -->
                 </div>
