@@ -36,7 +36,7 @@ public class Bdd
     public void seConnecter ()
     {
         this.chargerPilote();
-        String url = "jdbc:mysql://localhost:3308/dbfly";
+        String url = "jdbc:mysql://localhost:3306/dbfly";
         
         try 
         {
