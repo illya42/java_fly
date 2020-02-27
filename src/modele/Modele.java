@@ -104,8 +104,7 @@ public class Modele
 	public static void insertAdministrateur( Administrateur unAdministrateur )
 	{
 		String requete="insert into administrateur values (null, '" 
-				+ unAdministrateur.getId() 
-		+ "','" + unAdministrateur.getNom_admin()
+				+ unAdministrateur.getNom_admin()
 		+"','" + unAdministrateur.getPrenom_admin() 
 		+"','" + unAdministrateur.getIdentifiant()
 		+"','" + unAdministrateur.getMdp()
@@ -200,9 +199,7 @@ public class Modele
 		+ "', aeroport = '" + unTrajet.getAeroport()
 		+ "', date = '" + unTrajet.getDate()
 		+ "', destination = '" + unTrajet.getDestination()
-		+ "', image = '" + unTrajet.getImage()
-		+ "' where id = '" 
-		+ unTrajet.getId() + "';";
+		+ "', image = '" + unTrajet.getImage() + "' where id = '" + unTrajet.getId() + "';";
 		
 		executer (requete);
 	}
