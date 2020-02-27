@@ -46,7 +46,7 @@
 			
 			//response.sendRedirect("update.jsp");
 			
-			uneSession.setAttribute("id", id);
+			uneSession.setAttribute("id_g", id);
 			response.sendRedirect("groupe_edit.jsp");
 		}
 		
@@ -57,7 +57,6 @@
 			Controller.deleteGroupe(id);
 			response.sendRedirect("groupe.jsp");
 		}
-		
 		
 		if ( request.getParameter("retour") != null )
 		{

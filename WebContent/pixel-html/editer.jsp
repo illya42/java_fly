@@ -16,16 +16,19 @@
 		unTrajet = Controller.returnTrajet(id);
 
 		out.print("<form method='post' action='' id='form'>");
-		out.print("Heure de départ : <input type='text' name='heure_dep' value=" + unTrajet.getHeure_dep() + "></br>");
-		out.print("Heure d'arrivée : <input type='text' name='heure_arr' value=" + unTrajet.getHeure_arr() + "></br>");
-		out.print("Aéroport : <input type='text' name='aeroport' value=" + unTrajet.getAeroport() + "></br>");
-		out.print("Date : <input type='text' name='date' value=" + unTrajet.getDate() + "></br>");
-		out.print("Destination : <input type='text' name='destination' value=" + unTrajet.getDestination() + "></br>");
-		out.print("Image : <input type='text' name='image' value=" + unTrajet.getImage() + "></br>");
-		out.print("Prix : <input type='number' min='30' max='3000' name='prix' value=" + unTrajet.getPrix() + "></br>");
-		out.print("<input type='submit' name='modifier' value='modifier'><br/>");
-		out.print("<input type='reset' name='rétablir' value='rétablir' onclick='reset();'><br/>");
-		out.print("<input type='submit' name='retour' value='retour'><br/>");
+		out.print("<table>");
+		out.print("<tr><td>Heure de départ : </td><td><input type='text' name='heure_dep' style='margin:10px;' value=" + unTrajet.getHeure_dep() + "></td></tr>");
+		out.print("<tr><td>Heure d'arrivée : </td><td><input type='text' name='heure_arr' style='margin:10px;' value=" + unTrajet.getHeure_arr() + "></td></tr>");
+		out.print("<tr><td>Aéroport : </td><td><input type='text' name='aeroport' style='margin:10px;' value=" + unTrajet.getAeroport() + "></td></tr>");
+		out.print("<tr><td>Date : </td><td><input type='text' name='date' style='margin:10px;' value=" + unTrajet.getDate() + "></td></tr>");
+		out.print("<tr><td>Destination : </td><td><input type='text' name='destination' style='margin:10px;' value=" + unTrajet.getDestination() + "></td></tr>");
+		out.print("<tr><td>Image : </td><td><input type='text' name='image' style='margin:10px;' value=" + unTrajet.getImage() + "></td></tr>");
+		out.print("<tr><td>Prix : </td><td><input type='number' min='30' max='3000' name='prix' style='margin:10px;' value=" + unTrajet.getPrix() + "></td></tr>");
+		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='modifier'></td>");
+		out.print("<td><input type='reset' name='rétablir' value='rétablir' onclick='reset();'></td></tr>");
+		out.print("<tr><td><input type='submit' name='retour' style='margin:10px;' value='retour'></td></tr>");
+		out.print("</table>");
+		out.print("</form>");
 		
 		if ( request.getParameter("modifier") != null )
 		{

@@ -23,8 +23,8 @@
 			out.print("<table>");
 			out.print("<tr><td>Identifiant : </td><td><input type='text' style='margin:10px;' name='identifiant'></td></tr>");
 			out.print("<tr><td>Mot de passe : </td><td><input type='password' style='margin:10px;' name='mdp'></td></tr>");
-			out.print("<input type='submit' class='button1' name='valider'  style='margin:10px;' value='valider'><br/>");
-			out.print("<input type='reset' class='button2' name='annuler' style='margin:10px;' value='annuler'><br/>");
+			out.print("<tr><td><input type='submit' class='button1' name='valider'  style='margin:10px;' value='valider'></td>");
+			out.print("<td><input type='reset' class='button2' name='annuler' style='margin:10px;' value='annuler'></td></tr>");
 			out.print("</table>");
 			out.print("</form>");
 		}
@@ -43,7 +43,7 @@
 				out.print("<tr><td>Identifiant : </td><td><input type='text' style='margin:10px;' name='identifiant' value=" + identifiant + "></td></tr>");
 				out.print("<tr><td>Mot de passe : </td><td><input type='password' style='margin:10px;' name='mdp'value=" + mdp + "></td></tr>");
 				out.print("<tr><td><input class='button1' type='submit' name='valider'  style='margin:10px;' value='valider'></td>");
-				out.print("<td><input type='reset' class='button2' name='annuler' style='margin:10px;' value='annuler'></td></td>");
+				out.print("<td><input type='submit' name='deconnection' style='margin:10px;' value='deconnection'></td></tr>");
 				out.print("</table>");
 				out.print("</form>");
 			}
@@ -53,8 +53,8 @@
 				out.print("<table>");
 				out.print("<tr><td>Identifiant : </td><td><input type='text' style='margin:10px;' name='identifiant'></td></tr>");
 				out.print("<tr><td>Mot de passe : </td><td><input type='password' style='margin:10px;' name='mdp'></td></tr>");
-				out.print("<input type='submit' class='button1' name='valider'  style='margin:10px;' value='valider'><br/>");
-				out.print("<input type='reset' class='button2' name='annuler' style='margin:10px;' value='annuler'><br/>");
+				out.print("<tr><td><input type='submit' class='button1' name='valider'  style='margin:10px;' value='valider'></td>");
+				out.print("<td><input type='reset' class='button2' name='annuler' style='margin:10px;' value='annuler'></td></tr>");
 				out.print("</table>");
 				out.print("</form>");
 			}
@@ -77,7 +77,7 @@
 				response.sendRedirect("menu.jsp");
 			}
 		}
-		if( request.getParameter("déconnection") != null )
+		if( request.getParameter("deconnection") != null )
 		{
 			if(!uneSession.isNew())
 			{
