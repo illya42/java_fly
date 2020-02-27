@@ -14,7 +14,6 @@ public class Reservation
 
 	public Reservation(int id, int groupe_id, String tarif, int trajet_id) 
 	{
-		super();
 		this.id = id;
 		this.groupe_id = groupe_id;
 		this.tarif = tarif;
@@ -23,7 +22,6 @@ public class Reservation
 	
 	public Reservation(int groupe_id, String tarif, int trajet_id ) 
 	{
-		super();
 		this.groupe_id = groupe_id;
 		this.tarif = tarif;
 		this.trajet_id = trajet_id;
