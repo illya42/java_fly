@@ -36,7 +36,6 @@
 				String mdp = (String) uneSession.getAttribute("mdp");
 				
 			    //Session déjà créée
-
 				
 				out.print("<form method='post' action=''>");
 				out.print("<table>");

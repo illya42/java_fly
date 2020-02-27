@@ -13,7 +13,7 @@ import controller.Trajet;
 
 public class Modele 
 {
-	private static Bdd uneBdd = new Bdd("localhost", "dbfly", "root", "");
+	private static Bdd uneBdd = new Bdd("localhost", "dbfly", "root", "root");
 	
 	public static void executer(String requete)
 	{
