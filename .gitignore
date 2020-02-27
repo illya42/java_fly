@@ -3,3 +3,4 @@
 .classpath
 src/modele/Bdd.java
 src/modele/Modele.java
+src/modele/Bdd.java
