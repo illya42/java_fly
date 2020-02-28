@@ -19,15 +19,38 @@
 			//Nouvelle Session
 		    uneSession = request.getSession();
 			
-			
-			out.print("<form method='post' action=''>");
-			out.print("<table>");
-			out.print("<tr><td>Identifiant : </td><td><input type='text' style='margin:10px;' name='identifiant'></td></tr>");
-			out.print("<tr><td>Mot de passe : </td><td><input type='password' style='margin:10px;' name='mdp'></td></tr>");
-			out.print("<input type='submit' class='button1' name='valider'  style='margin:10px;' value='valider'><br/>");
-			out.print("<input type='reset' class='button2' name='annuler' style='margin:10px;' value='annuler'><br/>");
-			out.print("</table>");
-			out.print("</form>");
+			%>
+			<div class="limiter">
+	<div class="container-login100">
+		<div class="wrap-login100 p-t-0 p-b-80">
+			<form class="login100-form validate-form flex-sb flex-w">
+				<span class="login100-form-title p-b-51">
+					Login
+				</span>
+
+				
+				<div class="wrap-input100 validate-input m-b-16">
+					<input class="input100" type="text" name="identifiant" placeholder="Identifiant">
+					<span class="focus-input100"></span>
+				</div>
+				
+				
+				<div class="wrap-input100 validate-input m-b-16">
+					<input class="input100" type="password" name="mdp" placeholder="Mot de passe">
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="container-login100-form-btn m-t-17">
+					<input class="login100-form-btn" type='submit' name='valider' value='valider'>
+				</div>
+				<div class="container-login100-form-btn m-t-17">
+						<input class="login100-form-btn" type='submit' name='annuler' value='annuler'>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div><%
 		}
 		else 
 		{
@@ -37,16 +60,43 @@
 				String mdp = (String) uneSession.getAttribute("mdp");
 				
 			    //Session déjà créée
+%>
+			    <div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-0 p-b-80">
+				<form class="login100-form validate-form flex-sb flex-w">
+					<span class="login100-form-title p-b-51">
+						Login
+					</span>
 
-				
-				out.print("<form method='post' action=''>");
-				out.print("<table>");
-				out.print("<tr><td>Identifiant : </td><td><input type='text' style='margin:10px;' name='identifiant' value=" + identifiant + "></td></tr>");
-				out.print("<tr><td>Mot de passe : </td><td><input type='password' style='margin:10px;' name='mdp'value=" + mdp + "></td></tr>");
-				out.print("<tr><td><input class='button1' type='submit' name='valider'  style='margin:10px;' value='valider'></td>");
-				out.print("<td><input type='reset' class='button2' name='annuler' style='margin:10px;' value='annuler'></td></td>");
-				out.print("</table>");
-				out.print("</form>");
+					
+					<div class="wrap-input100 validate-input m-b-16">
+					<%
+						out.print("<input class='input100' type='text' name='identifiant' placeholder='Identifiant' value=" + identifiant + ">");
+					%>
+						<span class="focus-input100"></span>
+					</div>
+					
+					
+					<div class="wrap-input100 validate-input m-b-16">
+					<%
+						out.print("<input class='input100' type='password' name='mdp' placeholder='Mot de passe' value=" + mdp + ">");
+					%>
+						<span class="focus-input100"></span>
+					</div>
+
+					<div class="container-login100-form-btn m-t-17">
+						<input class="login100-form-btn" type='submit' name='valider' value='menu'>
+					</div>
+					<div class="container-login100-form-btn m-t-17">
+						<input class="login100-form-btn" type='submit' name='deconnection' value='deconnection'>
+					</div>
+
+				</form>
+			</div>
+		</div>
+	</div>
+			<%	
 			}
 			else
 			{
@@ -74,6 +124,9 @@
 
 					<div class="container-login100-form-btn m-t-17">
 						<input class="login100-form-btn" type='submit' name='valider' value='valider'>
+					</div>
+					<div class="container-login100-form-btn m-t-17">
+						<input class="login100-form-btn" type='submit' name='annuler' value='annuler'>
 					</div>
 
 				</form>
@@ -103,7 +156,7 @@
 				response.sendRedirect("menu.jsp");
 			}
 		}
-		if( request.getParameter("déconnection") != null )
+		if( request.getParameter("deconnection") != null )
 		{
 			if(!uneSession.isNew())
 			{
