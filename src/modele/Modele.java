@@ -10,6 +10,7 @@ import controller.Administrateur;
 import controller.Groupe;
 import controller.Reservation;
 import controller.Trajet;
+import controller.Tstat;
 import controller.Vol;
 
 
@@ -446,4 +447,32 @@ public class Modele
 	}
 	
 	//FIN FONCTIONS RESERVATION
+	
+	//DIAGRAMME TRAJET
+	public static ArrayList<Tstat> selectTstat()
+	{
+		ArrayList<Tstat> lesTstat = new ArrayList<Tstat>();
+		
+		String requete = "select * from tstat;";
+		try 
+		{
+			uneBdd.seConnecter();
+			Statement unStat = uneBdd.getMaConnexion().createStatement();
+			ResultSet desRes = unStat.executeQuery(requete);
+			while(desRes.next())
+			{
+				Tstat unTstat = new Tstat(
+						desRes.getInt("nbtrajet"),
+						desRes.getString("destination")
+						);
+				lesTstat.add(unTstat);
+			}
+			uneBdd.seDeconnecter();
+		}
+		catch(SQLException exp)
+		{
+			exp.printStackTrace();
+		}
+		return lesTstat;
+	}
 }

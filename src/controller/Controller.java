@@ -149,4 +149,10 @@ public class Controller
 	}
 	
 	//FIN FONCTIONS RESERVATION
+	
+	//FONCTION TSTAT
+	public static ArrayList<Tstat> selectTstat()
+	{
+		return Modele.selectTstat();
+	}
 }

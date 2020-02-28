@@ -1,10 +1,10 @@
 
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
 	<%@ include file="header.jsp" %>
 		<div class="row">
                     <div class="col-sm-12">
-                        <div class="white-box" style="display: inline-block;
-     width: 450px;
-     vertical-align: top; text-align: center; max-width: 100%;">
+                        <div class="white-box" style="display: inline-block; width: 450px; vertical-align: top; text-align: center; max-width: 100%;">
 		<h2>Gestion des Trajets</h2>
 		<form method="post" style="margin-left: 40px;" action="">
 		<table>
@@ -22,8 +22,53 @@
 		<br/>
 		<br/></div>
 		
-		<div style=" display: inline-block; max-width: 100%;">
-		<img src="https://ih1.redbubble.net/image.439646371.5865/flat,550x550,075,f.u1.jpg">
+		<div class="white-box" style=" display: inline-block;">
+		<canvas id="myChart" width="400" height="400"></canvas>
+		<% ArrayList<Tstat> lesTstat = Controller.selectTstat(); 
+		for (Tstat unTstat : lesTstat)
+        {
+		out.print(unTstat.getNbtrajet()+unTstat.getDestination());
+        }
+		%>
+<script>
+var ctx = document.getElementById('myChart').getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+</script>
 		</div>
 		
 		</div>
