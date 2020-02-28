@@ -35,7 +35,17 @@
 			int id = Integer.parseInt(request.getParameter("id"));
 			
 			uneSession.setAttribute("id_g", id);
-			response.sendRedirect("groupe_edit.jsp");
+			
+			String role = (String) uneSession.getAttribute("role");
+			
+			if( role.equals("super") )
+			{
+				response.sendRedirect("groupe_edit.jsp");
+			}
+			else
+			{
+				response.sendRedirect("groupe_edit_safe.jsp");
+			}
 		}
 		
 		if ( request.getParameter("id") != null && request.getParameter("supp") != null )

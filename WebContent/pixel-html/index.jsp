@@ -71,6 +71,7 @@
 				uneSession.setAttribute("prenom", unAdministrateur.getPrenom_admin());
 				uneSession.setAttribute("identifiant", unAdministrateur.getIdentifiant());
 				uneSession.setAttribute("mdp", unAdministrateur.getMdp());
+				uneSession.setAttribute("role", unAdministrateur.getRole());
 				
 				response.sendRedirect("menu.jsp");
 			}

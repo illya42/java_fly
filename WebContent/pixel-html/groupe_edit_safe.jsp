@@ -42,98 +42,47 @@
 		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
 		
 		out.print("<tr>");
-			out.print("<td><label for='trajet-select'>ID Trajet :</label></td>");
+			out.print("<td><label for='trajet-select'>Trajet :</label></td>");
 				out.print("<td>");
 					out.print("<select style='margin : 10px' name='id_trajet' id='trajet-select'>");
-						out.print("<option value=" + unGroupe.getId_trajet() + " disabled selected hidden>Choisir un ID Trajet</option>");
+						out.print("<option value=" + unGroupe.getId_trajet() + " disabled selected hidden>Choisir un Trajet</option>");
 						for (Trajet unTrajet : lesTrajets)
 						{
-							out.print("<option value=" + unTrajet.getId() + ">" + unTrajet.getId() + "</option>");
+							out.print("<option value=" + unTrajet.getId() + ">" + unTrajet.getId() + " -- " + unTrajet.getDestination() +" -- " + unTrajet.getDate() + "</option>");
 						}
 					out.print("</select>");
 				out.print("</td>");
 		out.print("</tr>");
 		
-		if ( request.getParameter("id_trajet") != null )
+		out.print("<tr>");
+			out.print("<td><label for='statut-select'>Statut :</label></td>");
+				out.print("<td>");
+					out.print("<select style='margin : 10px' name='statut' id='statut-select'>");
+						out.print("<option value='' disabled selected hidden>Choisir un statut</option>");
+						out.print("<option value='en cours'>En cours</option>");
+						out.print("<option value='valide'>Validé</option>");
+					out.print("</select>");
+				out.print("</td>");
+		out.print("</tr>");
+	
+		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='modifier'></td>");
+		out.print("<td><input type='reset' name='rétablir' value='rétablir' onclick='reset();'></td></tr>");
+		out.print("<tr><td><input type='submit' name='retour' style='margin:10px;' value='retour'></td></tr>");
+		out.print("</table>");
+		out.print("</form>");
+		
+		if ( request.getParameter("modifier") != null )
 		{
 			int id_t = Integer.parseInt(request.getParameter("id_trajet"));
 			
 			leTrajet = Controller.returnTrajet(id_t);
-
-			out.print("<tr><td>Destination : </td><td><input type='text' style='margin:10px;' name='destination' value = " + leTrajet.getDestination() + " disabled></td></tr>");
-	
-			out.print("<tr><td>Date : </td><td><input type='text' style='margin:10px;' name='date' value =" + leTrajet.getDate() + " disabled></td></tr>");
-	
-			out.print("<tr>");
-				out.print("<td><label for='statut-select'>Statut :</label></td>");
-					out.print("<td>");
-						out.print("<select style='margin : 10px' name='statut' id='statut-select'>");
-							out.print("<option value='' disabled selected hidden>Choisir un statut</option>");
-							out.print("<option value='en cours'>En cours</option>");
-							out.print("<option value='valide'>Validé</option>");
-						out.print("</select>");
-					out.print("</td>");
-			out.print("</tr>");
-		
-			out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='modifier'></td>");
-			out.print("<td><input type='reset' name='rétablir' value='rétablir' onclick='reset();'></td></tr>");
-			out.print("<tr><td><input type='submit' name='retour' style='margin:10px;' value='retour'></td></tr>");
-			out.print("</table>");
-			out.print("</form>");
-		}
-		else
-		{
-			out.print("<tr>");
-				out.print("<td><label for='destination-select'>Destination :</label></td>");
-					out.print("<td>");
-						out.print("<select style='margin : 10px' name='destination' id='destination-select'>");
-							out.print("<option value=" + unGroupe.getDestination() + " disabled selected hidden>Choisir une destination</option>");
-							for (Trajet unTrajet : lesTrajets)
-							{
-								out.print("<option value=" + unTrajet.getDestination() + ">" + unTrajet.getDestination() + " -- " + unTrajet.getDate() + "</option>");
-							}
-						out.print("</select>");
-					out.print("</td>");
-			out.print("</tr>");
-		
-			out.print("<tr>");
-				out.print("<td><label for='date-select'>Date :</label></td>");
-					out.print("<td>");
-						out.print("<select style='margin : 10px' name='date' id='date-select'>");
-							out.print("<option value=" + unGroupe.getDate() + " disabled selected hidden>Choisir une date</option>");
-							for (Trajet unTrajet : lesTrajets)
-							{
-								out.print("<option value=" + unTrajet.getDate() + ">" + unTrajet.getDate() + "</option>");
-							}
-						out.print("</select>");
-					out.print("</td>");
-			out.print("</tr>");
-		
-			out.print("<tr>");
-				out.print("<td><label for='statut-select'>Statut :</label></td>");
-					out.print("<td>");
-						out.print("<select style='margin : 10px' name='statut' id='statut-select'>");
-							out.print("<option value='' disabled selected hidden>Choisir un statut</option>");
-							out.print("<option value='en cours'>En cours</option>");
-							out.print("<option value='valide'>Validé</option>");
-						out.print("</select>");
-					out.print("</td>");
-			out.print("</tr>");
 			
-			out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='modifier'></td>");
-			out.print("<td><input type='reset' name='rétablir' value='rétablir' onclick='reset();'></td></tr>");
-			out.print("<tr><td><input type='submit' name='retour' style='margin:10px;' value='retour'></td></tr>");
-			out.print("</table>");
-			out.print("</form>");
-		}
-	
-		
-		if ( request.getParameter("modifier") != null )
-		{
 			int admin_id = Integer.parseInt(request.getParameter("admin_id"));
-			String destination = request.getParameter("destination");
-			String date = request.getParameter("date");
 			int id_trajet = Integer.parseInt(request.getParameter("id_trajet"));
+			
+			String destination = leTrajet.getDestination();
+			String date = leTrajet.getDate();
+
 			String statut = request.getParameter("statut");
 			
 			unGroupe = new Groupe( id, admin_id, destination, date, id_trajet, statut );
