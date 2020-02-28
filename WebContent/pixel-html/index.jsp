@@ -18,7 +18,6 @@
 			//Nouvelle Session
 		    uneSession = request.getSession();
 			
-			
 			out.print("<form method='post' action=''>");
 			out.print("<table>");
 			out.print("<tr><td>Identifiant : </td><td><input type='text' style='margin:10px;' name='identifiant'></td></tr>");

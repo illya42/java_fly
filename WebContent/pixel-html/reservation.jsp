@@ -4,15 +4,56 @@
                     <div class="col-sm-12">
                         <div class="white-box">
 		<h2>Gestion des Reservations</h2>
+		
+		<%!
+		Groupe unGroupe = new Groupe();
+		
+		Trajet unTrajet = new Trajet();
+		%>
+		
 		<form method="post" action="">
 		<table>
-				<tr><td>ID Groupe : </td><td><input type="number" name="groupe_id"></td></tr>
-				<tr><td>Tarif : </td><td><input type="text" name="tarif"></td></tr>
-				<tr><td>ID Trajet : </td><td><input type="number" name="trajet_id"></td></tr>
+				<!-- <tr><td>ID Groupe : </td><td><input type="number" name="groupe_id"></td></tr> -->
+				
+				<tr>
+					<td><label for="groupe-select">ID Groupe :</label></td>
+						<td>
+							<select style='margin : 10px' name="groupe_id" id="groupe-select">
+								<option value="" disabled selected hidden>Choisir un groupe</option>
+									<%
+									ArrayList<Groupe> lesGroupes = Controller.selectAllGroupes();
+									
+									for (Groupe unGroupe : lesGroupes)
+									{
+										out.print("<option value=" + unGroupe.getId() + ">" + unGroupe.getId() + " -- " + unGroupe.getDestination() + "</option>");
+									}
+									%>
+							</select>
+						</td>
+				</tr>
+				<tr><td>Tarif : </td><td><input style='margin : 10px' type="text" name="tarif"></td></tr>
+				<!--  <tr><td>ID Trajet : </td><td><input type="number" name="trajet_id"></td></tr> -->
+				
+				<tr>
+					<td><label for="trajet-select">ID Trajet :</label></td>
+						<td>
+							<select style='margin : 10px' name="trajet_id" id="trajet-select">
+								<option value="" disabled selected hidden>Choisir un trajet</option>
+									<%
+									ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
+									
+									for (Trajet unTrajet : lesTrajets)
+									{
+										out.print("<option value=" + unTrajet.getId() + ">" + unTrajet.getId() + " -- " + unTrajet.getDestination() + "</option>");
+									}
+									%>
+							</select>
+						</td>
+				</tr>
 				<tr>
 					<td><label for="statut-select">Statut :</label></td>
 						<td>
-							<select name="statut" id="statut-select">
+							<select style='margin : 10px' name="statut" id="statut-select">
 								<option value="" disabled selected hidden>Choisir un statut</option>
 								<option value="en cours">En cours</option>
 								<option value="valide">Validé</option>
@@ -35,7 +76,7 @@
 		//partie éxecution
 		
 		ArrayList<Reservation> lesReservations = Controller.selectAllReservations();
-		//parcourir les compte
+
 		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Admin ID</th><th>Destination</th><th>Date</th><th>ID Trajet</th><th>Statut</th></tr></thead><tbody>");
 		for (Reservation uneReservation : lesReservations)
         {
@@ -63,7 +104,7 @@
 		{
 			int id = Integer.parseInt(request.getParameter("id"));
 			
-			Controller.deleteGroupe(id);
+			Controller.deleteReservation(id);
 			response.sendRedirect("reservation.jsp");
 		}
 		

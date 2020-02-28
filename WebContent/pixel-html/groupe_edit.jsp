@@ -6,6 +6,10 @@
 		<%!
 		//partie déclaration
 		Groupe unGroupe = new Groupe();
+		
+		Trajet unTrajet = new Trajet();
+		
+		Administrateur unAdministrateur = new Administrateur();
 		%>
 		
 		<%
@@ -17,15 +21,67 @@
 
 		out.print("<form method='post' action='' id='form'>");
 		out.print("<table>");
-		out.print("<tr><td>Admin ID : </td><td><input type='number' name='admin_id' style='margin:10px;' value=" + unGroupe.getAdministrateur_id() + "></td></tr>");
-		out.print("<tr><td>Destination : </td><td><input type='text' name='destination' style='margin:10px;' value=" + unGroupe.getDestination() + "></td></tr>");
-		out.print("<tr><td>Date : </td><td><input type='date' name='date' style='margin:10px;' value=" + unGroupe.getDate() + "></td></tr>");
-		out.print("<tr><td>ID Trajet : </td><td><input type='text' name='id_trajet' style='margin:10px;' value=" + unGroupe.getId_trajet() + "></td></tr>");
+		
+		ArrayList<Administrateur> lesAdministrateurs = Controller.selectAllAdministrateur();
+		
+		out.print("<tr>");
+			out.print("<td><label for='admin-select'>ID Admin :</label></td>");
+				out.print("<td>");
+					out.print("<select style='margin : 10px' name='admin_id' id='admin-select'>");
+						out.print("<option value=" + unGroupe.getAdministrateur_id() + " selected hidden> " + unGroupe.getAdministrateur_id() + " </option>");
+						for (Administrateur unAdministrateur : lesAdministrateurs)
+						{
+							out.print("<option value=" + unAdministrateur.getId() + ">" + unAdministrateur.getId() + " -- " + unAdministrateur.getNom_admin() + "</option>");
+						}
+					out.print("</select>");
+				out.print("</td>");
+		out.print("</tr>");
+
+		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
+		
+		out.print("<tr>");
+			out.print("<td><label for='destination-select'>Destination :</label></td>");
+				out.print("<td>");
+					out.print("<select style='margin : 10px' name='destination' id='destination-select'>");
+						out.print("<option value=" + unGroupe.getDestination() + " selected hidden> " + unGroupe.getDestination() + " </option>");
+						for (Trajet unTrajet : lesTrajets)
+						{
+							out.print("<option value=" + unTrajet.getDestination() + ">" + unTrajet.getDestination() + " -- " + unTrajet.getDate() + "</option>");
+						}
+					out.print("</select>");
+				out.print("</td>");
+		out.print("</tr>");
+		
+		out.print("<tr>");
+		out.print("<td><label for='date-select'>Date :</label></td>");
+			out.print("<td>");
+				out.print("<select style='margin : 10px' name='date' id='date-select'>");
+					out.print("<option value=" + unGroupe.getDate() + " selected hidden> " + unGroupe.getDate() + " </option>");
+					for (Trajet unTrajet : lesTrajets)
+					{
+						out.print("<option value=" + unTrajet.getDate() + ">" + unTrajet.getDate() + "</option>");
+					}
+				out.print("</select>");
+			out.print("</td>");
+		out.print("</tr>");
+		
+		out.print("<tr>");
+			out.print("<td><label for='trajet-select'>ID Trajet :</label></td>");
+				out.print("<td>");
+					out.print("<select style='margin : 10px' name='id_trajet' id='trajet-select'>");
+						out.print("<option value=" + unGroupe.getId_trajet() + " selected hidden> " + unGroupe.getId_trajet() + " </option>");
+						for (Trajet unTrajet : lesTrajets)
+						{
+							out.print("<option value=" + unTrajet.getId() + ">" + unTrajet.getId() + "</option>");
+						}
+					out.print("</select>");
+				out.print("</td>");
+		out.print("</tr>");
 		
 		out.print("<tr>");
 			out.print("<td><label for='statut-select'>Statut :</label></td>");
 				out.print("<td>");
-					out.print("<select name='statut' id='statut-select'>");
+					out.print("<select style='margin : 10px' name='statut' id='statut-select'>");
 						out.print("<option value='' disabled selected hidden>Choisir un statut</option>");
 						out.print("<option value='en cours'>En cours</option>");
 						out.print("<option value='valide'>Validé</option>");

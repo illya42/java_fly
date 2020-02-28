@@ -369,6 +369,7 @@ public class Modele
 				+ uneReservation.getGroupe_id()
 		+"','" + uneReservation.getTarif() 
 		+"','" + uneReservation.getTrajet_id()
+		+"','" + uneReservation.getStatut()
 		+"');";
 		
 		System.out.println(" " + requete);
