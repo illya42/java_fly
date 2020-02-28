@@ -54,7 +54,8 @@ public class Modele
 	                    unRes.getString("nom_admin"),
 	                    unRes.getString("prenom_admin"),
 	                    unRes.getString("identifiant"),
-	                    unRes.getString("mdp")
+	                    unRes.getString("mdp"),
+	                    unRes.getString("role")
 	                    );
 	        }
 	    }
@@ -86,7 +87,8 @@ public class Modele
 						unRes.getString("nom_admin"),
 						unRes.getString("prenom_admin"),
 						unRes.getString("identifiant"),
-						unRes.getString("mdp")
+						unRes.getString("mdp"),
+						unRes.getString("role")
 						);
 				lesAdministrateurs.add(unAdministrateur);
 			}
@@ -260,7 +262,8 @@ public class Modele
 						desRes.getInt("administrateur_id"),
 						desRes.getString("destination"),
 						desRes.getString("date"),
-						desRes.getInt("id_trajet")
+						desRes.getInt("id_trajet"),
+						desRes.getString("statut")
 						);
 				lesGroupes.add(unGroupe);
 			}
@@ -286,6 +289,7 @@ public class Modele
 		+ "', destination = '" + unGroupe.getDestination()
 		+ "', date = '" + unGroupe.getDate()
 		+ "', id_trajet = '" + unGroupe.getId_trajet()
+		+ "', statut = '" + unGroupe.getStatut()
 		+ "' where id = '" 
 		+ unGroupe.getId() + "';";
 		
@@ -311,7 +315,8 @@ public class Modele
 	                    unRes.getInt("administrateur_id"),
 	                    unRes.getString("destination"),
 	                    unRes.getString("date"),
-	                    unRes.getInt("id_trajet")
+	                    unRes.getInt("id_trajet"),
+	                    unRes.getString("statut")
 	                    );
 	        }
 	    }
@@ -344,7 +349,8 @@ public class Modele
 						desRes.getInt("id"),
 						desRes.getInt("groupe_id"),
 						desRes.getString("tarif"),
-						desRes.getInt("trajet_id")
+						desRes.getInt("trajet_id"),
+						desRes.getString("statut")
 						);
 				lesReservations.add(uneReservation);
 			}
@@ -381,6 +387,7 @@ public class Modele
 		String requete="update reservation set groupe_id = '" + uneReservation.getGroupe_id()
 		+ "', tarif = '" + uneReservation.getTarif()
 		+ "', trajet_id = '" + uneReservation.getTrajet_id()
+		+ "', statut = '" + uneReservation.getStatut()
 		+ "' where id = '" 
 		+ uneReservation.getId() + "';";
 		
@@ -405,7 +412,8 @@ public class Modele
 	                    unRes.getInt("id"),
 	                    unRes.getInt("groupe_id"),
 	                    unRes.getString("tarif"),
-	                    unRes.getInt("trajet_id")
+	                    unRes.getInt("trajet_id"),
+	                    unRes.getString("statut")
 	                    );
 	        }
 	    }

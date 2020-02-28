@@ -16,7 +16,7 @@
 		
 		ArrayList<Groupe> lesGroupes = Controller.selectAllGroupes();
 		//parcourir les compte
-		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Admin ID</th><th>Destination</th><th>Date</th><th>ID Trajet</th></tr></thead><tbody>");
+		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Admin ID</th><th>Destination</th><th>Date</th><th>ID Trajet</th><th>Statut</th></tr></thead><tbody>");
 		for (Groupe unGroupe : lesGroupes)
         {
             out.print("<tr><td>" + unGroupe.getId() 
@@ -24,7 +24,7 @@
             + "</td><td>" + unGroupe.getDestination() 
             + "</td><td>" + unGroupe.getDate() 
             + "</td><td>" + unGroupe.getId_trajet()
-            
+            + "</td><td>" + unGroupe.getStatut()
             + "</td><td><a href='groupe.jsp?edit=E&id=" + unGroupe.getId() + "'> EDITER </a></td>"
         	+ "</td><td><a href='groupe.jsp?supp=X&id=" + unGroupe.getId() + "'> SUPPRIMER </a></td></tr>");
         }

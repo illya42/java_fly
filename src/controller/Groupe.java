@@ -3,21 +3,22 @@ package controller;
 public class Groupe 
 {
 	private int id, administrateur_id, id_trajet;
-	private String destination, date;
+	private String destination, date, statut;
 	
 	public Groupe()
 	{
 		this.id = this.administrateur_id = this.id_trajet = 0;
-		this.destination = this.date = "";
+		this.destination = this.date = this.statut = "";
 	}
 
-	public Groupe(int id, int administrateur_id, String destination, String date, int id_trajet) 
+	public Groupe(int id, int administrateur_id, String destination, String date, int id_trajet, String statut) 
 	{
 		this.id = id;
 		this.administrateur_id = administrateur_id;
 		this.destination = destination;
 		this.date = date;
 		this.id_trajet = id_trajet;
+		this.statut = statut;
 	}
 	
 	public String consulter()
@@ -27,6 +28,7 @@ public class Groupe
 				+ "<br/> Destination : " + this.destination
 				+ "<br/> Date : " + this.date
 				+ "<br/> TRAJET ID : " + this.id_trajet
+				+ "<br/> Statut : " + this.statut 
 				+ "<br/>";
 	}
 
@@ -68,5 +70,13 @@ public class Groupe
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+
+	public String getStatut() {
+		return statut;
+	}
+
+	public void setStatut(String statut) {
+		this.statut = statut;
 	}
 }

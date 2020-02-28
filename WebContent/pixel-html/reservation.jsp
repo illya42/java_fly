@@ -9,6 +9,16 @@
 				<tr><td>ID Groupe : </td><td><input type="number" name="groupe_id"></td></tr>
 				<tr><td>Tarif : </td><td><input type="text" name="tarif"></td></tr>
 				<tr><td>ID Trajet : </td><td><input type="number" name="trajet_id"></td></tr>
+				<tr>
+					<td><label for="statut-select">Statut :</label></td>
+						<td>
+							<select name="statut" id="statut-select">
+								<option value="" disabled selected hidden>Choisir un statut</option>
+								<option value="en cours">En cours</option>
+								<option value="valide">Validé</option>
+							</select>
+						</td>
+				</tr>
 				<tr><td><input type="submit" style="margin:10px;" id="bouton1" name="enregistrer" value="Enregistrer"></td>
 				<td><input type="submit" style="margin:10px;" name="retour" value="Retour"></td></tr>
 		</table>
@@ -26,14 +36,14 @@
 		
 		ArrayList<Reservation> lesReservations = Controller.selectAllReservations();
 		//parcourir les compte
-		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Admin ID</th><th>Destination</th><th>Date</th><th>ID Trajet</th></tr></thead><tbody>");
+		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Admin ID</th><th>Destination</th><th>Date</th><th>ID Trajet</th><th>Statut</th></tr></thead><tbody>");
 		for (Reservation uneReservation : lesReservations)
         {
             out.print("<tr><td>" + uneReservation.getId() 
             + "</td><td>" + uneReservation.getGroupe_id()
             + "</td><td>" + uneReservation.getTarif() 
             + "</td><td>" + uneReservation.getTrajet_id()
-            
+            + "</td><td>" + uneReservation.getStatut()
             + "</td><td><a href='reservation.jsp?edit=E&id=" + uneReservation.getId() + "'> EDITER </a></td>"
         	+ "</td><td><a href='reservation.jsp?supp=X&id=" + uneReservation.getId() + "'> SUPPRIMER </a></td></tr>");
         }
@@ -62,8 +72,9 @@
 			int groupe_id = Integer.parseInt(request.getParameter("groupe_id"));
 			String tarif = request.getParameter("tarif");
 			int trajet_id = Integer.parseInt(request.getParameter("trajet_id"));
+			String statut = request.getParameter("statut");
 			
-			uneReservation = new Reservation( groupe_id, tarif, trajet_id );
+			uneReservation = new Reservation( groupe_id, tarif, trajet_id, statut );
 			
 			//insertion
 			
