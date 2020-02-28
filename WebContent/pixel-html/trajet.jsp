@@ -2,9 +2,11 @@
 	<%@ include file="header.jsp" %>
 		<div class="row">
                     <div class="col-sm-12">
-                        <div class="white-box">
+                        <div class="white-box" style="display: inline-block;
+     width: 450px;
+     vertical-align: top; text-align: center; max-width: 100%;">
 		<h2>Gestion des Trajets</h2>
-		<form method="post" action="">
+		<form method="post" style="margin-left: 40px;" action="">
 		<table>
 				<tr><td> Prix : </td><td><input style="margin:10px;" type="text" name="prix" placeholder="Rentrez un prix"></td></tr>
 				<tr><td>Heure de départ : </td><td><input style="margin:10px;" type="text" name="heure_dep"></td></tr>
@@ -18,7 +20,14 @@
 		</table>
 		</form>
 		<br/>
-		<br/></div></div></div>
+		<br/></div>
+		
+		<div style=" display: inline-block; max-width: 100%;">
+		<img src="https://ih1.redbubble.net/image.439646371.5865/flat,550x550,075,f.u1.jpg">
+		</div>
+		
+		</div>
+		</div>
 		<%!
 		//partie déclaration
 		Trajet unTrajet = new Trajet();
