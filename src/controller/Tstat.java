@@ -21,7 +21,7 @@ public class Tstat {
 		this.destination = "";
 	}
 
-	public int getIdtrajet() {
+	public int getNbtrajet() {
 		return nbtrajet;
 	}
 
