@@ -1,6 +1,6 @@
 
 <%@ include file="header.jsp" %>
-		<h1>Edition</h1>
+		<h1>Edition</h1><a href="groupe_edit_safe.jsp"><h2>Mode administrateur de groupe</h2></a>
 		<br/>
 		<br/>
 		<%!
@@ -40,6 +40,19 @@
 		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
 		
 		out.print("<tr>");
+			out.print("<td><label for='trajet-select'>ID Trajet :</label></td>");
+				out.print("<td>");
+					out.print("<select style='margin : 10px' name='id_trajet' id='trajet-select'>");
+						out.print("<option value=" + unGroupe.getId_trajet() + " selected hidden> " + unGroupe.getId_trajet() + " </option>");
+						for (Trajet unTrajet : lesTrajets)
+						{
+							out.print("<option value=" + unTrajet.getId() + ">" + unTrajet.getId() + "</option>");
+						}
+					out.print("</select>");
+				out.print("</td>");
+		out.print("</tr>");
+		
+		out.print("<tr>");
 			out.print("<td><label for='destination-select'>Destination :</label></td>");
 				out.print("<td>");
 					out.print("<select style='margin : 10px' name='destination' id='destination-select'>");
@@ -66,23 +79,10 @@
 		out.print("</tr>");
 		
 		out.print("<tr>");
-			out.print("<td><label for='trajet-select'>ID Trajet :</label></td>");
-				out.print("<td>");
-					out.print("<select style='margin : 10px' name='id_trajet' id='trajet-select'>");
-						out.print("<option value=" + unGroupe.getId_trajet() + " selected hidden> " + unGroupe.getId_trajet() + " </option>");
-						for (Trajet unTrajet : lesTrajets)
-						{
-							out.print("<option value=" + unTrajet.getId() + ">" + unTrajet.getId() + "</option>");
-						}
-					out.print("</select>");
-				out.print("</td>");
-		out.print("</tr>");
-		
-		out.print("<tr>");
 			out.print("<td><label for='statut-select'>Statut :</label></td>");
 				out.print("<td>");
 					out.print("<select style='margin : 10px' name='statut' id='statut-select'>");
-						out.print("<option value='' disabled selected hidden>Choisir un statut</option>");
+						out.print("<option value=" + unGroupe.getStatut() + " selected hidden>" + unGroupe.getStatut() + "</option>");
 						out.print("<option value='en cours'>En cours</option>");
 						out.print("<option value='valide'>Validé</option>");
 					out.print("</select>");
@@ -104,12 +104,10 @@
 			
 			unGroupe = new Groupe( id, admin_id, destination, date, id_trajet, statut );
 			
-			//insertion de ce compte dans la bdd
-			
 			Controller.updateGroupe(unGroupe);
 			
 			out.print("Modification réussie");
-			out.print( "<br/> Trajet modifié : " );
+			out.print( "<br/> Groupe modifié : " );
 			out.print( "" + unGroupe.consulter() );
 		}
 		if ( request.getParameter("retour") != null )

@@ -31,7 +31,7 @@
 							</select>
 						</td>
 				</tr>
-				<tr><td>Tarif : </td><td><input style='margin : 10px' type="text" name="tarif"></td></tr>
+				<tr><td>Tarif : </td><td><input style='margin : 10px' type="text" name="tarif" placeholder="Rentrez un tarif"></td></tr>
 				<!--  <tr><td>ID Trajet : </td><td><input type="number" name="trajet_id"></td></tr> -->
 				
 				<tr>
@@ -96,7 +96,7 @@
 			
 			//response.sendRedirect("update.jsp");
 			
-			uneSession.setAttribute("id", id);
+			uneSession.setAttribute("id_r", id);
 			response.sendRedirect("reservation_edit.jsp");
 		}
 		
