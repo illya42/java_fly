@@ -58,7 +58,7 @@
 			out.print("<td><label for='statut-select'>Statut :</label></td>");
 				out.print("<td>");
 					out.print("<select style='margin : 10px' name='statut' id='statut-select'>");
-						out.print("<option value=" + unGroupe.getStatut() + " selected hidden> " + unGroupe.getStatut() + " </option>");
+						out.print("<option value='" + unGroupe.getStatut() + "' selected hidden> " + unGroupe.getStatut() + " </option>");
 						out.print("<option value='en cours'>En cours</option>");
 						out.print("<option value='valide'>Validé</option>");
 					out.print("</select>");

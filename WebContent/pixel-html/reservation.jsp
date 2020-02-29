@@ -54,7 +54,7 @@
 					<td><label for="statut-select">Statut :</label></td>
 						<td>
 							<select style='margin : 10px' name="statut" id="statut-select">
-								<option value="" disabled selected hidden>Choisir un statut</option>
+								<option value="en cours" selected hidden>Choisir un statut</option>
 								<option value="en cours">En cours</option>
 								<option value="valide">Validé</option>
 							</select>
