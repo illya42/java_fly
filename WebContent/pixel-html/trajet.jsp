@@ -78,10 +78,44 @@ var myChart = new Chart(ctx, {
 		Trajet unTrajet = new Trajet();
 		%>
 		<div class="white-box">
-                            <h3 class="box-title">Basic Table</h3>
+                            <h3 class="box-title">Trajets</h3>
+                            
+        	<form method="post" style="margin-left:286px;text-align:center;" action="">
+				<table>
+                           <tr><td> Recherche : <input style="width:250px; " type="text" name="recherche"></td>
+                           <td><input type="submit" style="margin:10px;"  name="rech" value="Rechercher"></td>
+                           </tr>
+       			</table>
+			</form>               
 		<%
-		//partie éxecution
+	//	partie éxecution
 		
+	
+		if ( request.getParameter("recherche") != null )
+		{
+			
+			String mot = request.getParameter("recherche");
+			
+			ArrayList<Trajet> lesTrajetsrech = Controller.selectWhereTrajets(mot);
+			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Heure départ</th><th>Heure arrivée</th><th>Aéroport</th><th>Date</th><th>Destination</th><th>Image</th><th>Prix</th></tr></thead><tbody>");
+			for (Trajet unTrajet : lesTrajetsrech)
+	        {
+	            out.print("<tr><td>" + unTrajet.getId() 
+	            + "</td><td>" + unTrajet.getHeure_dep() 
+	            + "</td><td>" + unTrajet.getHeure_arr() 
+	            + "</td><td>" + unTrajet.getAeroport() 
+	            + "</td><td>" + unTrajet.getDate() 
+	            + "</td><td>" + unTrajet.getDestination() 
+	            + "</td><td>" + unTrajet.getImage() 
+	            + "</td><td>" + unTrajet.getPrix() 
+	            
+	            + "</td><td><a href='trajet.jsp?edit=E&id=" + unTrajet.getId() + "'> EDITER </a></td>"
+	        	+ "</td><td><a href='trajet.jsp?supp=X&id=" + unTrajet.getId() + "'> SUPPRIMER </a></td></tr>");
+	        }
+			out.print("</table>");
+		}
+		else
+		{
 		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
 		//parcourir les compte
 		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Heure départ</th><th>Heure arrivée</th><th>Aéroport</th><th>Date</th><th>Destination</th><th>Image</th><th>Prix</th></tr></thead><tbody>");
@@ -100,6 +134,11 @@ var myChart = new Chart(ctx, {
         	+ "</td><td><a href='trajet.jsp?supp=X&id=" + unTrajet.getId() + "'> SUPPRIMER </a></td></tr>");
         }
 		out.print("</table>");
+		}
+		
+	
+		
+		
 		
 		if ( request.getParameter("id") != null && request.getParameter("edit") != null )
 		{

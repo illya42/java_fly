@@ -75,6 +75,10 @@ public class Controller
 	{
 		return Modele.selectAllTrajets();
 	}
+	public static ArrayList<Trajet> selectWhereTrajets(String mot)
+	{
+		return Modele.selectWhereTrajets(mot);
+	}
 	public static void deleteTrajet(int id)
 	{
 		Modele.deleteTrajet(id);
