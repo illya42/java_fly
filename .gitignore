@@ -1,6 +1,11 @@
 /build/
 .project
 .classpath
+
+.project
+.settings/org.eclipse.jdt.core.prefs
+
 src/modele/Bdd.java
 src/modele/Modele.java
+
 src/modele/Bdd.java

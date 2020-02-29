@@ -10,6 +10,9 @@ import controller.Administrateur;
 import controller.Groupe;
 import controller.Reservation;
 import controller.Trajet;
+import controller.Tstat;
+import controller.Vol;
+
 
 public class Modele 
 {
@@ -169,6 +172,49 @@ public class Modele
 		}
 		return lesTrajets;
 	}
+	
+
+	public static ArrayList<Trajet> selectWhereTrajets (String mot){
+		ArrayList<Trajet> lesTrajetsrech = new ArrayList<Trajet>();
+		String requete = "select * from trajet where id like '%"+mot+"%'"
+				+ " or heure_dep like '%" + mot +"%'"
+				+ " or heure_arr like '%" + mot +"%'"
+				+ " or aeroport like '%" + mot +"%'"
+				+ " or date like '%" + mot +"%'"
+				+ " or destination like '%" + mot +"%'"
+				+ " or image like '%" + mot +"%'"
+				+ " or prix like '%" + mot +"%'"
+				+ ";";
+		try 
+		{
+			uneBdd.seConnecter();
+			Statement unStat = uneBdd.getMaConnexion().createStatement();
+			ResultSet desRes = unStat.executeQuery(requete);
+
+			System.out.println(" " + requete);
+			while(desRes.next())
+			{
+				Trajet unTrajet = new Trajet(
+						desRes.getInt("id"),
+						desRes.getString("heure_dep"),
+						desRes.getString("heure_arr"),
+						desRes.getString("aeroport"),
+						desRes.getString("date"),
+						desRes.getString("destination"),
+						desRes.getString("image"),
+						desRes.getInt("prix")
+						);
+				lesTrajetsrech.add(unTrajet);
+			}
+			uneBdd.seDeconnecter();
+		}
+		catch(SQLException exp)
+		{
+			exp.printStackTrace();
+		}
+		return lesTrajetsrech;
+	}
+	
 	
 	public static void insertTrajet( Trajet unTrajet )
 	{
@@ -428,4 +474,32 @@ public class Modele
 	}
 	
 	//FIN FONCTIONS RESERVATION
+	
+	//DIAGRAMME TRAJET
+	public static ArrayList<Tstat> selectTstat()
+	{
+		ArrayList<Tstat> lesTstat = new ArrayList<Tstat>();
+		
+		String requete = "select * from tstat;";
+		try 
+		{
+			uneBdd.seConnecter();
+			Statement unStat = uneBdd.getMaConnexion().createStatement();
+			ResultSet desRes = unStat.executeQuery(requete);
+			while(desRes.next())
+			{
+				Tstat unTstat = new Tstat(
+						desRes.getInt("nbtrajet"),
+						desRes.getString("destination")
+						);
+				lesTstat.add(unTstat);
+			}
+			uneBdd.seDeconnecter();
+		}
+		catch(SQLException exp)
+		{
+			exp.printStackTrace();
+		}
+		return lesTstat;
+	}
 }

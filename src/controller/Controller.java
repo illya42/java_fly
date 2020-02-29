@@ -75,6 +75,10 @@ public class Controller
 	{
 		return Modele.selectAllTrajets();
 	}
+	public static ArrayList<Trajet> selectWhereTrajets(String mot)
+	{
+		return Modele.selectWhereTrajets(mot);
+	}
 	public static void deleteTrajet(int id)
 	{
 		Modele.deleteTrajet(id);
@@ -134,4 +138,10 @@ public class Controller
 	}
 	
 	//FIN FONCTIONS RESERVATION
+	
+	//FONCTION TSTAT
+	public static ArrayList<Tstat> selectTstat()
+	{
+		return Modele.selectTstat();
+	}
 }
