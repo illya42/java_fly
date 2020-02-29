@@ -18,7 +18,6 @@
 			//Nouvelle Session
 		    uneSession = request.getSession();
 			
-			
 			out.print("<form method='post' action=''>");
 			out.print("<table>");
 			out.print("<tr><td>Identifiant : </td><td><input type='text' style='margin:10px;' name='identifiant'></td></tr>");
@@ -36,7 +35,6 @@
 				String mdp = (String) uneSession.getAttribute("mdp");
 				
 			    //Session déjà créée
-
 				
 				out.print("<form method='post' action=''>");
 				out.print("<table>");
@@ -73,6 +71,7 @@
 				uneSession.setAttribute("prenom", unAdministrateur.getPrenom_admin());
 				uneSession.setAttribute("identifiant", unAdministrateur.getIdentifiant());
 				uneSession.setAttribute("mdp", unAdministrateur.getMdp());
+				uneSession.setAttribute("role", unAdministrateur.getRole());
 				
 				response.sendRedirect("menu.jsp");
 			}

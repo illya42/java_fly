@@ -10,12 +10,10 @@ import controller.Administrateur;
 import controller.Groupe;
 import controller.Reservation;
 import controller.Trajet;
-import controller.Vol;
-
 
 public class Modele 
 {
-	private static Bdd uneBdd = new Bdd("localhost", "dbfly", "root", "");
+	private static Bdd uneBdd = new Bdd("localhost", "dbfly", "root", "root");
 	
 	public static void executer(String requete)
 	{
@@ -56,7 +54,8 @@ public class Modele
 	                    unRes.getString("nom_admin"),
 	                    unRes.getString("prenom_admin"),
 	                    unRes.getString("identifiant"),
-	                    unRes.getString("mdp")
+	                    unRes.getString("mdp"),
+	                    unRes.getString("role")
 	                    );
 	        }
 	    }
@@ -88,7 +87,8 @@ public class Modele
 						unRes.getString("nom_admin"),
 						unRes.getString("prenom_admin"),
 						unRes.getString("identifiant"),
-						unRes.getString("mdp")
+						unRes.getString("mdp"),
+						unRes.getString("role")
 						);
 				lesAdministrateurs.add(unAdministrateur);
 			}
@@ -106,8 +106,7 @@ public class Modele
 	public static void insertAdministrateur( Administrateur unAdministrateur )
 	{
 		String requete="insert into administrateur values (null, '" 
-				+ unAdministrateur.getId() 
-		+ "','" + unAdministrateur.getNom_admin()
+				+ unAdministrateur.getNom_admin()
 		+"','" + unAdministrateur.getPrenom_admin() 
 		+"','" + unAdministrateur.getIdentifiant()
 		+"','" + unAdministrateur.getMdp()
@@ -202,16 +201,14 @@ public class Modele
 		+ "', aeroport = '" + unTrajet.getAeroport()
 		+ "', date = '" + unTrajet.getDate()
 		+ "', destination = '" + unTrajet.getDestination()
-		+ "', image = '" + unTrajet.getImage()
-		+ "' where id = '" 
-		+ unTrajet.getId() + "';";
+		+ "', image = '" + unTrajet.getImage() + "' where id = '" + unTrajet.getId() + "';";
 		
 		executer (requete);
 	}
 	
 	public static Trajet selectTrajet(int id)
 	{
-		Trajet unTrajet = null;
+		Trajet unTrajet = new Trajet();
 		
 		String requete = "select * from trajet where id = " + id + ";";
 	            
@@ -265,7 +262,8 @@ public class Modele
 						desRes.getInt("administrateur_id"),
 						desRes.getString("destination"),
 						desRes.getString("date"),
-						desRes.getInt("trajet_id")
+						desRes.getInt("id_trajet"),
+						desRes.getString("statut")
 						);
 				lesGroupes.add(unGroupe);
 			}
@@ -276,18 +274,6 @@ public class Modele
 			exp.printStackTrace();
 		}
 		return lesGroupes;
-	}
-	
-	public static void insertGroupe( Groupe unGroupe )
-	{
-		String requete="insert into groupe values (null, '" 
-				+ unGroupe.getAdministrateur_id() 
-		+"','" + unGroupe.getDestination() 
-		+"','" + unGroupe.getDate()
-		+"','" + unGroupe.getId_trajet()
-		+"');";
-		
-		executer (requete);
 	}
 	
 	public static void deleteGroupe( int id )
@@ -303,7 +289,8 @@ public class Modele
 		+ "', destination = '" + unGroupe.getDestination()
 		+ "', date = '" + unGroupe.getDate()
 		+ "', id_trajet = '" + unGroupe.getId_trajet()
-		+ " where id = '" 
+		+ "', statut = '" + unGroupe.getStatut()
+		+ "' where id = '" 
 		+ unGroupe.getId() + "';";
 		
 		executer (requete);
@@ -311,7 +298,7 @@ public class Modele
 	
 	public static Groupe selectGroupe(int id)
 	{
-		Groupe unGroupe = null;
+		Groupe unGroupe = new Groupe();
 		
 		String requete = "select * from groupe where id = " + id + ";";
 	            
@@ -328,7 +315,8 @@ public class Modele
 	                    unRes.getInt("administrateur_id"),
 	                    unRes.getString("destination"),
 	                    unRes.getString("date"),
-	                    unRes.getInt("trajet_id")
+	                    unRes.getInt("id_trajet"),
+	                    unRes.getString("statut")
 	                    );
 	        }
 	    }
@@ -361,7 +349,8 @@ public class Modele
 						desRes.getInt("id"),
 						desRes.getInt("groupe_id"),
 						desRes.getString("tarif"),
-						desRes.getInt("trajet_id")
+						desRes.getInt("trajet_id"),
+						desRes.getString("statut")
 						);
 				lesReservations.add(uneReservation);
 			}
@@ -376,12 +365,14 @@ public class Modele
 	
 	public static void insertReservation( Reservation uneReservation )
 	{
-		String requete="insert into vol values (null, '" 
+		String requete="insert into reservation values (null, '" 
 				+ uneReservation.getGroupe_id()
 		+"','" + uneReservation.getTarif() 
 		+"','" + uneReservation.getTrajet_id()
+		+"','" + uneReservation.getStatut()
 		+"');";
 		
+		System.out.println(" " + requete);
 		executer (requete);
 	}
 	
@@ -395,9 +386,10 @@ public class Modele
 	public static void updateReservation( Reservation uneReservation )
 	{
 		String requete="update reservation set groupe_id = '" + uneReservation.getGroupe_id()
-		+ "', date_vol = '" + uneReservation.getTarif()
-		+ "', heure_dep = '" + uneReservation.getTrajet_id()
-		+ " where id = '" 
+		+ "', tarif = '" + uneReservation.getTarif()
+		+ "', trajet_id = '" + uneReservation.getTrajet_id()
+		+ "', statut = '" + uneReservation.getStatut()
+		+ "' where id = '" 
 		+ uneReservation.getId() + "';";
 		
 		executer (requete);
@@ -421,7 +413,8 @@ public class Modele
 	                    unRes.getInt("id"),
 	                    unRes.getInt("groupe_id"),
 	                    unRes.getString("tarif"),
-	                    unRes.getInt("trajet_id")
+	                    unRes.getInt("trajet_id"),
+	                    unRes.getString("statut")
 	                    );
 	        }
 	    }
