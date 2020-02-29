@@ -77,7 +77,7 @@
 		
 		ArrayList<Reservation> lesReservations = Controller.selectAllReservations();
 
-		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Admin ID</th><th>Destination</th><th>Date</th><th>ID Trajet</th><th>Statut</th></tr></thead><tbody>");
+		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Tarif</th><th>Trajet ID</th><th>Statut</th></tr></thead><tbody>");
 		for (Reservation uneReservation : lesReservations)
         {
             out.print("<tr><td>" + uneReservation.getId() 
