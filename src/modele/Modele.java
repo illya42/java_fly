@@ -16,7 +16,7 @@ import controller.Vol;
 
 public class Modele 
 {
-	private static Bdd uneBdd = new Bdd("localhost", "dbfly", "root", "");
+	private static Bdd uneBdd = new Bdd("localhost", "dbfly", "root", "root");
 	
 	public static void executer(String requete)
 	{
@@ -57,7 +57,8 @@ public class Modele
 	                    unRes.getString("nom_admin"),
 	                    unRes.getString("prenom_admin"),
 	                    unRes.getString("identifiant"),
-	                    unRes.getString("mdp")
+	                    unRes.getString("mdp"),
+	                    unRes.getString("role")
 	                    );
 	        }
 	    }
@@ -89,7 +90,8 @@ public class Modele
 						unRes.getString("nom_admin"),
 						unRes.getString("prenom_admin"),
 						unRes.getString("identifiant"),
-						unRes.getString("mdp")
+						unRes.getString("mdp"),
+						unRes.getString("role")
 						);
 				lesAdministrateurs.add(unAdministrateur);
 			}
@@ -107,8 +109,7 @@ public class Modele
 	public static void insertAdministrateur( Administrateur unAdministrateur )
 	{
 		String requete="insert into administrateur values (null, '" 
-				+ unAdministrateur.getId() 
-		+ "','" + unAdministrateur.getNom_admin()
+				+ unAdministrateur.getNom_admin()
 		+"','" + unAdministrateur.getPrenom_admin() 
 		+"','" + unAdministrateur.getIdentifiant()
 		+"','" + unAdministrateur.getMdp()
@@ -246,16 +247,14 @@ public class Modele
 		+ "', aeroport = '" + unTrajet.getAeroport()
 		+ "', date = '" + unTrajet.getDate()
 		+ "', destination = '" + unTrajet.getDestination()
-		+ "', image = '" + unTrajet.getImage()
-		+ "' where id = '" 
-		+ unTrajet.getId() + "';";
+		+ "', image = '" + unTrajet.getImage() + "' where id = '" + unTrajet.getId() + "';";
 		
 		executer (requete);
 	}
 	
 	public static Trajet selectTrajet(int id)
 	{
-		Trajet unTrajet = null;
+		Trajet unTrajet = new Trajet();
 		
 		String requete = "select * from trajet where id = " + id + ";";
 	            
@@ -290,78 +289,6 @@ public class Modele
 	
 	//FIN FONCTIONS TRAJET
 	
-	//FONCTIONS VOL
-	
-	public static ArrayList<Vol> selectAllVols()
-	{
-		ArrayList<Vol> lesVols = new ArrayList<Vol>();
-		
-		String requete = "select * from vol;";
-		try 
-		{
-			uneBdd.seConnecter();
-			Statement unStat = uneBdd.getMaConnexion().createStatement();
-			ResultSet desRes = unStat.executeQuery(requete);
-			while(desRes.next())
-			{
-				Vol unVol = new Vol(
-						desRes.getInt("id"),
-						desRes.getInt("trajet_id"),
-						desRes.getString("date_vol"),
-						desRes.getString("heure_dep"),
-						desRes.getString("heure_arr"),
-						desRes.getString("aeroport_dep"),
-						desRes.getString("aeroport_arr")
-						);
-				lesVols.add(unVol);
-			}
-			uneBdd.seDeconnecter();
-		}
-		catch(SQLException exp)
-		{
-			exp.printStackTrace();
-		}
-		return lesVols;
-	}
-	
-	public static void insertVol( Vol unVol )
-	{
-		String requete="insert into vol values (null, '" 
-				+ unVol.getId() 
-		+ "','" + unVol.getTrajet_id() 
-		+"','" + unVol.getDate_vol() 
-		+"','" + unVol.getHeure_dep()
-		+"','" + unVol.getHeure_arr()
-		+"','" + unVol.getAeroport_dep()
-		+"','" + unVol.getAeroport_arr()
-		+"');";
-		
-		executer (requete);
-	}
-	
-	public static void deleteVol( int id )
-	{
-		String requete ="delete from vol where id = " + id + ";";
-		
-		executer (requete);
-	}
-	
-	public static void updateVol( Vol unVol )
-	{
-		String requete="update vol set trajet_id = '" + unVol.getTrajet_id()
-		+ "', date_vol = '" + unVol.getHeure_dep()
-		+ "', heure_dep = '" + unVol.getHeure_dep()
-		+ "', heure_arr = '" + unVol.getHeure_arr()
-		+ "', aeroport_dep = '" + unVol.getAeroport_dep()
-		+ "', aeroport_arr = '" + unVol.getAeroport_arr()
-		+ " where id = '" 
-		+ unVol.getId() + "';";
-		
-		executer (requete);
-	}
-	
-	//FIN FONCTIONS VOL
-	
 	//FONCTIONS GROUPE
 	
 	public static ArrayList<Groupe> selectAllGroupes()
@@ -381,7 +308,8 @@ public class Modele
 						desRes.getInt("administrateur_id"),
 						desRes.getString("destination"),
 						desRes.getString("date"),
-						desRes.getInt("id_trajet")
+						desRes.getInt("id_trajet"),
+						desRes.getString("statut")
 						);
 				lesGroupes.add(unGroupe);
 			}
@@ -392,19 +320,6 @@ public class Modele
 			exp.printStackTrace();
 		}
 		return lesGroupes;
-	}
-	
-	public static void insertGroupe( Groupe unGroupe )
-	{
-		String requete="insert into groupe values (null, '" 
-				+ unGroupe.getId() 
-		+ "','" + unGroupe.getAdministrateur_id() 
-		+"','" + unGroupe.getDestination() 
-		+"','" + unGroupe.getDate()
-		+"','" + unGroupe.getId_trajet()
-		+"');";
-		
-		executer (requete);
 	}
 	
 	public static void deleteGroupe( int id )
@@ -420,10 +335,44 @@ public class Modele
 		+ "', destination = '" + unGroupe.getDestination()
 		+ "', date = '" + unGroupe.getDate()
 		+ "', id_trajet = '" + unGroupe.getId_trajet()
-		+ " where id = '" 
+		+ "', statut = '" + unGroupe.getStatut()
+		+ "' where id = '" 
 		+ unGroupe.getId() + "';";
 		
 		executer (requete);
+	}
+	
+	public static Groupe selectGroupe(int id)
+	{
+		Groupe unGroupe = new Groupe();
+		
+		String requete = "select * from groupe where id = " + id + ";";
+	            
+	    uneBdd.seConnecter();
+	
+	    try
+	    {
+	        Statement unStat = uneBdd.getMaConnexion().createStatement();
+	        ResultSet unRes = unStat.executeQuery(requete);
+	        if(unRes.next())
+	        {
+	            unGroupe = new Groupe(
+	                    unRes.getInt("id"),
+	                    unRes.getInt("administrateur_id"),
+	                    unRes.getString("destination"),
+	                    unRes.getString("date"),
+	                    unRes.getInt("id_trajet"),
+	                    unRes.getString("statut")
+	                    );
+	        }
+	    }
+	    catch(SQLException exp)
+	    {
+	        System.out.println("Erreur execution : " + requete);
+	    }
+	    uneBdd.seDeconnecter();
+		
+		return unGroupe;
 	}
 	
 	//FIN FONCTIONS GROUPE
@@ -446,7 +395,8 @@ public class Modele
 						desRes.getInt("id"),
 						desRes.getInt("groupe_id"),
 						desRes.getString("tarif"),
-						desRes.getInt("trajet_id")
+						desRes.getInt("trajet_id"),
+						desRes.getString("statut")
 						);
 				lesReservations.add(uneReservation);
 			}
@@ -461,13 +411,14 @@ public class Modele
 	
 	public static void insertReservation( Reservation uneReservation )
 	{
-		String requete="insert into vol values (null, '" 
-				+ uneReservation.getId() 
-		+ "','" + uneReservation.getGroupe_id() 
+		String requete="insert into reservation values (null, '" 
+				+ uneReservation.getGroupe_id()
 		+"','" + uneReservation.getTarif() 
 		+"','" + uneReservation.getTrajet_id()
+		+"','" + uneReservation.getStatut()
 		+"');";
 		
+		System.out.println(" " + requete);
 		executer (requete);
 	}
 	
@@ -481,12 +432,45 @@ public class Modele
 	public static void updateReservation( Reservation uneReservation )
 	{
 		String requete="update reservation set groupe_id = '" + uneReservation.getGroupe_id()
-		+ "', date_vol = '" + uneReservation.getTarif()
-		+ "', heure_dep = '" + uneReservation.getTrajet_id()
-		+ " where id = '" 
+		+ "', tarif = '" + uneReservation.getTarif()
+		+ "', trajet_id = '" + uneReservation.getTrajet_id()
+		+ "', statut = '" + uneReservation.getStatut()
+		+ "' where id = '" 
 		+ uneReservation.getId() + "';";
 		
 		executer (requete);
+	}
+	
+	public static Reservation selectReservation(int id)
+	{
+		Reservation uneReservation = null;
+		
+		String requete = "select * from reservation where id = " + id + ";";
+	            
+	    uneBdd.seConnecter();
+	
+	    try
+	    {
+	        Statement unStat = uneBdd.getMaConnexion().createStatement();
+	        ResultSet unRes = unStat.executeQuery(requete);
+	        if(unRes.next())
+	        {
+	            uneReservation = new Reservation(
+	                    unRes.getInt("id"),
+	                    unRes.getInt("groupe_id"),
+	                    unRes.getString("tarif"),
+	                    unRes.getInt("trajet_id"),
+	                    unRes.getString("statut")
+	                    );
+	        }
+	    }
+	    catch(SQLException exp)
+	    {
+	        System.out.println("Erreur execution : " + requete);
+	    }
+	    uneBdd.seDeconnecter();
+		
+		return uneReservation;
 	}
 	
 	//FIN FONCTIONS RESERVATION

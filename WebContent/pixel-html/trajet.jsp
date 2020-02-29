@@ -8,15 +8,16 @@
 		<h2>Gestion des Trajets</h2>
 		<form method="post" style="margin-left: 40px;" action="">
 		<table>
-				<tr><td> Prix : </td><td><input style="margin:10px;" type="text" name="prix" placeholder="Rentrez un prix"></td></tr>
-				<tr><td>Heure de départ : </td><td><input style="margin:10px;" type="text" name="heure_dep"></td></tr>
-				<tr><td>Heure d'arrivée : </td><td><input style="margin:10px;" type="text" name="heure_arr"></td></tr>
-				<tr><td>Aéroport de départ : </td><td><input style="margin:10px;" type="text" name="aeroport"></td></tr>
+				<tr><td>Prix : </td><td><input style="margin:10px;" type="number" min="10" name="prix" placeholder="Rentrez un prix"></td></tr>
+				<tr><td>Heure de dÃ©part : </td><td><input style="margin:10px;" type="text" name="heure_dep"></td></tr>
+				<tr><td>Heure d'arrivÃ©e : </td><td><input style="margin:10px;" type="text" name="heure_arr"></td></tr>
+				<tr><td>AÃ©roport de dÃ©part : </td><td><input style="margin:10px;" type="text" name="aeroport"></td></tr>
 				<tr><td>Date : </td><td><input type="date" style="margin:10px;" name="date"></td></tr>
 				<tr><td>Destination : </td><td><input style="margin:10px;" type="text" name="destination"></td></tr>
 				<tr><td>Image : </td><td><input style="margin:10px;" type="text" name="image"></td></tr>
 				<tr><td><input type="submit" style="margin:10px;" id="bouton1" name="enregistrer" value="Enregistrer"></td>
-				<td><input type="submit" style="margin:10px;" name="retour" value="Retour"></td></tr>
+				<td><input type="reset" style="margin:10px;" name="annuler" value="annuler"></td></tr>
+				<tr><td><input type="submit" style="margin:10px;" name="retour" value="Retour"></td></tr>
 		</table>
 		</form>
 		<br/>
@@ -74,7 +75,7 @@ var myChart = new Chart(ctx, {
 		</div>
 		</div>
 		<%!
-		//partie déclaration
+		//partie dÃ©claration
 		Trajet unTrajet = new Trajet();
 		%>
 		<div class="white-box">
@@ -86,9 +87,9 @@ var myChart = new Chart(ctx, {
                            <td><input type="submit" style="margin:10px;"  name="rech" value="Rechercher"></td>
                            </tr>
        			</table>
-			</form>               
+			</form>
 		<%
-	//	partie éxecution
+	//	partie Ã©xecution
 		
 	
 		if ( request.getParameter("recherche") != null )
@@ -97,7 +98,7 @@ var myChart = new Chart(ctx, {
 			String mot = request.getParameter("recherche");
 			
 			ArrayList<Trajet> lesTrajetsrech = Controller.selectWhereTrajets(mot);
-			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Heure départ</th><th>Heure arrivée</th><th>Aéroport</th><th>Date</th><th>Destination</th><th>Image</th><th>Prix</th></tr></thead><tbody>");
+			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Heure dÃ©part</th><th>Heure arrivÃ©e</th><th>AÃ©roport</th><th>Date</th><th>Destination</th><th>Image</th><th>Prix</th></tr></thead><tbody>");
 			for (Trajet unTrajet : lesTrajetsrech)
 	        {
 	            out.print("<tr><td>" + unTrajet.getId() 
@@ -118,7 +119,7 @@ var myChart = new Chart(ctx, {
 		{
 		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
 		//parcourir les compte
-		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Heure départ</th><th>Heure arrivée</th><th>Aéroport</th><th>Date</th><th>Destination</th><th>Image</th><th>Prix</th></tr></thead><tbody>");
+		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Heure dÃ©part</th><th>Heure arrivÃ©e</th><th>AÃ©roport</th><th>Date</th><th>Destination</th><th>Image</th><th>Prix</th></tr></thead><tbody>");
 		for (Trajet unTrajet : lesTrajets)
         {
             out.print("<tr><td>" + unTrajet.getId() 
@@ -174,13 +175,13 @@ var myChart = new Chart(ctx, {
 			
 			Controller.insertTrajet(unTrajet);
 			
-			out.print("Insertion dans la bdd réussie");
+			out.print("Insertion dans la bdd rÃ©ussie");
 			out.print( "<br/> Nouveau Trajet : " );
 			out.print( "" + unTrajet.consulter() );
 		}
 		if ( request.getParameter("retour") != null )
 		{
-			response.sendRedirect("index.jsp");
+			response.sendRedirect("menu.jsp");
 		}
 		%>
 		</div>

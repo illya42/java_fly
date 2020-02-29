@@ -7,12 +7,12 @@
                     <div class="col-sm-12">
                         <div class="white-box">
 		<%!
-		//partie déclaration
+		//partie dÃ©claration
 		Administrateur unAdministrateur = new Administrateur();
 		%>
 		
 		<%
-		//partie éxecution
+		//partie Ã©xecution
 		
 		if (uneSession.isNew()) 
 		{
@@ -59,7 +59,7 @@
 				String identifiant = (String) uneSession.getAttribute("identifiant");
 				String mdp = (String) uneSession.getAttribute("mdp");
 				
-			    //Session déjà créée
+			    //Session dÃ©jÃ  crÃ©Ã©e
 %>
 			    <div class="limiter">
 		<div class="container-login100">
@@ -152,6 +152,7 @@
 				uneSession.setAttribute("prenom", unAdministrateur.getPrenom_admin());
 				uneSession.setAttribute("identifiant", unAdministrateur.getIdentifiant());
 				uneSession.setAttribute("mdp", unAdministrateur.getMdp());
+				uneSession.setAttribute("role", unAdministrateur.getRole());
 				
 				response.sendRedirect("menu.jsp");
 			}
