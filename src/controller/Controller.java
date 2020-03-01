@@ -101,6 +101,10 @@ public class Controller
 	{
 		return Modele.selectAllGroupes();
 	}
+	public static ArrayList<Groupe> selectWhereGroupes(String mot)
+	{
+		return Modele.selectWhereGroupes(mot);
+	}
 	public static void deleteGroupe(int id)
 	{
 		Modele.deleteGroupe(id);
@@ -135,6 +139,10 @@ public class Controller
 	public static Reservation returnReservation(int id)
 	{
 		return Modele.selectReservation(id);
+	}
+	public static ArrayList<Reservation> selectWhereReservations(String mot)
+	{
+		return Modele.selectWhereReservations(mot);
 	}
 	
 	//FIN FONCTIONS RESERVATION

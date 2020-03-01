@@ -21,6 +21,15 @@ public class Groupe
 		this.statut = statut;
 	}
 	
+	public Groupe(int administrateur_id, String destination, String date, int id_trajet, String statut) 
+	{
+		this.administrateur_id = administrateur_id;
+		this.destination = destination;
+		this.date = date;
+		this.id_trajet = id_trajet;
+		this.statut = statut;
+	}
+	
 	public String consulter()
 	{
 		return "ID : " + this.id 

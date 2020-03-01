@@ -44,17 +44,12 @@
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-static-top m-b-0">
             <div class="navbar-header"> <a class="navbar-toggle hidden-sm hidden-md hidden-lg " href="javascript:void(0)" data-toggle="collapse" data-target=".navbar-collapse"><i class="fa fa-bars"></i></a>
-                <div class="top-left-part"><a class="logo" href="index.html"><b><img src="../plugins/images/pixeladmin-logo.png" alt="home" /></b><span class="hidden-xs"><img src="../plugins/images/pixeladmin-text.png" alt="home" /></span></a></div>
-                <ul class="nav navbar-top-links navbar-left m-l-20 hidden-xs">
-                    <li>
-                        <form role="search" class="app-search hidden-xs">
-                            <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a>
-                        </form>
-                    </li>
-                </ul>
+                <div class="top-left-part"><a class="logo" href="menu.jsp"><b><img src="../plugins/images/flylogo.png" alt="home" style="width: 40px;margin-bottom: 3px;"/></b><span class="hidden-xs">
+                <img src="../plugins/images/textfly.png" alt="home" style="width: 110px;"/></span></a></div>
+                
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
-                        <a class="profile-pic" href="#"> <img src="../plugins/images/users/varun.jpg" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">
+                        <a class="profile-pic" href="index.jsp"><b class="hidden-xs"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>
                         <% 
                         HttpSession uneSession = request.getSession(false);
                         
@@ -86,15 +81,22 @@
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                 <ul class="nav" id="side-menu">
                     <li style="padding: 10px 0 0;">
-                        <a href="index.jsp" class="waves-effect"><i class="fa fa-clock-o fa-fw" aria-hidden="true"></i><span class="hide-menu">Accueil</span></a>
+                        <a href="index.jsp" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i><span class="hide-menu">Accueil</span></a>
                     </li>
                     <li>
                         <a href="profil.jsp" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
                     </li>
+                    <li style="padding: 10px 0 0;">
+                        <a href="trajet.jsp" class="waves-effect"><i class="fa fa-plane fa-fw" aria-hidden="true"></i><span class="hide-menu">Trajets</span></a>
+                    </li>
+                    <li style="padding: 10px 0 0;">
+                        <a href="groupe.jsp" class="waves-effect"><i class="fa fa-group fa-fw" aria-hidden="true"></i><span class="hide-menu">Groupes</span></a>
+                    </li>
+                    <li style="padding: 10px 0 0;">
+                        <a href="reservation.jsp" class="waves-effect"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i><span class="hide-menu">Reservation</span></a>
+                    </li>
                 </ul>
-                <div class="center p-20">
-                    <span class="hide-menu"><a href="http://wrappixel.com/templates/pixeladmin/" target="_blank" class="btn btn-danger btn-block btn-rounded waves-effect waves-light">Upgrade to Pro</a></span>
-                </div>
+                
             </div>
         </div>
         <!-- Left navbar-header end -->

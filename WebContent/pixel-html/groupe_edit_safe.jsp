@@ -1,8 +1,9 @@
 
 <%@ include file="header.jsp" %>
-		<h1>Edition</h1>
-		<br/>
-		<br/>
+		<div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box" style="display: inline-block; width: 450px; vertical-align: top; text-align: center; max-width: 100%;height: 300px;">
+		<h2>Edition des Groupes</h2>
 		<%!
 		//partie déclaration
 		Groupe unGroupe = new Groupe();
@@ -14,6 +15,7 @@
 		Administrateur unAdministrateur = new Administrateur();
 		%>
 		
+		
 		<%
 		//partie éxecution
 		
@@ -21,7 +23,7 @@
 		
 		unGroupe = Controller.returnGroupe(id);
 
-		out.print("<form method='post' action='' id='form'>");
+		out.print("<form method='post' style='font-size:14px;margin-left: 40px;' action='' id='form'>");
 		out.print("<table>");
 		
 		ArrayList<Administrateur> lesAdministrateurs = Controller.selectAllAdministrateur();
@@ -29,7 +31,7 @@
 		out.print("<tr>");
 			out.print("<td><label for='admin-select'>ID Admin :</label></td>");
 				out.print("<td>");
-					out.print("<select style='margin : 10px' name='admin_id' id='admin-select'>");
+					out.print("<select style='margin : 10px;width: 171px;' name='admin_id' id='admin-select'>");
 						out.print("<option value=" + unGroupe.getAdministrateur_id() + " selected hidden> " + unGroupe.getAdministrateur_id() + " </option>");
 						for (Administrateur unAdministrateur : lesAdministrateurs)
 						{
@@ -44,7 +46,7 @@
 		out.print("<tr>");
 			out.print("<td><label for='trajet-select'>Trajet :</label></td>");
 				out.print("<td>");
-					out.print("<select style='margin : 10px' name='id_trajet' id='trajet-select'>");
+					out.print("<select style='margin : 10px;width: 171px;' name='id_trajet' id='trajet-select'>");
 						out.print("<option value=" + unGroupe.getId_trajet() + " selected hidden> " + unGroupe.getDestination() + " -- " + unGroupe.getDate() + " </option>");
 						for (Trajet unTrajet : lesTrajets)
 						{
@@ -57,7 +59,7 @@
 		out.print("<tr>");
 			out.print("<td><label for='statut-select'>Statut :</label></td>");
 				out.print("<td>");
-					out.print("<select style='margin : 10px' name='statut' id='statut-select'>");
+					out.print("<select style='margin : 10px;width: 171px;' name='statut' id='statut-select'>");
 						out.print("<option value='" + unGroupe.getStatut() + "' selected hidden> " + unGroupe.getStatut() + " </option>");
 						out.print("<option value='en cours'>En cours</option>");
 						out.print("<option value='valide'>Validé</option>");
@@ -65,9 +67,8 @@
 				out.print("</td>");
 		out.print("</tr>");
 	
-		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='modifier'></td>");
-		out.print("<td><input type='reset' name='rétablir' value='rétablir' onclick='reset();'></td></tr>");
-		out.print("<tr><td><input type='submit' name='retour' style='margin:10px;' value='retour'></td></tr>");
+		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='Modifier'></td>");
+		out.print("<td><input type='reset' name='annuler' value='Annuler' onclick='reset();'></td></tr>");
 		out.print("</table>");
 		out.print("</form>");
 		
@@ -98,7 +99,7 @@
 			response.sendRedirect("groupe.jsp");
 		}
 		%>
-		
+		</div></div></div>
 		<script type="text/javascript">
 		function reset()
 		{
