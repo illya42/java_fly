@@ -8,7 +8,7 @@
 		<h2>Gestion des Trajets</h2>
 		<form method="post" style="font-size:14px;margin-left: 40px;" action="">
 		<table>
-				<tr><td style="font-size: 14px;font-weight: 500;">Tarif : </td><td><input style="margin:10px;" type="number" min="10" name="prix" required placeholder="Rentrez un prix"></td></tr>
+				<tr><td style="font-size: 14px;font-weight: 500;">Tarif : </td><td><input style="margin:10px;" type="number" min="30" name="prix" required placeholder="Rentrez un prix"></td></tr>
 				<tr><td style="font-size: 14px;font-weight: 500;">Heure de depart : </td><td><input style="margin:10px;" type="time" name="heure_dep" required ></td></tr>
 				<tr><td style="font-size: 14px;font-weight: 500;">Heure d'arrivee : </td><td><input style="margin:10px;" type="time" name="heure_arr" required ></td></tr>
 				<tr><td style="font-size: 14px;font-weight: 500;">Date : </td><td><input type="date" style="margin:10px; margin:10px;width: 200px;height: 25px;" required name="date"></td></tr>

@@ -155,10 +155,11 @@
 			out.print("Insertion dans la bdd réussie");
 			out.print( "<br/> Nouveau Trajet : " );
 			out.print( "" + uneReservation.consulter() );
+			response.sendRedirect("reservation.jsp");
 		}
 		if ( request.getParameter("retour") != null )
 		{
-			response.sendRedirect("menu.jsp");
+			response.sendRedirect("reservation.jsp");
 		}
 		%>
 		</div>

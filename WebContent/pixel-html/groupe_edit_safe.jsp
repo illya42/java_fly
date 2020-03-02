@@ -29,7 +29,7 @@
 		ArrayList<Administrateur> lesAdministrateurs = Controller.selectAllAdministrateur();
 		
 		out.print("<tr>");
-			out.print("<td><label for='admin-select'>ID Admin :</label></td>");
+			out.print("<td><label style='margin-bottom: 0px;' for='admin-select'>ID Admin :</label></td>");
 				out.print("<td>");
 					out.print("<select style='margin : 10px;width: 171px;' name='admin_id' id='admin-select'>");
 						out.print("<option value=" + unGroupe.getAdministrateur_id() + " selected hidden> " + unGroupe.getAdministrateur_id() + " </option>");
@@ -44,7 +44,7 @@
 		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
 		
 		out.print("<tr>");
-			out.print("<td><label for='trajet-select'>Trajet :</label></td>");
+			out.print("<td><label style='margin-bottom: 0px;' for='trajet-select'>Trajet :</label></td>");
 				out.print("<td>");
 					out.print("<select style='margin : 10px;width: 171px;' name='id_trajet' id='trajet-select'>");
 						out.print("<option value=" + unGroupe.getId_trajet() + " selected hidden> " + unGroupe.getDestination() + " -- " + unGroupe.getDate() + " </option>");
@@ -57,7 +57,7 @@
 		out.print("</tr>");
 		
 		out.print("<tr>");
-			out.print("<td><label for='statut-select'>Statut :</label></td>");
+			out.print("<td><label style='margin-bottom: 0px;' for='statut-select'>Statut :</label></td>");
 				out.print("<td>");
 					out.print("<select style='margin : 10px;width: 171px;' name='statut' id='statut-select'>");
 						out.print("<option value='" + unGroupe.getStatut() + "' selected hidden> " + unGroupe.getStatut() + " </option>");
@@ -93,6 +93,7 @@
 			out.print("Modification réussie");
 			out.print( "<br/> Groupe modifié : " );
 			out.print( "" + unGroupe.consulter() );
+			response.sendRedirect("groupe.jsp");
 		}
 		if ( request.getParameter("retour") != null )
 		{
