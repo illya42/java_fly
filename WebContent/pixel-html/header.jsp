@@ -49,7 +49,7 @@
                 
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
-                        <a class="profile-pic" href="index.jsp"><b class="hidden-xs"><i class="fa fa-sign-out fa-fw" aria-hidden="true"></i>
+                        
                         <% 
                         HttpSession uneSession = request.getSession(false);
                         
@@ -59,12 +59,13 @@
                         }
                         else
                         {
-                        	if (uneSession.getAttribute("identifiant") != null && uneSession.getAttribute("mdp") != null)
+                        	if (uneSession.getAttribute("identifiant") != null && uneSession.getAttribute("mdp") != null && uneSession.getAttribute("role") != null)
                 			{
                 				String identifiant = (String) uneSession.getAttribute("identifiant");
                 				String mdp = (String) uneSession.getAttribute("mdp");
+                				String role = (String) uneSession.getAttribute("role");
                 				
-                				out.print( (String) uneSession.getAttribute("nom") + " " + (String) uneSession.getAttribute("prenom"));
+                				out.print("<a class='profile-pic' href='index.jsp'><b class='hidden-xs'><i class='fa fa-sign-out fa-fw' aria-hidden='true'></i>"+ (String) uneSession.getAttribute("nom") + " " + (String) uneSession.getAttribute("prenom"));
                 			}
                         }
                         %>
@@ -76,14 +77,48 @@
             <!-- /.navbar-top-links -->
             <!-- /.navbar-static-side -->
         </nav>
-        <!-- Left navbar-header -->
-        <div class="navbar-default sidebar" role="navigation">
+        
+        <%
+        	if (uneSession.getAttribute("identifiant") != null && uneSession.getAttribute("mdp") != null && uneSession.getAttribute("role").equals("super"))
+        	{
+        		%>
+        		<div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                 <ul class="nav" id="side-menu">
                     <li style="padding: 10px 0 0;">
                         <a href="index.jsp" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i><span class="hide-menu">Accueil</span></a>
                     </li>
-                    <li>
+                    <li style="padding: 10px 0 0;">
+                        <a href="profil.jsp" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
+                    </li>
+                    <li style="padding: 10px 0 0;">
+                        <a href="trajet.jsp" class="waves-effect"><i class="fa fa-plane fa-fw" aria-hidden="true"></i><span class="hide-menu">Trajets</span></a>
+                    </li>
+                    <li style="padding: 10px 0 0;">
+                        <a href="groupe.jsp" class="waves-effect"><i class="fa fa-group fa-fw" aria-hidden="true"></i><span class="hide-menu">Groupes</span></a>
+                    </li>
+                    <li style="padding: 10px 0 0;">
+                        <a href="reservation.jsp" class="waves-effect"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i><span class="hide-menu">Reservation</span></a>
+                    </li>
+                    <li style="padding: 10px 0 0;">
+                        <a href="administrateur.jsp" class="waves-effect"><i class="fa fa-shield fa-fw" aria-hidden="true"></i><span class="hide-menu">Administrateur</span></a>
+                    </li>
+                </ul>
+                
+            </div>
+        </div>
+        <%
+        	}
+        	else if (uneSession.getAttribute("identifiant") != null && uneSession.getAttribute("mdp") != null)
+        	{
+        		%>
+        		<div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse slimscrollsidebar">
+                <ul class="nav" id="side-menu">
+                    <li style="padding: 10px 0 0;">
+                        <a href="index.jsp" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i><span class="hide-menu">Accueil</span></a>
+                    </li>
+                    <li style="padding: 10px 0 0;">
                         <a href="profil.jsp" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
                     </li>
                     <li style="padding: 10px 0 0;">
@@ -99,6 +134,22 @@
                 
             </div>
         </div>
+        <%
+        	}
+        	else
+        	{
+        %>
+         <div class="navbar-default sidebar" role="navigation">
+            <div class="sidebar-nav navbar-collapse slimscrollsidebar">
+                <ul class="nav" id="side-menu">
+                    <li style="padding: 10px 0 0;">
+                        <a href="index.jsp" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i><span class="hide-menu">Accueil</span></a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Left navbar-header -->
+        <%} %>
         <!-- Left navbar-header end -->
         <div id="page-wrapper">
             <div class="container-fluid">

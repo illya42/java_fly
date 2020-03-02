@@ -2,7 +2,7 @@
 <%@ include file="header.jsp" %>
 		<div class="row">
                     <div class="col-sm-12">
-                        <div class="white-box" style="display: inline-block; width: 450px; vertical-align: top; text-align: center; max-width: 100%;height: 475px;">
+                        <div class="white-box" style="display: inline-block; width: 450px; vertical-align: top; text-align: center; max-width: 100%;height: 510px;">
 		<h2>Edition des Trajets</h2>
 		<%!
 		//partie déclaration
@@ -26,8 +26,10 @@
 		out.print("<tr><td style='font-weight: 500;'>Image : </td><td><input type='text' name='image' style='margin:10px;' value=" + unTrajet.getImage() + "></td></tr>");
 		out.print("<tr><td style='font-weight: 500;'>Prix : </td><td><input type='number' min='30' max='3000' name='prix' style='margin:10px;' value=" + unTrajet.getPrix() + "></td></tr>");
 		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='Modifier'></td>");
-		out.print("<td><input type='reset' name='rétablir' value='Annuler' onclick='reset();'></td></tr>");
+		out.print("<td><input type='reset' style='margin-left: 110px;' name='rétablir' value='Annuler' onclick='reset();'></td></tr>");
 		out.print("</table>");
+
+		out.print("<tr><td><input type='submit' name='retour' style='margin-right:35px;' value='Retour'></td></tr><br><br>");
 		out.print("</form>");
 		
 		if ( request.getParameter("modifier") != null )
@@ -42,15 +44,29 @@
 			
 			unTrajet = new Trajet( id, heure_dep, heure_arr, aeroport, date, destination, image, prix );
 			
-			//insertion de ce compte dans la bdd
-			
-			Controller.updateTrajet(unTrajet);
-			
-			out.print("Modification réussie");
-			out.print( "<br/> Trajet modifié : " );
-			out.print( "" + unTrajet.consulter() );
-			response.sendRedirect("trajet.jsp");
-		}
+		//insertion de ce compte dans la bdd
+					
+					Controller.updateTrajet(unTrajet);
+					%>
+					</div></div></div>
+					<div class="white-box">
+					<%
+					out.print("Modification réussie");
+					out.print( "<br/> Trajet modifié : " );
+					out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Heure depart</th><th>Heure arrivee</th><th>Date</th><th>Aeroport</th><th>Destination</th><th>Image</th><th>Prix</th></tr></thead><tbody>");
+					
+			            out.print("<tr><td>" + unTrajet.getId() 
+			            + "</td><td>" + unTrajet.getHeure_dep() 
+			            + "</td><td>" + unTrajet.getHeure_arr() 
+			            + "</td><td>" + unTrajet.getDate() 
+			            + "</td><td>" + unTrajet.getAeroport() 
+			            + "</td><td>" + unTrajet.getDestination() 
+			            + "</td><td>" + unTrajet.getImage() 
+			            + "</td><td>" + unTrajet.getPrix());
+			        
+					out.print("</table>");
+					}
+		
 		if ( request.getParameter("retour") != null )
 		{
 			response.sendRedirect("trajet.jsp");

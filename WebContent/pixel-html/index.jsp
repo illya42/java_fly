@@ -156,6 +156,10 @@
 				
 				response.sendRedirect("menu.jsp");
 			}
+			else
+			{
+				out.print("<h3 style='color:red;text-align: center;'>Veuillez vérifier les champs</h3>");
+			}
 		}
 		if( request.getParameter("deconnection") != null )
 		{

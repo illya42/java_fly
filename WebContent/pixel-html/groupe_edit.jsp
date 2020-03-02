@@ -3,10 +3,9 @@
 		
 		<div class="row">
                     <div class="col-sm-12">
-                        <div class="white-box" style="display: inline-block;width: 400px;vertical-align: top;text-align: center;max-width: 100%;height: 410px;">
-		<a href="groupe_edit_safe.jsp"><h2>Edition des Trajets</h2></a>
-		<br/>
-		<br/>
+                        <div class="white-box" style="display: inline-block;width: 400px;vertical-align: top;text-align: center;max-width: 100%;height: 390px;">
+		<a href="groupe_edit_safe.jsp"><h2>Edition des Groupes</h2></a>
+		
 		<%!
 		//partie déclaration
 		Groupe unGroupe = new Groupe();
@@ -93,9 +92,12 @@
 				out.print("</td>");
 		out.print("</tr>");
 		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='Modifier'></td>");
-		out.print("<td><input type='reset' name='rétablir' value='Annuler' onclick='reset();'></td></tr>");
+		out.print("<td><input type='reset' style='margin-left: 90px;' name='rétablir' value='Annuler' onclick='reset();'></td></tr>");
 		out.print("</table>");
+
+		out.print("<tr><td><input type='submit' name='retour' style='margin-right:35px;' value='Retour'></td></tr><br><br>");
 		out.print("</form>");
+	
 		
 		if ( request.getParameter("modifier") != null )
 		{
@@ -108,17 +110,33 @@
 			unGroupe = new Groupe( id, admin_id, destination, date, id_trajet, statut );
 			
 			Controller.updateGroupe(unGroupe);
-			
+			%>
+			</div></div></div>
+			<div class="white-box">
+			<%
 			out.print("Modification réussie");
-			out.print( "<br/> Groupe modifié : " );
-			out.print( "" + unGroupe.consulter() );
-			response.sendRedirect("groupe.jsp");
-		}
+			out.print( "<br/> Groupe modifié : <br/>" );
+
+			
+			//parcourir les compte
+			out.print("<div style='font-family: Rubik,sans-serif;' class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Admin ID</th><th>Destination</th><th>Date</th><th>ID Trajet</th><th>Statut</th></tr></thead><tbody>");
+			
+	            out.print("<tr><td>" + unGroupe.getId() 
+	            + "</td><td>" + unGroupe.getAdministrateur_id()
+	            + "</td><td>" + unGroupe.getDestination() 
+	            + "</td><td>" + unGroupe.getDate() 
+	            + "</td><td>" + unGroupe.getId_trajet()
+	            + "</td><td>" + unGroupe.getStatut());
+	        
+			out.print("</table>");
+			}
+			
+		
 		if ( request.getParameter("retour") != null )
 		{
 			response.sendRedirect("groupe.jsp");
 		}
-		%>
+		%></div>
 		
 		<script type="text/javascript">
 		function reset()
@@ -126,7 +144,7 @@
 			document.getElementById('form').reset();
 		}
 		</script>
-		</div></div></div>
+		
 	<%@ include file="footer.jsp" %>
 </body>
 </html>

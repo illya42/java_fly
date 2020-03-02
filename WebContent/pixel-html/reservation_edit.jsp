@@ -68,8 +68,9 @@
 				out.print("</td>");
 		out.print("</tr>");
 		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='Modifier'></td>");
-		out.print("<td><input type='reset' name='rétablir' value='Annuler' onclick='reset();'></td></tr>");
+		out.print("<td><input type='reset' style='margin-left: 90px;' name='rétablir' value='Annuler' onclick='reset();'></td></tr>");
 		out.print("</table>");
+		out.print("<tr><td><input type='submit' name='retour' style='margin-right:50px;' value='Retour'></td></tr><br><br>");
 		out.print("</form>");
 		
 		if ( request.getParameter("modifier") != null )
@@ -82,12 +83,24 @@
 			uneReservation = new Reservation( id, groupe_id, tarif, trajet_id, statut );
 			
 			Controller.updateReservation(uneReservation);
-			
+			%>
+			</div></div></div>
+			<div class="white-box">
+			<%
 			out.print("Modification réussie");
 			out.print( "<br/> Réservation modifié : " );
-			out.print( "" + uneReservation.consulter() );
-			response.sendRedirect("reservation.jsp");
+			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Tarif</th><th>Trajet ID</th><th>Statut</th></tr></thead><tbody>");
+			
+	            out.print("<tr><td>" + uneReservation.getId() 
+	            + "</td><td>" + uneReservation.getGroupe_id()
+	            + "</td><td>" + uneReservation.getTarif() 
+	            + "</td><td>" + uneReservation.getTrajet_id()
+	            + "</td><td>" + uneReservation.getStatut());
+	            out.print("</table>");
+	            
 		}
+			
+		
 		if ( request.getParameter("retour") != null )
 		{
 			response.sendRedirect("reservation.jsp");
