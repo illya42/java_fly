@@ -2,9 +2,9 @@
 	<%@ include file="header.jsp" %>
 		<div class="row">
                     <div class="col-sm-12">
-                        <div class="white-box">
+                        <div class="white-box" style="display: inline-block;width: 430px;vertical-align: top;text-align: center;max-width: 100%;height: 400px;">
 		<h2>Gestion des Administrateurs</h2>
-		<form method="post" action="">
+		<form method="post" style="margin-left: 40px;" action="">
 		<table>
 				<tr><td>Nom : </td><td><input style="margin:10px;" type="text" min="10" name="nom" placeholder="Rentrez un nom"></td></tr>
 				<tr><td>Prénom : </td><td><input style="margin:10px;" type="text" name="prenom" placeholder="Rentrez un prénom"></td></tr>
@@ -22,8 +22,7 @@
 				</tr>
 				
 				<tr><td><input type="submit" style="margin:10px;" id="bouton1" name="enregistrer" value="Enregistrer"></td>
-				<td><input type="reset" style="margin:10px;" name="annuler" value="annuler"></td></tr>
-				<tr><td><input type="submit" style="margin:10px;" name="retour" value="Retour"></td></tr>
+				<td><input type="reset" style="margin:10px;" name="annuler" value="Annuler"></td></tr>
 		</table>
 		</form>
 		<br/>

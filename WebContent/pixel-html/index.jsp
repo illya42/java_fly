@@ -30,13 +30,13 @@
 
 				
 				<div class="wrap-input100 validate-input m-b-16">
-					<input class="input100" type="text" name="identifiant" placeholder="Identifiant">
+					<input class="input100" type="text" name="identifiant" required placeholder="Identifiant">
 					<span class="focus-input100"></span>
 				</div>
 				
 				
 				<div class="wrap-input100 validate-input m-b-16">
-					<input class="input100" type="password" name="mdp" placeholder="Mot de passe">
+					<input class="input100" type="password" name="mdp" required placeholder="Mot de passe">
 					<span class="focus-input100"></span>
 				</div>
 
@@ -72,7 +72,7 @@
 					
 					<div class="wrap-input100 validate-input m-b-16">
 					<%
-						out.print("<input class='input100' type='text' name='identifiant' placeholder='Identifiant' value=" + identifiant + ">");
+						out.print("<input class='input100' type='text' name='identifiant' required placeholder='Identifiant' value=" + identifiant + ">");
 					%>
 						<span class="focus-input100"></span>
 					</div>
@@ -80,7 +80,7 @@
 					
 					<div class="wrap-input100 validate-input m-b-16">
 					<%
-						out.print("<input class='input100' type='password' name='mdp' placeholder='Mot de passe' value=" + mdp + ">");
+						out.print("<input class='input100' type='password' name='mdp' required placeholder='Mot de passe' value=" + mdp + ">");
 					%>
 						<span class="focus-input100"></span>
 					</div>
@@ -112,13 +112,13 @@
 
 					
 					<div class="wrap-input100 validate-input m-b-16">
-						<input class="input100" type="text" name="identifiant" placeholder="Identifiant">
+						<input class="input100" type="text" name="identifiant" required placeholder="Identifiant">
 						<span class="focus-input100"></span>
 					</div>
 					
 					
 					<div class="wrap-input100 validate-input m-b-16">
-						<input class="input100" type="password" name="mdp" placeholder="Mot de passe">
+						<input class="input100" type="password" name="mdp" required placeholder="Mot de passe">
 						<span class="focus-input100"></span>
 					</div>
 
@@ -155,6 +155,10 @@
 				uneSession.setAttribute("role", unAdministrateur.getRole());
 				
 				response.sendRedirect("menu.jsp");
+			}
+			else
+			{
+				out.print("<h3 style='color:red;text-align: center;'>Veuillez vérifier les champs</h3>");
 			}
 		}
 		if( request.getParameter("deconnection") != null )

@@ -4,20 +4,19 @@
 	<%@ include file="header.jsp" %>
 		<div class="row">
                     <div class="col-sm-12">
-                        <div class="white-box" style="display: inline-block; width: 450px; vertical-align: top; text-align: center; max-width: 100%;">
+                        <div class="white-box" style="display: inline-block; width: 480px; vertical-align: top; text-align: center; max-width: 100%;height: 480px;">
 		<h2>Gestion des Trajets</h2>
-		<form method="post" style="margin-left: 40px;" action="">
+		<form method="post" style="font-size:14px;margin-left: 40px;" action="">
 		<table>
-				<tr><td>Prix : </td><td><input style="margin:10px;" type="number" min="10" name="prix" placeholder="Rentrez un prix"></td></tr>
-				<tr><td>Heure de départ : </td><td><input style="margin:10px;" type="text" name="heure_dep"></td></tr>
-				<tr><td>Heure d'arrivée : </td><td><input style="margin:10px;" type="text" name="heure_arr"></td></tr>
-				<tr><td>Aéroport de départ : </td><td><input style="margin:10px;" type="text" name="aeroport"></td></tr>
-				<tr><td>Date : </td><td><input type="date" style="margin:10px;" name="date"></td></tr>
-				<tr><td>Destination : </td><td><input style="margin:10px;" type="text" name="destination"></td></tr>
-				<tr><td>Image : </td><td><input style="margin:10px;" type="text" name="image"></td></tr>
-				<tr><td><input type="submit" style="margin:10px;" id="bouton1" name="enregistrer" value="Enregistrer"></td>
-				<td><input type="reset" style="margin:10px;" name="annuler" value="annuler"></td></tr>
-				<tr><td><input type="submit" style="margin:10px;" name="retour" value="Retour"></td></tr>
+				<tr><td style="font-size: 14px;font-weight: 500;">Tarif : </td><td><input style="margin:10px;" type="number" min="30" name="prix" required placeholder="Rentrez un prix"></td></tr>
+				<tr><td style="font-size: 14px;font-weight: 500;">Heure de depart : </td><td><input style="margin:10px;" type="time" name="heure_dep" required ></td></tr>
+				<tr><td style="font-size: 14px;font-weight: 500;">Heure d'arrivee : </td><td><input style="margin:10px;" type="time" name="heure_arr" required ></td></tr>
+				<tr><td style="font-size: 14px;font-weight: 500;">Date : </td><td><input type="date" style="margin:10px; margin:10px;width: 200px;height: 25px;" required name="date"></td></tr>
+				<tr><td style="font-size: 14px;font-weight: 500;">Aeroport de depart : </td><td><input style="margin:10px;" type="text" name="aeroport" required placeholder="Rentrez un aeroport"></td></tr>
+				<tr><td style="font-size: 14px;font-weight: 500;">Destination : </td><td><input style="margin:10px;" type="text" name="destination" required placeholder="Rentrez la destination"></td></tr>
+				<tr><td style="font-size: 14px;font-weight: 500;">Image : </td><td><input style="margin:10px;" type="text" name="image" required placeholder="Rentrez le nom de l'image"></td></tr>
+				<tr><td><input type="submit" style="margin:10px;" id="bouton1" onclick="verif()" name="enregistrer" value="Enregistrer"></td>
+				<td><input type="reset" style="margin-left:50px" name="annuler" value="Annuler"></td></tr>
 		</table>
 		</form>
 		<br/>
@@ -98,14 +97,14 @@ var myChart = new Chart(ctx, {
 			String mot = request.getParameter("recherche");
 			
 			ArrayList<Trajet> lesTrajetsrech = Controller.selectWhereTrajets(mot);
-			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Heure départ</th><th>Heure arrivée</th><th>Aéroport</th><th>Date</th><th>Destination</th><th>Image</th><th>Prix</th></tr></thead><tbody>");
+			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Heure depart</th><th>Heure arrivee</th><th>Date</th><th>Aeroport</th><th>Destination</th><th>Image</th><th>Prix</th></tr></thead><tbody>");
 			for (Trajet unTrajet : lesTrajetsrech)
 	        {
 	            out.print("<tr><td>" + unTrajet.getId() 
 	            + "</td><td>" + unTrajet.getHeure_dep() 
 	            + "</td><td>" + unTrajet.getHeure_arr() 
-	            + "</td><td>" + unTrajet.getAeroport() 
 	            + "</td><td>" + unTrajet.getDate() 
+	            + "</td><td>" + unTrajet.getAeroport() 
 	            + "</td><td>" + unTrajet.getDestination() 
 	            + "</td><td>" + unTrajet.getImage() 
 	            + "</td><td>" + unTrajet.getPrix() 
@@ -119,14 +118,14 @@ var myChart = new Chart(ctx, {
 		{
 		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
 		//parcourir les compte
-		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Heure départ</th><th>Heure arrivée</th><th>Aéroport</th><th>Date</th><th>Destination</th><th>Image</th><th>Prix</th></tr></thead><tbody>");
+		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Heure depart</th><th>Heure arrivee</th><th>Date</th><th>Aeroport</th><th>Destination</th><th>Image</th><th>Prix</th></tr></thead><tbody>");
 		for (Trajet unTrajet : lesTrajets)
         {
             out.print("<tr><td>" + unTrajet.getId() 
             + "</td><td>" + unTrajet.getHeure_dep() 
             + "</td><td>" + unTrajet.getHeure_arr() 
-            + "</td><td>" + unTrajet.getAeroport() 
             + "</td><td>" + unTrajet.getDate() 
+            + "</td><td>" + unTrajet.getAeroport() 
             + "</td><td>" + unTrajet.getDestination() 
             + "</td><td>" + unTrajet.getImage() 
             + "</td><td>" + unTrajet.getPrix() 
@@ -178,6 +177,7 @@ var myChart = new Chart(ctx, {
 			out.print("Insertion dans la bdd réussie");
 			out.print( "<br/> Nouveau Trajet : " );
 			out.print( "" + unTrajet.consulter() );
+			response.sendRedirect("trajet.jsp");
 		}
 		if ( request.getParameter("retour") != null )
 		{
