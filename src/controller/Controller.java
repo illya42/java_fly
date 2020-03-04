@@ -56,6 +56,10 @@ public class Controller
 	{
 		Modele.deleteAdministrateur(id);
 	}
+	public static Administrateur returnAdministrateur(int id)
+	{
+		return Modele.selectAdministrateur(id);
+	}
 	
 	//FIN FONCTIONS ADMINISTRATEUR
 	
@@ -145,11 +149,19 @@ public class Controller
 		return Modele.selectWhereReservations(mot);
 	}
 	
-	//FIN FONCTIONS RESERVATION
-	
-	//FONCTION TSTAT
-	public static ArrayList<Tstat> selectTstat()
+	public static int selectTarif(int id)
 	{
-		return Modele.selectTstat();
+		return Modele.selectTarif(id);
 	}
+	
+	public static int selectNb_personnes(int id)
+	{
+		return Modele.selectNb_personnes(id);
+	}
+	public static ArrayList<Groupe> selectFree_groupes()
+	{
+		return Modele.selectFree_groupes();
+	}
+	
+	//FIN FONCTIONS RESERVATION
 }

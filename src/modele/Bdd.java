@@ -40,7 +40,7 @@ public class Bdd
         
         try 
         {
-            this.maConnexion = DriverManager.getConnection(url,"root", "");
+            this.maConnexion = DriverManager.getConnection(url,"root", "root");
         }
         
         catch (SQLException exp)

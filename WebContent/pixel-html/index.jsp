@@ -28,12 +28,10 @@
 					Login
 				</span>
 
-				
 				<div class="wrap-input100 validate-input m-b-16">
 					<input class="input100" type="text" name="identifiant" style="font-family: rubik;" required placeholder="Identifiant">
 					<span class="focus-input100"></span>
 				</div>
-				
 				
 				<div class="wrap-input100 validate-input m-b-16">
 					<input class="input100" type="password" name="mdp" style="font-family: rubik;" required placeholder="Mot de passe">
@@ -109,13 +107,11 @@
 					<span class="login100-form-title p-b-51" style="font-family: rubik;">
 						Login
 					</span>
-
 					
 					<div class="wrap-input100 validate-input m-b-16">
 						<input class="input100" type="text" style="font-family: rubik;" name="identifiant" required placeholder="Identifiant">
 						<span class="focus-input100"></span>
 					</div>
-					
 					
 					<div class="wrap-input100 validate-input m-b-16">
 						<input class="input100" type="password" style="font-family: rubik;" name="mdp" required placeholder="Mot de passe">

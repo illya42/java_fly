@@ -19,8 +19,9 @@
 		</form>
 		<br/>
 		<br/></div>
-		
-		
+
+				
+
 		</div>
 		</div>
 		<%!
@@ -38,8 +39,7 @@
        			</table>
 			</form>
 		<%
-	//	partie éxecution
-		
+	//	partie Execution
 	
 		if ( request.getParameter("recherche") != null )
 		{
@@ -85,10 +85,6 @@
         }
 		out.print("</table>");
 		}
-		
-	
-		
-		
 		
 		if ( request.getParameter("id") != null && request.getParameter("edit") != null )
 		{

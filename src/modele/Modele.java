@@ -10,12 +10,11 @@ import controller.Administrateur;
 import controller.Groupe;
 import controller.Reservation;
 import controller.Trajet;
-import controller.Tstat;
 
 
 public class Modele 
 {
-	private static Bdd uneBdd = new Bdd("localhost", "dbfly", "root", "");
+	private static Bdd uneBdd = new Bdd("localhost", "dbfly", "root", "root");
 	
 	public static void executer(String requete)
 	{
@@ -132,10 +131,46 @@ public class Modele
 		+ "', identifiant = '" + unAdministrateur.getIdentifiant()
 		+ "', mdp = '" + unAdministrateur.getMdp()
 		+ "', role = '" + unAdministrateur.getRole()
-		+ " where id = '" 
+
+		+ "' where id = '" 
 		+ unAdministrateur.getId() + "';";
 		
+		System.out.println(requete);
+		
 		executer (requete);
+	}
+	
+	public static Administrateur selectAdministrateur(int id)
+	{
+		Administrateur unAdministrateur = new Administrateur();
+		
+		String requete = "select * from administrateur where id = " + id + ";";
+	            
+	    uneBdd.seConnecter();
+	
+	    try
+	    {
+	        Statement unStat = uneBdd.getMaConnexion().createStatement();
+	        ResultSet unRes = unStat.executeQuery(requete);
+	        if(unRes.next())
+	        {
+	            unAdministrateur = new Administrateur(
+	                    unRes.getInt("id"),
+	                    unRes.getString("nom_admin"),
+	                    unRes.getString("prenom_admin"),
+	                    unRes.getString("identifiant"),
+	                    unRes.getString("mdp"),
+	                    unRes.getString("role")
+	                    );
+	        }
+	    }
+	    catch(SQLException exp)
+	    {
+	        System.out.println("Erreur execution : " + requete);
+	    }
+	    uneBdd.seDeconnecter();
+		
+		return unAdministrateur;
 	}
 	
 	//FIN FONCTIONS ADMINISTRATEUR
@@ -296,7 +331,7 @@ public class Modele
 	{
 		ArrayList<Groupe> lesGroupes = new ArrayList<Groupe>();
 		
-		String requete = "select * from groupe;";
+		String requete = "select g.id, g.administrateur_id, g.nb_personnes, t.destination, t.date, g.id_trajet, g.statut from groupe g, trajet t where g.id_trajet = t.id;";
 		try 
 		{
 			uneBdd.seConnecter();
@@ -307,9 +342,10 @@ public class Modele
 				Groupe unGroupe = new Groupe(
 						desRes.getInt("id"),
 						desRes.getInt("administrateur_id"),
+						desRes.getInt("nb_personnes"),
+						desRes.getInt("id_trajet"),
 						desRes.getString("destination"),
 						desRes.getString("date"),
-						desRes.getInt("id_trajet"),
 						desRes.getString("statut")
 						);
 				lesGroupes.add(unGroupe);
@@ -329,9 +365,8 @@ public class Modele
 		
 		String requete = "select * from groupe where id like '%"+mot+"%'"
 				+ " or administrateur_id like '%" + mot +"%'"
-				+ " or destination like '%" + mot +"%'"
-				+ " or date like '%" + mot +"%'"
 				+ " or id_trajet like '%" + mot +"%'"
+				+ " or nb_personnes like '%" + mot +"%'"
 				+ " or statut like '%" + mot +"%'"
 				+ ";";
 		try 
@@ -346,9 +381,8 @@ public class Modele
 				Groupe unGroupe = new Groupe(
 						desRes.getInt("id"),
 						desRes.getInt("administrateur_id"),
-						desRes.getString("destination"),
-						desRes.getString("date"),
 						desRes.getInt("id_trajet"),
+						desRes.getInt("nb_personnes"),
 						desRes.getString("statut")
 						);
 				lesGroupesrech.add(unGroupe);
@@ -373,12 +407,13 @@ public class Modele
 	public static void updateGroupe( Groupe unGroupe )
 	{
 		String requete="update groupe set administrateur_id = '" + unGroupe.getAdministrateur_id()
-		+ "', destination = '" + unGroupe.getDestination()
-		+ "', date = '" + unGroupe.getDate()
+		+ "', nb_personnes = '" + unGroupe.getNb_personnes()
 		+ "', id_trajet = '" + unGroupe.getId_trajet()
 		+ "', statut = '" + unGroupe.getStatut()
 		+ "' where id = '" 
 		+ unGroupe.getId() + "';";
+		
+		System.out.println(requete);
 		
 		executer (requete);
 	}
@@ -387,7 +422,7 @@ public class Modele
 	{
 		Groupe unGroupe = new Groupe();
 		
-		String requete = "select * from groupe where id = " + id + ";";
+		String requete = "select g.id, g.administrateur_id, g.nb_personnes, g.id_trajet, t.destination, t.date, g.statut from groupe g, trajet t where g.id_trajet = t.id and g.id = " + id + ";";
 	            
 	    uneBdd.seConnecter();
 	
@@ -400,9 +435,10 @@ public class Modele
 	            unGroupe = new Groupe(
 	                    unRes.getInt("id"),
 	                    unRes.getInt("administrateur_id"),
+	                    unRes.getInt("nb_personnes"),
+	                    unRes.getInt("id_trajet"),
 	                    unRes.getString("destination"),
 	                    unRes.getString("date"),
-	                    unRes.getInt("id_trajet"),
 	                    unRes.getString("statut")
 	                    );
 	        }
@@ -412,6 +448,8 @@ public class Modele
 	        System.out.println("Erreur execution : " + requete);
 	    }
 	    uneBdd.seDeconnecter();
+	    
+	    System.out.println(requete);
 		
 		return unGroupe;
 	}
@@ -424,7 +462,8 @@ public class Modele
 	{
 		ArrayList<Reservation> lesReservations = new ArrayList<Reservation>();
 		
-		String requete = "select * from reservation;";
+		//String requete = "select r.id, r.groupe_id, t.destination, (g.nb_personnes * t.prix) as tarif, (tarif * taux_reduc) as tarif_reduc, taux_reduc, r.statut from reservation r, groupe g, trajet t where r.groupe_id = g.id and g.id_trajet = t.id;";
+		String requete = "select r.id, r.groupe_id, t.destination, tarif, tarif_reduc, taux_reduc, r.statut from reservation r, groupe g, trajet t where r.groupe_id = g.id and g.id_trajet = t.id;";
 		try 
 		{
 			uneBdd.seConnecter();
@@ -435,8 +474,10 @@ public class Modele
 				Reservation uneReservation = new Reservation(
 						desRes.getInt("id"),
 						desRes.getInt("groupe_id"),
-						desRes.getString("tarif"),
-						desRes.getInt("trajet_id"),
+						desRes.getString("destination"),
+						desRes.getFloat("tarif"),
+						desRes.getFloat("tarif_reduc"),
+						desRes.getFloat("taux_reduc"),
 						desRes.getString("statut")
 						);
 				lesReservations.add(uneReservation);
@@ -457,7 +498,8 @@ public class Modele
 		String requete = "select * from reservation where id like '%"+mot+"%'"
 				+ " or groupe_id like '%" + mot +"%'"
 				+ " or tarif like '%" + mot +"%'"
-				+ " or trajet_id like '%" + mot +"%'"
+				+ " or tarif_reduc like '%" + mot +"%'"
+				+ " or taux_reduc like '%" + mot +"%'"
 				+ " or statut like '%" + mot +"%'"
 				+ ";";
 		try 
@@ -472,8 +514,9 @@ public class Modele
 				Reservation uneReservation = new Reservation(
 						desRes.getInt("id"),
 						desRes.getInt("groupe_id"),
-						desRes.getString("tarif"),
-						desRes.getInt("trajet_id"),
+						desRes.getFloat("tarif"),
+						desRes.getFloat("tarif_reduc"),
+						desRes.getFloat("taux_reduc"),
 						desRes.getString("statut")
 						);
 				lesReservationsrech.add(uneReservation);
@@ -492,7 +535,8 @@ public class Modele
 		String requete="insert into reservation values (null, '" 
 				+ uneReservation.getGroupe_id()
 		+"','" + uneReservation.getTarif() 
-		+"','" + uneReservation.getTrajet_id()
+		+"','" + uneReservation.getTarif_reduc() 
+		+"','" + uneReservation.getTaux_reduc() 
 		+"','" + uneReservation.getStatut()
 		+"');";
 		
@@ -511,10 +555,13 @@ public class Modele
 	{
 		String requete="update reservation set groupe_id = '" + uneReservation.getGroupe_id()
 		+ "', tarif = '" + uneReservation.getTarif()
-		+ "', trajet_id = '" + uneReservation.getTrajet_id()
+		+ "', tarif_reduc = '" + uneReservation.getTarif_reduc()
+		+ "', taux_reduc = '" + uneReservation.getTaux_reduc()
 		+ "', statut = '" + uneReservation.getStatut()
 		+ "' where id = '" 
 		+ uneReservation.getId() + "';";
+		
+		System.out.println(requete);
 		
 		executer (requete);
 	}
@@ -522,8 +569,8 @@ public class Modele
 	public static Reservation selectReservation(int id)
 	{
 		Reservation uneReservation = null;
-		
-		String requete = "select * from reservation where id = " + id + ";";
+		//String requete = "select r.id, r.groupe_id, t.destination, (g.nb_personnes * t.prix) as tarif, (tarif * taux_reduc) as tarif_reduc, taux_reduc, r.statut from reservation r, groupe g, trajet t where r.groupe_id = g.id and g.id_trajet = t.id and r.id = " + id + ";";
+		String requete = "select r.id, r.groupe_id, t.destination, tarif, tarif_reduc, taux_reduc, r.statut from reservation r, groupe g, trajet t where r.groupe_id = g.id and g.id_trajet = t.id and r.id = " + id + ";";
 	            
 	    uneBdd.seConnecter();
 	
@@ -534,12 +581,14 @@ public class Modele
 	        if(unRes.next())
 	        {
 	            uneReservation = new Reservation(
-	                    unRes.getInt("id"),
-	                    unRes.getInt("groupe_id"),
-	                    unRes.getString("tarif"),
-	                    unRes.getInt("trajet_id"),
-	                    unRes.getString("statut")
-	                    );
+						unRes.getInt("id"),
+						unRes.getInt("groupe_id"),
+						unRes.getString("destination"),
+						unRes.getFloat("tarif"),
+						unRes.getFloat("tarif_reduc"),
+						unRes.getFloat("taux_reduc"),
+						unRes.getString("statut")
+						);
 	        }
 	    }
 	    catch(SQLException exp)
@@ -551,14 +600,63 @@ public class Modele
 		return uneReservation;
 	}
 	
-	//FIN FONCTIONS RESERVATION
-	
-	//DIAGRAMME TRAJET
-	public static ArrayList<Tstat> selectTstat()
-	{
-		ArrayList<Tstat> lesTstat = new ArrayList<Tstat>();
+	public static int selectTarif(int id)
+	{		
+		int tarif = 0;
 		
-		String requete = "select * from tstat;";
+		String requete = "select nb_personnes * prix as tarif from groupe g, trajet t where g.id_trajet = t.id and g.id = " + id + ";";
+        
+	    uneBdd.seConnecter();
+	
+	    try
+	    {
+	        Statement unStat = uneBdd.getMaConnexion().createStatement();
+	        ResultSet unRes = unStat.executeQuery(requete);
+	        if(unRes.next())
+	        {
+	        	tarif = unRes.getInt("tarif");
+	        }
+	    }
+	    catch(SQLException exp)
+	    {
+	        System.out.println("Erreur execution : " + requete);
+	    }
+	    uneBdd.seDeconnecter();
+	    
+	    return tarif;
+	}
+	
+	public static int selectNb_personnes(int id)
+	{		
+		int nb_personnes = 0;
+		
+		String requete = "select nb_personnes from groupe where id = " + id + ";";
+        
+	    uneBdd.seConnecter();
+	
+	    try
+	    {
+	        Statement unStat = uneBdd.getMaConnexion().createStatement();
+	        ResultSet unRes = unStat.executeQuery(requete);
+	        if(unRes.next())
+	        {
+	        	nb_personnes = unRes.getInt("nb_personnes");
+	        }
+	    }
+	    catch(SQLException exp)
+	    {
+	        System.out.println("Erreur execution : " + requete);
+	    }
+	    uneBdd.seDeconnecter();
+	    
+	    return nb_personnes;
+	}
+	
+	public static ArrayList<Groupe> selectFree_groupes()
+	{
+		ArrayList<Groupe> lesGroupes = new ArrayList<Groupe>();
+		
+		String requete = "select g.id, t.destination from groupe g, trajet t where g.id not in ( select groupe_id from reservation ) and g.id_trajet = t.id;";
 		try 
 		{
 			uneBdd.seConnecter();
@@ -566,11 +664,11 @@ public class Modele
 			ResultSet desRes = unStat.executeQuery(requete);
 			while(desRes.next())
 			{
-				Tstat unTstat = new Tstat(
-						desRes.getInt("nbtrajet"),
+				Groupe unGroupe = new Groupe(
+						desRes.getInt("id"),
 						desRes.getString("destination")
 						);
-				lesTstat.add(unTstat);
+				lesGroupes.add(unGroupe);
 			}
 			uneBdd.seDeconnecter();
 		}
@@ -578,6 +676,9 @@ public class Modele
 		{
 			exp.printStackTrace();
 		}
-		return lesTstat;
+		return lesGroupes;
 	}
+	
+	//FIN FONCTIONS RESERVATION
+
 }

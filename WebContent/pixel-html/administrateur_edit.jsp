@@ -2,16 +2,18 @@
 <%@ include file="header.jsp" %>
 		<div class="row">
                     <div class="col-sm-12">
+
                         <div class="white-box" style="display: inline-block;width: 400px;vertical-align: top;text-align: center;max-width: 100%;height: 390px;">
+
 		<a href="groupe_edit_safe.jsp"><h2>Edition des Administrateurs</h2></a>
 		
 		<%!
-		//partie déclaration
+		//partie dÃ©claration
 		Administrateur unAdministrateur = new Administrateur();
 		%>
 		
 		<%
-		//partie éxecution
+		//partie Ã©xecution
 		
 		int id = (Integer) uneSession.getAttribute("id_a");
 		
@@ -36,11 +38,11 @@
 		out.print("</tr>");
 
 		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='Modifier'></td>");
-		out.print("<td><input type='reset' name='rétablir' value='Annuler' onclick='reset();'></td></tr>");
+		out.print("<td><input type='reset' name='retablir' value='Annuler' onclick='reset();'></td></tr>");
 		out.print("</table>");
+
 		out.print("<tr><td><input type='submit' style='margin-left: 90px;' name='retour' value='retour'></td></tr>");
 		out.print("</form>");
-		
 		
 		if ( request.getParameter("modifier") != null )
 		{
@@ -55,6 +57,7 @@
 			//insertion de ce compte dans la bdd
 			
 			Controller.updateAdministrateur(unAdministrateur);
+
 			%>
 			</div></div></div>
 			<div class="white-box">
@@ -62,7 +65,7 @@
 			
 			out.print("Modification réussie");
 			out.print( "<br/> Admin modifié : " );
-			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Nom</th><th>Prénom</th><th>Identifiant</th><th>Mot de passe</th><th>Rôle</th></tr></thead><tbody>");
+			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Nom</th><th>PrÃ©nom</th><th>Identifiant</th><th>Mot de passe</th><th>RÃ´le</th></tr></thead><tbody>");
 			
 	            out.print("<tr><td>" + unAdministrateur.getId()
 	            + "</td><td>" + unAdministrateur.getNom_admin()
