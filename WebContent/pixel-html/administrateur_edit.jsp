@@ -22,12 +22,12 @@
 		out.print("<form method='post' style='font-size:14px;margin-left: 40px;' action='' id='form'>");
 		out.print("<table>");
 		out.print("<tr><td style='font-size: 14px;font-weight: 500;'>Nom : </td><td><input type='text' name='nom_admin' style='margin:10px;width: 159px;height: 26px;' value=" + unAdministrateur.getNom_admin() + "></td></tr>");
-		out.print("<tr><td style='font-size: 14px;font-weight: 500;'>PrÃ©nom : </td><td><input type='text' name='prenom_admin' style='margin:10px;width: 159px;height: 26px;' value=" + unAdministrateur.getPrenom_admin() + "></td></tr>");
+		out.print("<tr><td style='font-size: 14px;font-weight: 500;'>Prénom : </td><td><input type='text' name='prenom_admin' style='margin:10px;width: 159px;height: 26px;' value=" + unAdministrateur.getPrenom_admin() + "></td></tr>");
 		out.print("<tr><td style='font-size: 14px;font-weight: 500;'>Identifiant : </td><td><input type='text' name='identifiant' style='margin:10px;width: 159px;height: 26px;' value=" + unAdministrateur.getIdentifiant() + "></td></tr>");
 		out.print("<tr><td style='font-size: 14px;font-weight: 500;'>Mot de passe : </td><td><input type='text' name='mdp' style='margin:10px;width: 159px;height: 26px;' value=" + unAdministrateur.getMdp() + "></td></tr>");
 		
 		out.print("<tr>");
-			out.print("<td><label style='margin-bottom: 0px;' for='role-select'>RÃ´le :</label></td>");
+			out.print("<td><label style='margin-bottom: 0px;' for='role-select'>Rôle :</label></td>");
 				out.print("<td>");
 					out.print("<select style='margin:10px;width: 159px;height: 26px;' name='role' id='role-select'>");
 						out.print("<option value='" + unAdministrateur.getRole() + "' selected hidden>" + unAdministrateur.getRole() + "</option>");
@@ -38,7 +38,7 @@
 		out.print("</tr>");
 
 		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='Modifier'></td>");
-		out.print("<td><input type='reset' name='rÃ©tablir' value='Annuler' onclick='reset();'></td></tr>");
+		out.print("<td><input type='reset' name='retablir' value='Annuler' onclick='reset();'></td></tr>");
 		out.print("</table>");
 
 		out.print("<tr><td><input type='submit' style='margin-left: 90px;' name='retour' value='retour'></td></tr>");
@@ -63,8 +63,8 @@
 			<div class="white-box">
 			<%
 			
-			out.print("Modification rÃ©ussie");
-			out.print( "<br/> Admin modifiÃ© : " );
+			out.print("Modification réussie");
+			out.print( "<br/> Admin modifié : " );
 			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Nom</th><th>PrÃ©nom</th><th>Identifiant</th><th>Mot de passe</th><th>RÃ´le</th></tr></thead><tbody>");
 			
 	            out.print("<tr><td>" + unAdministrateur.getId()

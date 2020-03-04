@@ -10,12 +10,11 @@ import controller.Administrateur;
 import controller.Groupe;
 import controller.Reservation;
 import controller.Trajet;
-import controller.Tstat;
 
 
 public class Modele 
 {
-	private static Bdd uneBdd = new Bdd("localhost", "dbfly", "root", "");
+	private static Bdd uneBdd = new Bdd("localhost", "dbfly", "root", "root");
 	
 	public static void executer(String requete)
 	{
@@ -130,8 +129,11 @@ public class Modele
 		+ "', prenom_admin = '" + unAdministrateur.getPrenom_admin()
 		+ "', identifiant = '" + unAdministrateur.getIdentifiant()
 		+ "', mdp = '" + unAdministrateur.getMdp()
+		+ "', role = '" + unAdministrateur.getRole()
 		+ "' where id = '" 
 		+ unAdministrateur.getId() + "';";
+		
+		System.out.println(requete);
 		
 		executer (requete);
 	}
@@ -361,9 +363,8 @@ public class Modele
 		
 		String requete = "select * from groupe where id like '%"+mot+"%'"
 				+ " or administrateur_id like '%" + mot +"%'"
-				+ " or destination like '%" + mot +"%'"
-				+ " or date like '%" + mot +"%'"
 				+ " or id_trajet like '%" + mot +"%'"
+				+ " or nb_personnes like '%" + mot +"%'"
 				+ " or statut like '%" + mot +"%'"
 				+ ";";
 		try 
@@ -378,9 +379,8 @@ public class Modele
 				Groupe unGroupe = new Groupe(
 						desRes.getInt("id"),
 						desRes.getInt("administrateur_id"),
-						desRes.getString("destination"),
-						desRes.getString("date"),
 						desRes.getInt("id_trajet"),
+						desRes.getInt("nb_personnes"),
 						desRes.getString("statut")
 						);
 				lesGroupesrech.add(unGroupe);
@@ -496,7 +496,8 @@ public class Modele
 		String requete = "select * from reservation where id like '%"+mot+"%'"
 				+ " or groupe_id like '%" + mot +"%'"
 				+ " or tarif like '%" + mot +"%'"
-				+ " or trajet_id like '%" + mot +"%'"
+				+ " or tarif_reduc like '%" + mot +"%'"
+				+ " or taux_reduc like '%" + mot +"%'"
 				+ " or statut like '%" + mot +"%'"
 				+ ";";
 		try 
@@ -511,8 +512,9 @@ public class Modele
 				Reservation uneReservation = new Reservation(
 						desRes.getInt("id"),
 						desRes.getInt("groupe_id"),
-						desRes.getString("tarif"),
-						desRes.getInt("trajet_id"),
+						desRes.getFloat("tarif"),
+						desRes.getFloat("tarif_reduc"),
+						desRes.getFloat("taux_reduc"),
 						desRes.getString("statut")
 						);
 				lesReservationsrech.add(uneReservation);
@@ -676,32 +678,5 @@ public class Modele
 	}
 	
 	//FIN FONCTIONS RESERVATION
-	
-	//DIAGRAMME TRAJET
-	public static ArrayList<Tstat> selectTstat()
-	{
-		ArrayList<Tstat> lesTstat = new ArrayList<Tstat>();
-		
-		String requete = "select * from tstat;";
-		try 
-		{
-			uneBdd.seConnecter();
-			Statement unStat = uneBdd.getMaConnexion().createStatement();
-			ResultSet desRes = unStat.executeQuery(requete);
-			while(desRes.next())
-			{
-				Tstat unTstat = new Tstat(
-						desRes.getInt("nbtrajet"),
-						desRes.getString("destination")
-						);
-				lesTstat.add(unTstat);
-			}
-			uneBdd.seDeconnecter();
-		}
-		catch(SQLException exp)
-		{
-			exp.printStackTrace();
-		}
-		return lesTstat;
-	}
+
 }

@@ -41,8 +41,8 @@
 		out.print("</tr>");
 	
 		out.print("<tr><td>Tarif : </td><td><input type='number' min='0' style='margin : 10px' name='tarif' value = " + uneReservation.getTarif() + "></td></tr>");
-		out.print("<tr><td>Tarif (RÃ©duction) : </td><td><input type='number' min='0' style='margin : 10px' name='tarif_reduc' value = " + uneReservation.getTarif_reduc() + "></td></tr>");
-		out.print("<tr><td>Taux rÃ©duction : </td><td><input type='number' min='0' style='margin : 10px' name='taux_reduc' value = " + uneReservation.getTaux_reduc() + "></td></tr>");
+		out.print("<tr><td>Tarif (Réduction) : </td><td><input type='number' min='0' style='margin : 10px' name='tarif_reduc' value = " + uneReservation.getTarif_reduc() + "></td></tr>");
+		out.print("<tr><td>Taux réduction : </td><td><input type='number' min='0' style='margin : 10px' name='taux_reduc' value = " + uneReservation.getTaux_reduc() + "></td></tr>");
 
 		out.print("<tr>");
 			out.print("<td><label style='margin-bottom: 0px;' for='statut-select'>Statut :</label></td>");
@@ -78,12 +78,13 @@
 			<%
 			out.print("Modification rÃ©ussie");
 			out.print( "<br/> RÃ©servation modifiÃ© : " );
-			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Tarif</th><th>Trajet ID</th><th>Statut</th></tr></thead><tbody>");
+			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Tarif</th><th>Tarif (Réduction)</th><th>Taux réduction</th><th>Statut</th></tr></thead><tbody>");
 			
 	            out.print("<tr><td>" + uneReservation.getId() 
 	            + "</td><td>" + uneReservation.getGroupe_id()
 	            + "</td><td>" + uneReservation.getTarif() 
-	            + "</td><td>" + uneReservation.getTrajet_id()
+	            + "</td><td>" + uneReservation.getTarif_reduc()
+	            + "</td><td>" + uneReservation.getTaux_reduc()
 	            + "</td><td>" + uneReservation.getStatut());
 	            out.print("</table>");
 		}

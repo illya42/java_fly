@@ -34,17 +34,17 @@
 				<%
 				if ( request.getParameter("personnaliser") != null )
 				{
-					out.print("<tr><td style="font-weight: 500;">Tarif : </td><td><input style='margin : 10px' type='number' min='0' name='tarif' placeholder='Rentrez un tarif'></td></tr>");
-					out.print("<tr><td style="font-weight: 500;">Tarif (R√©duction) : </td><td><input style='margin : 10px' type='number' min='0' name='tarif_reduc' placeholder='Rentrez un tarif r√©duit'></td></tr>");
-					out.print("<tr><td style="font-weight: 500;">Taux r√©duction : </td><td><input style='margin : 10px' type='number' min='0' name='taux_reduc' placeholder='Rentrez un taux de r√©duction'></td></tr>");
+					out.print("<tr><td style='font-weight: 500;'>Tarif : </td><td><input style='margin : 10px' type='number' min='0' name='tarif' placeholder='Rentrez un tarif'></td></tr>");
+					out.print("<tr><td style='font-weight: 500;'>Tarif (RÈduction) : </td><td><input style='margin : 10px' type='number' min='0' name='tarif_reduc' placeholder='Rentrez un tarif rÈduit'></td></tr>");
+					out.print("<tr><td style='font-weight: 500;'>Taux rÈduction : </td><td><input style='margin : 10px' type='number' min='0' name='taux_reduc' placeholder='Rentrez un taux de rÈduction'></td></tr>");
 				}
 				if ( request.getParameter("annuler") != null )
 				{
-					out.print("<tr><td>Taux r√©duction : </td><td><input style='margin : 10px' type='number' min='1' name='taux_reduc' placeholder='Rentrez un taux de r√©duction'></td></tr>");
+					out.print("<tr><td>Taux rÈduction : </td><td><input style='margin : 10px' type='number' min='1' name='taux_reduc' placeholder='Rentrez un taux de rÈduction'></td></tr>");
 				}
 				if ( request.getParameter("personnaliser") == null && request.getParameter("annuler") == null )
 				{
-					out.print("<tr><td>Taux r√©duction : </td><td><input style='margin : 10px' type='number' name='taux_reduc' placeholder='Rentrez un taux de r√©duction'></td></tr>");
+					out.print("<tr><td>Taux rÈduction : </td><td><input style='margin : 10px' type='number' name='taux_reduc' placeholder='Rentrez un taux de rÈduction'></td></tr>");
 				}
 				%>
 				
@@ -106,13 +106,14 @@
 			
 			ArrayList<Reservation> lesReservationsrech = Controller.selectWhereReservations(mot);
 
-			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Tarif</th><th>Trajet ID</th><th>Statut</th></tr></thead><tbody>");
+			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Tarif</th><th>Tarif (RÈduction)</th><th>Taux rÈduction</th><th>Statut</th></tr></thead><tbody>");
 			for (Reservation uneReservation : lesReservationsrech)
 	        {
 	            out.print("<tr><td>" + uneReservation.getId() 
 	            + "</td><td>" + uneReservation.getGroupe_id()
-	            + "</td><td>" + uneReservation.getTarif() 
-	            + "</td><td>" + uneReservation.getTrajet_id()
+	            + "</td><td>" + uneReservation.getTarif()
+	            + "</td><td>" + uneReservation.getTarif_reduc()
+	            + "</td><td>" + uneReservation.getTaux_reduc()
 	            + "</td><td>" + uneReservation.getStatut()
 	            + "</td><td><a href='reservation.jsp?edit=E&id=" + uneReservation.getId() + "'> EDITER </a></td>"
 	        	+ "</td><td><a href='reservation.jsp?supp=X&id=" + uneReservation.getId() + "'> SUPPRIMER </a></td></tr>");
@@ -123,76 +124,77 @@
 		{
 			
 			ArrayList<Reservation> lesReservations = Controller.selectAllReservations();
-
-		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Destination</th><th>Tarif</th><th>Tarif (R√©duction)</th><th>Taux r√©duction</th><th>Statut</th></tr></thead><tbody>");
-		for (Reservation uneReservation : lesReservations)
-        {
-            out.print("<tr><td>" + uneReservation.getId() 
-            + "</td><td>" + uneReservation.getGroupe_id()
-            + "</td><td>" + uneReservation.getDestination()
-            + "</td><td>" + uneReservation.getTarif() 
-            + "</td><td>" + uneReservation.getTarif_reduc() 
-            + "</td><td>" + uneReservation.getTaux_reduc() 
-            + "</td><td>" + uneReservation.getStatut()
-            + "</td><td><a href='reservation.jsp?edit=E&id=" + uneReservation.getId() + "'> EDITER </a></td>"
-        	+ "</td><td><a href='reservation.jsp?supp=X&id=" + uneReservation.getId() + "'> SUPPRIMER </a></td></tr>");
-        }
-		out.print("</table>");
-		
-		if ( request.getParameter("id") != null && request.getParameter("edit") != null )
-		{
-			int id = Integer.parseInt(request.getParameter("id"));
+	
+			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Destination</th><th>Tarif</th><th>Tarif (R√©duction)</th><th>Taux r√©duction</th><th>Statut</th></tr></thead><tbody>");
+			for (Reservation uneReservation : lesReservations)
+	        {
+	            out.print("<tr><td>" + uneReservation.getId() 
+	            + "</td><td>" + uneReservation.getGroupe_id()
+	            + "</td><td>" + uneReservation.getDestination()
+	            + "</td><td>" + uneReservation.getTarif() 
+	            + "</td><td>" + uneReservation.getTarif_reduc() 
+	            + "</td><td>" + uneReservation.getTaux_reduc() 
+	            + "</td><td>" + uneReservation.getStatut()
+	            + "</td><td><a href='reservation.jsp?edit=E&id=" + uneReservation.getId() + "'> EDITER </a></td>"
+	        	+ "</td><td><a href='reservation.jsp?supp=X&id=" + uneReservation.getId() + "'> SUPPRIMER </a></td></tr>");
+	        }
+			out.print("</table>");
 			
-			//response.sendRedirect("update.jsp");
+			if ( request.getParameter("id") != null && request.getParameter("edit") != null )
+			{
+				int id = Integer.parseInt(request.getParameter("id"));
+				
+				//response.sendRedirect("update.jsp");
+				
+				uneSession.setAttribute("id_r", id);
+				response.sendRedirect("reservation_edit.jsp");
+			}
 			
-			uneSession.setAttribute("id_r", id);
-			response.sendRedirect("reservation_edit.jsp");
-		}
-		
-		if ( request.getParameter("id") != null && request.getParameter("supp") != null )
-		{
-			int id = Integer.parseInt(request.getParameter("id"));
+			if ( request.getParameter("id") != null && request.getParameter("supp") != null )
+			{
+				int id = Integer.parseInt(request.getParameter("id"));
+				
+				Controller.deleteReservation(id);
+				response.sendRedirect("reservation.jsp");
+			}
 			
-			Controller.deleteReservation(id);
-			response.sendRedirect("reservation.jsp");
-		}
-		
-		if ( request.getParameter("enregistrer_perso") != null )
-		{
-			int groupe_id = Integer.parseInt(request.getParameter("groupe_id"));
-			float tarif = Float.parseFloat(request.getParameter("tarif"));
-			float tarif_reduc = Float.parseFloat(request.getParameter("tarif_reduc"));
-			float taux_reduc = Float.parseFloat(request.getParameter("taux_reduc"));
-			String statut = request.getParameter("statut");
-			
-			uneReservation = new Reservation( groupe_id, tarif, tarif_reduc, taux_reduc, statut );
-			
-			//insertion
-			
-			Controller.insertReservation(uneReservation);
-
-			out.print("Insertion dans la bdd r√©ussie");
-			out.print( "<br/> Nouveau Trajet : " );
-			out.print( "" + uneReservation.consulter() );
-			response.sendRedirect("reservation.jsp");
-
-		}
-		if ( request.getParameter("enregistrer") != null )
-		{
-			int groupe_id = Integer.parseInt(request.getParameter("groupe_id"));
-			
-			float tarif = Controller.selectNb_personnes(groupe_id) * Controller.selectTarif(groupe_id);
-
-			float taux_reduc = Float.parseFloat(request.getParameter("taux_reduc"));
-			
-			float tarif_reduc = tarif -( tarif * taux_reduc / 100 );
-			String statut = request.getParameter("statut");
-			
-			uneReservation = new Reservation( groupe_id, tarif, tarif_reduc, taux_reduc, statut );
-			
-			//insertion
-			
-			Controller.insertReservation(uneReservation);
+			if ( request.getParameter("enregistrer_perso") != null )
+			{
+				int groupe_id = Integer.parseInt(request.getParameter("groupe_id"));
+				float tarif = Float.parseFloat(request.getParameter("tarif"));
+				float tarif_reduc = Float.parseFloat(request.getParameter("tarif_reduc"));
+				float taux_reduc = Float.parseFloat(request.getParameter("taux_reduc"));
+				String statut = request.getParameter("statut");
+				
+				uneReservation = new Reservation( groupe_id, tarif, tarif_reduc, taux_reduc, statut );
+				
+				//insertion
+				
+				Controller.insertReservation(uneReservation);
+	
+				out.print("Insertion dans la bdd r√©ussie");
+				out.print( "<br/> Nouveau Trajet : " );
+				out.print( "" + uneReservation.consulter() );
+				response.sendRedirect("reservation.jsp");
+	
+			}
+			if ( request.getParameter("enregistrer") != null )
+			{
+				int groupe_id = Integer.parseInt(request.getParameter("groupe_id"));
+				
+				float tarif = Controller.selectNb_personnes(groupe_id) * Controller.selectTarif(groupe_id);
+	
+				float taux_reduc = Float.parseFloat(request.getParameter("taux_reduc"));
+				
+				float tarif_reduc = tarif -( tarif * taux_reduc / 100 );
+				String statut = request.getParameter("statut");
+				
+				uneReservation = new Reservation( groupe_id, tarif, tarif_reduc, taux_reduc, statut );
+				
+				//insertion
+				
+				Controller.insertReservation(uneReservation);
+			}
 		}
 		%>
 		</div>
