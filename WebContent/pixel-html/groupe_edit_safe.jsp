@@ -5,19 +5,17 @@
                         <div class="white-box" style="display: inline-block; width: 450px; vertical-align: top; text-align: center; max-width: 100%;height: 300px;">
 		<h2>Edition des Groupes</h2>
 		<%!
-		//partie dÈclaration
+		//partie d√©claration
 		Groupe unGroupe = new Groupe();
 		
 		Trajet unTrajet = new Trajet();
-		
-		Trajet leTrajet = new Trajet();
 		
 		Administrateur unAdministrateur = new Administrateur();
 		%>
 		
 		
 		<%
-		//partie Èxecution
+		//partie √©xecution
 		
 		int id = (Integer) uneSession.getAttribute("id_g");
 		
@@ -25,6 +23,8 @@
 
 		out.print("<form method='post' style='font-size:14px;margin-left: 40px;' action='' id='form'>");
 		out.print("<table>");
+		
+		out.print("<tr><td>ID Groupe : </td><td><input type='number' name='id_g' style='margin:10px;' value=" + unGroupe.getId() + " disabled></td></tr>");
 		
 		ArrayList<Administrateur> lesAdministrateurs = Controller.selectAllAdministrateur();
 		
@@ -40,7 +40,9 @@
 					out.print("</select>");
 				out.print("</td>");
 		out.print("</tr>");
-
+		
+		out.print("<tr><td>Nombre de personnes : </td><td><input type='number' min='1' name='nb_personnes' style='margin:10px;' value=" + unGroupe.getNb_personnes() + "></td></tr>");
+		
 		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
 		
 		out.print("<tr>");
@@ -62,39 +64,37 @@
 					out.print("<select style='margin : 10px;width: 171px;' name='statut' id='statut-select'>");
 						out.print("<option value='" + unGroupe.getStatut() + "' selected hidden> " + unGroupe.getStatut() + " </option>");
 						out.print("<option value='en cours'>En cours</option>");
-						out.print("<option value='valide'>ValidÈ</option>");
+						out.print("<option value='valide'>Valid√©</option>");
 					out.print("</select>");
 				out.print("</td>");
 		out.print("</tr>");
 	
 		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='Modifier'></td>");
-		out.print("<td><input type='reset' style='margin-left: 90px;' name='rÈtablir' value='Annuler' onclick='reset();'></td></tr>");
+		out.print("<td><input type='reset' style='margin-left: 90px;' name='r√©tablir' value='Annuler' onclick='reset();'></td></tr>");
 		out.print("</table>");
 		out.print("<tr><td><input type='submit' name='retour' style='margin-right:90px;' value='Retour'></td></tr><br><br>");
 		out.print("</form>");
 		
 		if ( request.getParameter("modifier") != null )
-		{
+		{	
 			int id_t = Integer.parseInt(request.getParameter("id_trajet"));
 			
-			leTrajet = Controller.returnTrajet(id_t);
-			
 			int admin_id = Integer.parseInt(request.getParameter("admin_id"));
+			int nb_personnes = Integer.parseInt(request.getParameter("nb_personnes"));
 			int id_trajet = Integer.parseInt(request.getParameter("id_trajet"));
-			
-			String destination = leTrajet.getDestination();
-			String date = leTrajet.getDate();
 
 			String statut = request.getParameter("statut");
 			
-			unGroupe = new Groupe( id, admin_id, destination, date, id_trajet, statut );
+			unGroupe = new Groupe( id, admin_id, nb_personnes, id_trajet, statut );
 			
+			Controller.updateGroupe(unGroupe);
+	
 			%>
 			</div></div></div>
 			<div class="white-box">
 			<%
-			out.print("Modification rÈussie");
-			out.print( "<br/> Groupe modifiÈ : <br/>" );
+			out.print("Modification r√©ussie");
+			out.print( "<br/> Groupe modifi√© : <br/>" );
 
 			
 			//parcourir les compte

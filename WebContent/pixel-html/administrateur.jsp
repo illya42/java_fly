@@ -59,7 +59,7 @@
 			
 			//response.sendRedirect("update.jsp");
 			
-			uneSession.setAttribute("id", id);
+			uneSession.setAttribute("id_a", id);
 			response.sendRedirect("administrateur_edit.jsp");
 		}
 		

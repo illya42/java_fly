@@ -5,7 +5,7 @@
                         <div class="white-box" style="display: inline-block; width: 430px; vertical-align: top; text-align: center; max-width: 100%;height: 325px;">
 		<h2>Edition des Reservations</h2>
 		<%!
-		//partie dÈclaration
+		//partie d√©claration
 		Reservation uneReservation = new Reservation();
 		
 		Groupe unGroupe = new Groupe();
@@ -16,7 +16,7 @@
 		%>
 		
 		<%
-		//partie Èxecution
+		//partie √©xecution
 		
 		int id = (Integer) uneSession.getAttribute("id_r");
 		
@@ -25,7 +25,7 @@
 		out.print("<form method='post' style='font-size:14px;margin-left: 50px;' action='' id='form'>");
 		out.print("<table>");
 		
-		ArrayList<Groupe> lesGroupes = Controller.selectAllGroupes();
+		ArrayList<Groupe> lesGroupes = Controller.selectFree_groupes();
 		
 		out.print("<tr>");
 			out.print("<td><label style='margin-bottom: 0px;' for='groupe-select'>ID Groupe :</label></td>");
@@ -39,36 +39,23 @@
 					out.print("</select>");
 				out.print("</td>");
 		out.print("</tr>");
-		
-		out.print("<tr><td style='font-weight: 500;'>Tarif : </td><td><input type='number' style='margin : 10px; width: 171px;height: 23px;' name='tarif' value = " + uneReservation.getTarif() + "></td></tr>");
-		
-		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
-		
-		out.print("<tr>");
-			out.print("<td><label style='margin-bottom: 0px;' for='trajet-select'>ID Trajet :</label></td>");
-				out.print("<td>");
-					out.print("<select style='margin : 10px;width: 171px;' name='trajet_id' id='trajet-select'>");
-						out.print("<option value=" + uneReservation.getTrajet_id() + " selected hidden> " + uneReservation.getTrajet_id() + " </option>");
-						for (Trajet unTrajet : lesTrajets)
-						{
-							out.print("<option value=" + unTrajet.getId() + ">" + unTrajet.getId() + " -- " + unTrajet.getDestination() + " -- " + unTrajet.getDate() + "</option>");
-						}
-					out.print("</select>");
-				out.print("</td>");
-		out.print("</tr>");
-		
+	
+		out.print("<tr><td>Tarif : </td><td><input type='number' min='0' style='margin : 10px' name='tarif' value = " + uneReservation.getTarif() + "></td></tr>");
+		out.print("<tr><td>Tarif (R√©duction) : </td><td><input type='number' min='0' style='margin : 10px' name='tarif_reduc' value = " + uneReservation.getTarif_reduc() + "></td></tr>");
+		out.print("<tr><td>Taux r√©duction : </td><td><input type='number' min='0' style='margin : 10px' name='taux_reduc' value = " + uneReservation.getTaux_reduc() + "></td></tr>");
+
 		out.print("<tr>");
 			out.print("<td><label style='margin-bottom: 0px;' for='statut-select'>Statut :</label></td>");
 				out.print("<td>");
 					out.print("<select style='margin : 10px;width: 171px;' name='statut' id='statut-select'>");
 						out.print("<option value='" + uneReservation.getStatut() + "' selected hidden> " + uneReservation.getStatut() + " </option>");
 						out.print("<option value='en cours'>En cours</option>");
-						out.print("<option value='valide'>ValidÈ</option>");
+						out.print("<option value='valide'>Valid√©</option>");
 					out.print("</select>");
 				out.print("</td>");
 		out.print("</tr>");
 		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='Modifier'></td>");
-		out.print("<td><input type='reset' style='margin-left: 90px;' name='rÈtablir' value='Annuler' onclick='reset();'></td></tr>");
+		out.print("<td><input type='reset' style='margin-left: 90px;' name='r√©tablir' value='Annuler' onclick='reset();'></td></tr>");
 		out.print("</table>");
 		out.print("<tr><td><input type='submit' name='retour' style='margin-right:50px;' value='Retour'></td></tr><br><br>");
 		out.print("</form>");
@@ -76,19 +63,21 @@
 		if ( request.getParameter("modifier") != null )
 		{
 			int groupe_id = Integer.parseInt(request.getParameter("groupe_id"));
-			String tarif = request.getParameter("tarif");
-			int trajet_id = Integer.parseInt(request.getParameter("trajet_id"));
+			float tarif = Float.parseFloat(request.getParameter("tarif"));
+			float tarif_reduc = Float.parseFloat(request.getParameter("tarif_reduc"));
+			float taux_reduc = Float.parseFloat(request.getParameter("taux_reduc"));
 			String statut = request.getParameter("statut");
 			
-			uneReservation = new Reservation( id, groupe_id, tarif, trajet_id, statut );
+			uneReservation = new Reservation( id, groupe_id, tarif, tarif_reduc, taux_reduc, statut );
 			
 			Controller.updateReservation(uneReservation);
+
 			%>
 			</div></div></div>
 			<div class="white-box">
 			<%
-			out.print("Modification rÈussie");
-			out.print( "<br/> RÈservation modifiÈ : " );
+			out.print("Modification r√©ussie");
+			out.print( "<br/> R√©servation modifi√© : " );
 			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Tarif</th><th>Trajet ID</th><th>Statut</th></tr></thead><tbody>");
 			
 	            out.print("<tr><td>" + uneReservation.getId() 
@@ -97,7 +86,6 @@
 	            + "</td><td>" + uneReservation.getTrajet_id()
 	            + "</td><td>" + uneReservation.getStatut());
 	            out.print("</table>");
-	            
 		}
 			
 		
