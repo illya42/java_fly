@@ -79,6 +79,10 @@ public class Controller
 	{
 		return Modele.selectAllTrajets();
 	}
+	public static ArrayList<Trajet> selectWhereTrajets(String mot)
+	{
+		return Modele.selectWhereTrajets(mot);
+	}
 	public static void deleteTrajet(int id)
 	{
 		Modele.deleteTrajet(id);
@@ -100,6 +104,10 @@ public class Controller
 	public static ArrayList<Groupe> selectAllGroupes()
 	{
 		return Modele.selectAllGroupes();
+	}
+	public static ArrayList<Groupe> selectWhereGroupes(String mot)
+	{
+		return Modele.selectWhereGroupes(mot);
 	}
 	public static void deleteGroupe(int id)
 	{
@@ -136,6 +144,10 @@ public class Controller
 	{
 		return Modele.selectReservation(id);
 	}
+	public static ArrayList<Reservation> selectWhereReservations(String mot)
+	{
+		return Modele.selectWhereReservations(mot);
+	}
 	
 	public static int selectTarif(int id)
 	{
@@ -152,4 +164,10 @@ public class Controller
 	}
 	
 	//FIN FONCTIONS RESERVATION
+	
+	//FONCTION TSTAT
+	public static ArrayList<Tstat> selectTstat()
+	{
+		return Modele.selectTstat();
+	}
 }

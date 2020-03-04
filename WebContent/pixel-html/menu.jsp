@@ -12,18 +12,27 @@
 		<%
 		//partie éxecution
 		
-		out.print("<div id='connected'><h3>Bienvenue " + uneSession.getAttribute("nom") + " " + uneSession.getAttribute("prenom") + "</div>");
-				
-		out.print("<h2><a href='trajet.jsp'>Menu des Trajets</a></h2>");
-		out.print("<h2><a href='groupe.jsp'>Menu des Groupes</a></h2>");
-		out.print("<h2><a href='reservation.jsp'>Menu des Réservations</a></h2>");
+		out.print("<div style='text-align:center;' id='connected'><h3>Bienvenue " + uneSession.getAttribute("nom") + " " + uneSession.getAttribute("prenom") + "</div>");
+		%>
+		<br><br>
+		<table style="margin: auto;">
+		<tr>
+			<td><a href="trajet.jsp" class="waves-effect"><img src='../plugins/images/iconetraj.png'></a></td>
+			<td><a href="reservation.jsp" class="waves-effect"><img style="padding-right: 40px;padding-left: 40px;" src='../plugins/images/iconereserv.png'></a></td>
+			<td><a href="groupe.jsp" class="waves-effect"><img src='../plugins/images/iconegrp.png'></a></td>
 		
+		
+		
+		<%
 		String role = (String) uneSession.getAttribute("role");
 		
 		if( role.equals("super") )
 		{
-			out.print("<h2><a href='administrateur.jsp'>Menu des Administrateurs</a></h2>");
+			out.print("<td><a href='administrateur.jsp' class='waves-effect'><img style='padding-left: 40px;' src='../plugins/images/iconeadmin.png'></a></td></tr>");
 		}
 		%>
+		</table>
+		<br>
+		<br>
 </div></div></div>
 		<%@ include file="footer.jsp" %>

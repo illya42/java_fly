@@ -30,11 +30,12 @@ public class Groupe
 		this.nb_personnes = nb_personnes;
 		this.statut = statut;
 	}
-	
+
 	public Groupe ( int id, String destination )
 	{
 		this.id = id;
 		this.destination = destination;
+
 	}
 	
 	public String consulter()

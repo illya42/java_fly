@@ -1,9 +1,7 @@
 
 	<%@ include file="header.jsp" %>
-		<div class="row">
-                    <div class="col-sm-12">
-                        <div class="white-box">
-		<h2>Gestion des Reservations</h2>
+		
+		
 		
 		<%!
 		Groupe unGroupe = new Groupe();
@@ -11,14 +9,15 @@
 		Trajet unTrajet = new Trajet();
 		%>
 		
-		<form method="post" action="">
-		<table>
-				<!-- <tr><td>ID Groupe : </td><td><input type="number" name="groupe_id"></td></tr> -->
-				
-				<tr>
-					<td><label for="groupe-select">ID Groupe :</label></td>
+		<div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box" style="display: inline-block;width: 450px;vertical-align: top;text-align: center;max-width: 100%;height: 330px;">
+		<h2>Gestion des Reservations</h2>
+		<form method="post" style="margin-left: 40px;" action="">
+		<table>				
+				<tr><td><label style="margin-bottom: 0px;" for="groupe-select">ID Groupe :</label></td>
 						<td>
-							<select style='margin : 10px' name="groupe_id" id="groupe-select">
+							<select style='margin : 10px;width: 171px;' name="groupe_id" id="groupe-select">
 								<option value="" disabled selected hidden>Choisir un groupe</option>
 									<%
 									ArrayList<Groupe> lesGroupes = Controller.selectFree_groupes();
@@ -31,30 +30,32 @@
 							</select>
 						</td>
 				</tr>
+
 				<%
 				if ( request.getParameter("personnaliser") != null )
 				{
-					out.print("<tr><td>Tarif : </td><td><input style='margin : 10px' type='number' min='0' name='tarif' placeholder='Rentrez un tarif'></td></tr>");
-					out.print("<tr><td>Tarif (Réduction) : </td><td><input style='margin : 10px' type='number' min='0' name='tarif_reduc' placeholder='Rentrez un tarif réduit'></td></tr>");
-					out.print("<tr><td>Taux réduction : </td><td><input style='margin : 10px' type='number' min='0' name='taux_reduc' placeholder='Rentrez un taux de réduction'></td></tr>");
+					out.print("<tr><td style="font-weight: 500;">Tarif : </td><td><input style='margin : 10px' type='number' min='0' name='tarif' placeholder='Rentrez un tarif'></td></tr>");
+					out.print("<tr><td style="font-weight: 500;">Tarif (RÃ©duction) : </td><td><input style='margin : 10px' type='number' min='0' name='tarif_reduc' placeholder='Rentrez un tarif rÃ©duit'></td></tr>");
+					out.print("<tr><td style="font-weight: 500;">Taux rÃ©duction : </td><td><input style='margin : 10px' type='number' min='0' name='taux_reduc' placeholder='Rentrez un taux de rÃ©duction'></td></tr>");
 				}
 				if ( request.getParameter("annuler") != null )
 				{
-					out.print("<tr><td>Taux réduction : </td><td><input style='margin : 10px' type='number' min='1' name='taux_reduc' placeholder='Rentrez un taux de réduction'></td></tr>");
+					out.print("<tr><td>Taux rÃ©duction : </td><td><input style='margin : 10px' type='number' min='1' name='taux_reduc' placeholder='Rentrez un taux de rÃ©duction'></td></tr>");
 				}
 				if ( request.getParameter("personnaliser") == null && request.getParameter("annuler") == null )
 				{
-					out.print("<tr><td>Taux réduction : </td><td><input style='margin : 10px' type='number' name='taux_reduc' placeholder='Rentrez un taux de réduction'></td></tr>");
+					out.print("<tr><td>Taux rÃ©duction : </td><td><input style='margin : 10px' type='number' name='taux_reduc' placeholder='Rentrez un taux de rÃ©duction'></td></tr>");
 				}
 				%>
 				
 				<tr>
 					<td><label for="statut-select">Statut :</label></td>
+
 						<td>
-							<select style='margin : 10px' name="statut" id="statut-select">
+							<select style='margin : 10px;width: 171px;' name="statut" id="statut-select">
 								<option value="en cours" selected hidden>Choisir un statut</option>
 								<option value="en cours">En cours</option>
-								<option value="valide">Validé</option>
+								<option value="valide">ValidÃ©</option>
 							</select>
 						</td>
 				</tr>
@@ -76,22 +77,54 @@
 					out.print("<td><input type='submit' style='margin:10px;' name='personnaliser' value='Personnaliser les tarifs'></td></tr>");
 				}
 				%>
+
 		</table>
 		</form>
 		<br/>
 		<br/></div></div></div>
 		<%!
-		//partie déclaration
+		//partie dÃ©claration
 		Reservation uneReservation = new Reservation();
 		%>
 		<div class="white-box">
-        <h3 class="box-title">Table des réservations</h3>
+                            <h3 class="box-title">Reservations</h3>
+                            
+        	<form method="post" style="margin-left:286px;text-align:center;" action="">
+				<table>
+                           <tr><td> Recherche : <input style="width:250px; " type="text" name="recherche"></td>
+                           <td><input type="submit" style="margin:10px;"  name="rech" value="Rechercher"></td>
+                           </tr>
+       			</table>
+			</form>
 		<%
-		//partie éxecution
+		//partie Ã©xecution
 		
-		ArrayList<Reservation> lesReservations = Controller.selectAllReservations();
+		if ( request.getParameter("recherche") != null )
+		{
+			
+			String mot = request.getParameter("recherche");
+			
+			ArrayList<Reservation> lesReservationsrech = Controller.selectWhereReservations(mot);
 
-		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Destination</th><th>Tarif</th><th>Tarif (Réduction)</th><th>Taux réduction</th><th>Statut</th></tr></thead><tbody>");
+			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Tarif</th><th>Trajet ID</th><th>Statut</th></tr></thead><tbody>");
+			for (Reservation uneReservation : lesReservationsrech)
+	        {
+	            out.print("<tr><td>" + uneReservation.getId() 
+	            + "</td><td>" + uneReservation.getGroupe_id()
+	            + "</td><td>" + uneReservation.getTarif() 
+	            + "</td><td>" + uneReservation.getTrajet_id()
+	            + "</td><td>" + uneReservation.getStatut()
+	            + "</td><td><a href='reservation.jsp?edit=E&id=" + uneReservation.getId() + "'> EDITER </a></td>"
+	        	+ "</td><td><a href='reservation.jsp?supp=X&id=" + uneReservation.getId() + "'> SUPPRIMER </a></td></tr>");
+	        }
+			out.print("</table>");
+		}
+		else
+		{
+			
+			ArrayList<Reservation> lesReservations = Controller.selectAllReservations();
+
+		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Destination</th><th>Tarif</th><th>Tarif (RÃ©duction)</th><th>Taux rÃ©duction</th><th>Statut</th></tr></thead><tbody>");
 		for (Reservation uneReservation : lesReservations)
         {
             out.print("<tr><td>" + uneReservation.getId() 
@@ -137,6 +170,12 @@
 			//insertion
 			
 			Controller.insertReservation(uneReservation);
+
+			out.print("Insertion dans la bdd rÃ©ussie");
+			out.print( "<br/> Nouveau Trajet : " );
+			out.print( "" + uneReservation.consulter() );
+			response.sendRedirect("reservation.jsp");
+
 		}
 		if ( request.getParameter("enregistrer") != null )
 		{
