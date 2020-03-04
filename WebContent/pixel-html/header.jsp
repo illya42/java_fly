@@ -86,10 +86,7 @@
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                 <ul class="nav" id="side-menu">
                     <li style="padding: 10px 0 0;">
-                        <a href="index.jsp" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i><span class="hide-menu">Accueil</span></a>
-                    </li>
-                    <li style="padding: 10px 0 0;">
-                        <a href="profil.jsp" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i><span class="hide-menu">Profile</span></a>
+                        <a href="menu.jsp" class="waves-effect"><i class="fa fa-home fa-fw" aria-hidden="true"></i><span class="hide-menu">Accueil</span></a>
                     </li>
                     <li style="padding: 10px 0 0;">
                         <a href="trajet.jsp" class="waves-effect"><i class="fa fa-plane fa-fw" aria-hidden="true"></i><span class="hide-menu">Trajets</span></a>

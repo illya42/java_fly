@@ -1,6 +1,4 @@
 
-		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
 	<%@ include file="header.jsp" %>
 		<div class="row">
                     <div class="col-sm-12">
@@ -11,7 +9,7 @@
 				<tr><td style="font-size: 14px;font-weight: 500;">Tarif : </td><td><input style="margin:10px;" type="number" min="30" name="prix" required placeholder="Rentrez un prix"></td></tr>
 				<tr><td style="font-size: 14px;font-weight: 500;">Heure de depart : </td><td><input style="margin:10px;" type="time" name="heure_dep" required ></td></tr>
 				<tr><td style="font-size: 14px;font-weight: 500;">Heure d'arrivee : </td><td><input style="margin:10px;" type="time" name="heure_arr" required ></td></tr>
-				<tr><td style="font-size: 14px;font-weight: 500;">Date : </td><td><input type="date" style="margin:10px; margin:10px;width: 200px;height: 25px;" required name="date"></td></tr>
+				<tr><td style="font-size: 14px;font-weight: 500;">Date : </td><td><input type="date" style="margin:10px; margin:10px;width: 160px;height: 25px;" required name="date"></td></tr>
 				<tr><td style="font-size: 14px;font-weight: 500;">Aeroport de depart : </td><td><input style="margin:10px;" type="text" name="aeroport" required placeholder="Rentrez un aeroport"></td></tr>
 				<tr><td style="font-size: 14px;font-weight: 500;">Destination : </td><td><input style="margin:10px;" type="text" name="destination" required placeholder="Rentrez la destination"></td></tr>
 				<tr><td style="font-size: 14px;font-weight: 500;">Image : </td><td><input style="margin:10px;" type="text" name="image" required placeholder="Rentrez le nom de l'image"></td></tr>
@@ -22,54 +20,6 @@
 		<br/>
 		<br/></div>
 		
-		<div class="white-box" style=" display: inline-block;">
-		<canvas id="myChart" width="400" height="400"></canvas>
-		<% ArrayList<Tstat> lesTstat = Controller.selectTstat(); 
-		for (Tstat unTstat : lesTstat)
-        {
-		out.print(unTstat.getNbtrajet()+unTstat.getDestination());
-        }
-		%>
-<script>
-var ctx = document.getElementById('myChart').getContext('2d');
-var myChart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-        datasets: [{
-            label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)'
-            ],
-            borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
-            borderWidth: 1
-        }]
-    },
-    options: {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true
-                }
-            }]
-        }
-    }
-});
-</script>
-		</div>
 		
 		</div>
 		</div>
