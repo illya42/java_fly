@@ -2,7 +2,7 @@
 <%@ include file="header.jsp" %>
 		<div class="row">
                     <div class="col-sm-12">
-                        <div class="white-box" style="display: inline-block; width: 430px; vertical-align: top; text-align: center; max-width: 100%;height: 325px;">
+                        <div class="white-box" style="display: inline-block; width: 430px; vertical-align: top; text-align: center; max-width: 100%;height: 400px;">
 		<h2>Edition des Reservations</h2>
 		<%!
 		//partie dÃ©claration
@@ -40,9 +40,9 @@
 				out.print("</td>");
 		out.print("</tr>");
 	
-		out.print("<tr><td>Tarif : </td><td><input type='number' min='0' style='margin : 10px' name='tarif' value = " + uneReservation.getTarif() + "></td></tr>");
-		out.print("<tr><td>Tarif (Réduction) : </td><td><input type='number' min='0' style='margin : 10px' name='tarif_reduc' value = " + uneReservation.getTarif_reduc() + "></td></tr>");
-		out.print("<tr><td>Taux réduction : </td><td><input type='number' min='0' style='margin : 10px' name='taux_reduc' value = " + uneReservation.getTaux_reduc() + "></td></tr>");
+		out.print("<tr><td style='font-size: 14px;font-weight: 500;'>Tarif : </td><td><input type='number' min='0' style='margin : 10px' name='tarif' value = " + uneReservation.getTarif() + "></td></tr>");
+		out.print("<tr><td style='font-size: 14px;font-weight: 500;'>Tarif (Réduction) : </td><td><input type='number' min='0' style='margin : 10px' name='tarif_reduc' value = " + uneReservation.getTarif_reduc() + "></td></tr>");
+		out.print("<tr><td style='font-size: 14px;font-weight: 500;'>Taux réduction : </td><td><input type='number' min='0' style='margin : 10px' name='taux_reduc' value = " + uneReservation.getTaux_reduc() + "></td></tr>");
 
 		out.print("<tr>");
 			out.print("<td><label style='margin-bottom: 0px;' for='statut-select'>Statut :</label></td>");
@@ -57,7 +57,7 @@
 		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='Modifier'></td>");
 		out.print("<td><input type='reset' style='margin-left: 90px;' name='rÃ©tablir' value='Annuler' onclick='reset();'></td></tr>");
 		out.print("</table>");
-		out.print("<tr><td><input type='submit' name='retour' style='margin-right:50px;' value='Retour'></td></tr><br><br>");
+		out.print("<tr><td><input type='submit' name='retour' style='margin-right:0px;' value='Retour'></td></tr><br><br>");
 		out.print("</form>");
 		
 		if ( request.getParameter("modifier") != null )

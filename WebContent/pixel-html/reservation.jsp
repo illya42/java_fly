@@ -40,11 +40,11 @@
 				}
 				if ( request.getParameter("annuler") != null )
 				{
-					out.print("<tr><td>Taux réduction : </td><td><input style='margin : 10px' type='number' min='1' name='taux_reduc' placeholder='Rentrez un taux de réduction'></td></tr>");
+					out.print("<tr><td style='font-size: 14px;font-weight: 500;'>Taux réduction : </td><td><input style='margin : 10px' type='number' min='1' name='taux_reduc' placeholder='Rentrez un taux de réduction'></td></tr>");
 				}
 				if ( request.getParameter("personnaliser") == null && request.getParameter("annuler") == null )
 				{
-					out.print("<tr><td>Taux réduction : </td><td><input style='margin : 10px' type='number' name='taux_reduc' placeholder='Rentrez un taux de réduction'></td></tr>");
+					out.print("<tr><td style='font-size: 14px;font-weight: 500;'>Taux réduction : </td><td><input style='margin : 10px' type='number' name='taux_reduc' placeholder='Rentrez un taux de réduction'></td></tr>");
 				}
 				%>
 				

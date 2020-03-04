@@ -65,7 +65,7 @@
                 				String mdp = (String) uneSession.getAttribute("mdp");
                 				String role = (String) uneSession.getAttribute("role");
                 				
-                				out.print("<a class='profile-pic' href='index.jsp'><b class='hidden-xs'><i class='fa fa-sign-out fa-fw' aria-hidden='true'></i>"+ (String) uneSession.getAttribute("nom") + " " + (String) uneSession.getAttribute("prenom"));
+                				out.print("<a class='profile-pic' href='deconnexion.jsp'><b class='hidden-xs'><i class='fa fa-sign-out fa-fw' aria-hidden='true'></i>"+ (String) uneSession.getAttribute("nom") + " " + (String) uneSession.getAttribute("prenom"));
                 			}
                         }
                         %>

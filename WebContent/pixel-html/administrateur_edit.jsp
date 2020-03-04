@@ -38,10 +38,10 @@
 		out.print("</tr>");
 
 		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='Modifier'></td>");
-		out.print("<td><input type='reset' name='retablir' value='Annuler' onclick='reset();'></td></tr>");
+		out.print("<td><input type='reset' name='retablir' value='Annuler' style='margin-left: 90px;' onclick='reset();'></td></tr>");
 		out.print("</table>");
 
-		out.print("<tr><td><input type='submit' style='margin-left: 90px;' name='retour' value='retour'></td></tr>");
+		out.print("<tr><td><input type='submit'  style='color: black;margin-right: 30px;' name='retour' value='Retour'></td></tr>");
 		out.print("</form>");
 		
 		if ( request.getParameter("modifier") != null )

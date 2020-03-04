@@ -2,7 +2,7 @@
 <%@ include file="header.jsp" %>
 		<div class="row">
                     <div class="col-sm-12">
-                        <div class="white-box" style="display: inline-block; width: 450px; vertical-align: top; text-align: center; max-width: 100%;height: 300px;">
+                        <div class="white-box" style="display: inline-block; width: 450px; vertical-align: top; text-align: center; max-width: 100%;height: 400px;">
 		<h2>Edition des Groupes</h2>
 		<%!
 		//partie déclaration
@@ -24,7 +24,7 @@
 		out.print("<form method='post' style='font-size:14px;margin-left: 40px;' action='' id='form'>");
 		out.print("<table>");
 		
-		out.print("<tr><td>ID Groupe : </td><td><input type='number' name='id_g' style='margin:10px;' value=" + unGroupe.getId() + " disabled></td></tr>");
+		out.print("<tr><td style='font-size: 14px;font-weight: 500;'>ID Groupe : </td><td><input type='number' name='id_g' style='margin:10px;' value=" + unGroupe.getId() + " disabled></td></tr>");
 		
 		ArrayList<Administrateur> lesAdministrateurs = Controller.selectAllAdministrateur();
 		
@@ -41,7 +41,7 @@
 				out.print("</td>");
 		out.print("</tr>");
 		
-		out.print("<tr><td>Nombre de personnes : </td><td><input type='number' min='1' name='nb_personnes' style='margin:10px;' value=" + unGroupe.getNb_personnes() + "></td></tr>");
+		out.print("<tr><td style='font-size: 14px;font-weight: 500;'>Nombre de personnes : </td><td><input type='number' min='1' name='nb_personnes' style='margin:10px;' value=" + unGroupe.getNb_personnes() + "></td></tr>");
 		
 		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
 		
@@ -72,7 +72,7 @@
 		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='Modifier'></td>");
 		out.print("<td><input type='reset' style='margin-left: 90px;' name='rétablir' value='Annuler' onclick='reset();'></td></tr>");
 		out.print("</table>");
-		out.print("<tr><td><input type='submit' name='retour' style='margin-right:90px;' value='Retour'></td></tr><br><br>");
+		out.print("<tr><td><input type='submit' name='retour' value='Retour'></td></tr><br><br>");
 		out.print("</form>");
 		
 		if ( request.getParameter("modifier") != null )

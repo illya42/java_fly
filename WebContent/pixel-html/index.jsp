@@ -87,7 +87,7 @@
 						<input class="login100-form-btn" type='submit' style="font-family: rubik;" name='valider' value='menu'>
 					</div>
 					<div class="container-login100-form-btn m-t-17">
-						<input class="login100-form-btn" type='submit' style="font-family: rubik;" name='deconnection' value='deconnection'>
+						<input class="login100-form-btn" type='submit' style="font-family: rubik;" name='deconnection' value='deconnexion'>
 					</div>
 
 				</form>
