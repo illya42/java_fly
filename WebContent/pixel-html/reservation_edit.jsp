@@ -24,7 +24,7 @@
 		out.print("<form method='post' action='' id='form'>");
 		out.print("<table>");
 		
-		ArrayList<Groupe> lesGroupes = Controller.selectAllGroupes();
+		ArrayList<Groupe> lesGroupes = Controller.selectFree_groupes();
 		
 		out.print("<tr>");
 			out.print("<td><label for='groupe-select'>Groupe :</label></td>");
@@ -39,22 +39,9 @@
 				out.print("</td>");
 		out.print("</tr>");
 		
-		out.print("<tr><td>Tarif : </td><td><input type='text' style='margin : 10px' name='tarif' value = " + uneReservation.getTarif() + "></td></tr>");
-		
-		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
-		
-		out.print("<tr>");
-			out.print("<td><label for='trajet-select'>Trajet :</label></td>");
-				out.print("<td>");
-					out.print("<select style='margin : 10px' name='trajet_id' id='trajet-select'>");
-						out.print("<option value=" + uneReservation.getTrajet_id() + " selected hidden> " + uneReservation.getTrajet_id() + " </option>");
-						for (Trajet unTrajet : lesTrajets)
-						{
-							out.print("<option value=" + unTrajet.getId() + ">" + unTrajet.getId() + " -- " + unTrajet.getDestination() + " -- " + unTrajet.getDate() + "</option>");
-						}
-					out.print("</select>");
-				out.print("</td>");
-		out.print("</tr>");
+		out.print("<tr><td>Tarif : </td><td><input type='number' min='0' style='margin : 10px' name='tarif' value = " + uneReservation.getTarif() + "></td></tr>");
+		out.print("<tr><td>Tarif (Réduction) : </td><td><input type='number' min='0' style='margin : 10px' name='tarif_reduc' value = " + uneReservation.getTarif_reduc() + "></td></tr>");
+		out.print("<tr><td>Taux réduction : </td><td><input type='number' min='0' style='margin : 10px' name='taux_reduc' value = " + uneReservation.getTaux_reduc() + "></td></tr>");
 		
 		out.print("<tr>");
 			out.print("<td><label for='statut-select'>Statut :</label></td>");
@@ -75,17 +62,14 @@
 		if ( request.getParameter("modifier") != null )
 		{
 			int groupe_id = Integer.parseInt(request.getParameter("groupe_id"));
-			String tarif = request.getParameter("tarif");
-			int trajet_id = Integer.parseInt(request.getParameter("trajet_id"));
+			float tarif = Float.parseFloat(request.getParameter("tarif"));
+			float tarif_reduc = Float.parseFloat(request.getParameter("tarif_reduc"));
+			float taux_reduc = Float.parseFloat(request.getParameter("taux_reduc"));
 			String statut = request.getParameter("statut");
 			
-			uneReservation = new Reservation( id, groupe_id, tarif, trajet_id, statut );
+			uneReservation = new Reservation( id, groupe_id, tarif, tarif_reduc, taux_reduc, statut );
 			
 			Controller.updateReservation(uneReservation);
-			
-			out.print("Modification réussie");
-			out.print( "<br/> Réservation modifié : " );
-			out.print( "" + uneReservation.consulter() );
 		}
 		if ( request.getParameter("retour") != null )
 		{

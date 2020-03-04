@@ -16,14 +16,15 @@
 		
 		ArrayList<Groupe> lesGroupes = Controller.selectAllGroupes();
 		//parcourir les compte
-		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Admin ID</th><th>Destination</th><th>Date</th><th>ID Trajet</th><th>Statut</th></tr></thead><tbody>");
+		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Admin ID</th><th>Nombre de personnes</th><th>ID Trajet</th><th>Destination</th><th>Date</th><th>Statut</th></tr></thead><tbody>");
 		for (Groupe unGroupe : lesGroupes)
         {
             out.print("<tr><td>" + unGroupe.getId() 
             + "</td><td>" + unGroupe.getAdministrateur_id()
+            + "</td><td>" + unGroupe.getNb_personnes()
+            + "</td><td>" + unGroupe.getId_trajet()
             + "</td><td>" + unGroupe.getDestination() 
             + "</td><td>" + unGroupe.getDate() 
-            + "</td><td>" + unGroupe.getId_trajet()
             + "</td><td>" + unGroupe.getStatut()
             + "</td><td><a href='groupe.jsp?edit=E&id=" + unGroupe.getId() + "'> EDITER </a></td>"
         	+ "</td><td><a href='groupe.jsp?supp=X&id=" + unGroupe.getId() + "'> SUPPRIMER </a></td></tr>");
@@ -36,16 +37,7 @@
 			
 			uneSession.setAttribute("id_g", id);
 			
-			String role = (String) uneSession.getAttribute("role");
-			
-			if( role.equals("super") )
-			{
-				response.sendRedirect("groupe_edit.jsp");
-			}
-			else
-			{
-				response.sendRedirect("groupe_edit_safe.jsp");
-			}
+			response.sendRedirect("groupe_edit_safe.jsp");
 		}
 		
 		if ( request.getParameter("id") != null && request.getParameter("supp") != null )

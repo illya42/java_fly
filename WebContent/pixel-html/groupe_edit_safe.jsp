@@ -9,8 +9,6 @@
 		
 		Trajet unTrajet = new Trajet();
 		
-		Trajet leTrajet = new Trajet();
-		
 		Administrateur unAdministrateur = new Administrateur();
 		%>
 		
@@ -23,6 +21,8 @@
 
 		out.print("<form method='post' action='' id='form'>");
 		out.print("<table>");
+		
+		out.print("<tr><td>ID Groupe : </td><td><input type='number' name='id_g' style='margin:10px;' value=" + unGroupe.getId() + " disabled></td></tr>");
 		
 		ArrayList<Administrateur> lesAdministrateurs = Controller.selectAllAdministrateur();
 		
@@ -38,7 +38,9 @@
 					out.print("</select>");
 				out.print("</td>");
 		out.print("</tr>");
-
+		
+		out.print("<tr><td>Nombre de personnes : </td><td><input type='number' min='1' name='nb_personnes' style='margin:10px;' value=" + unGroupe.getNb_personnes() + "></td></tr>");
+		
 		ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
 		
 		out.print("<tr>");
@@ -72,26 +74,20 @@
 		out.print("</form>");
 		
 		if ( request.getParameter("modifier") != null )
-		{
+		{	
 			int id_t = Integer.parseInt(request.getParameter("id_trajet"));
 			
-			leTrajet = Controller.returnTrajet(id_t);
-			
 			int admin_id = Integer.parseInt(request.getParameter("admin_id"));
+			int nb_personnes = Integer.parseInt(request.getParameter("nb_personnes"));
 			int id_trajet = Integer.parseInt(request.getParameter("id_trajet"));
-			
-			String destination = leTrajet.getDestination();
-			String date = leTrajet.getDate();
 
 			String statut = request.getParameter("statut");
 			
-			unGroupe = new Groupe( id, admin_id, destination, date, id_trajet, statut );
+			unGroupe = new Groupe( id, admin_id, nb_personnes, id_trajet, statut );
 			
 			Controller.updateGroupe(unGroupe);
 			
-			out.print("Modification réussie");
-			out.print( "<br/> Groupe modifié : " );
-			out.print( "" + unGroupe.consulter() );
+			response.sendRedirect("groupe_edit_safe.jsp");
 		}
 		if ( request.getParameter("retour") != null )
 		{

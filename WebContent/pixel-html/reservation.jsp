@@ -21,7 +21,7 @@
 							<select style='margin : 10px' name="groupe_id" id="groupe-select">
 								<option value="" disabled selected hidden>Choisir un groupe</option>
 									<%
-									ArrayList<Groupe> lesGroupes = Controller.selectAllGroupes();
+									ArrayList<Groupe> lesGroupes = Controller.selectFree_groupes();
 									
 									for (Groupe unGroupe : lesGroupes)
 									{
@@ -31,25 +31,23 @@
 							</select>
 						</td>
 				</tr>
-				<tr><td>Tarif : </td><td><input style='margin : 10px' type="text" name="tarif" placeholder="Rentrez un tarif"></td></tr>
-				<!--  <tr><td>ID Trajet : </td><td><input type="number" name="trajet_id"></td></tr> -->
+				<%
+				if ( request.getParameter("personnaliser") != null )
+				{
+					out.print("<tr><td>Tarif : </td><td><input style='margin : 10px' type='number' min='0' name='tarif' placeholder='Rentrez un tarif'></td></tr>");
+					out.print("<tr><td>Tarif (Réduction) : </td><td><input style='margin : 10px' type='number' min='0' name='tarif_reduc' placeholder='Rentrez un tarif réduit'></td></tr>");
+					out.print("<tr><td>Taux réduction : </td><td><input style='margin : 10px' type='number' min='0' name='taux_reduc' placeholder='Rentrez un taux de réduction'></td></tr>");
+				}
+				if ( request.getParameter("annuler") != null )
+				{
+					out.print("<tr><td>Taux réduction : </td><td><input style='margin : 10px' type='number' min='1' name='taux_reduc' placeholder='Rentrez un taux de réduction'></td></tr>");
+				}
+				if ( request.getParameter("personnaliser") == null && request.getParameter("annuler") == null )
+				{
+					out.print("<tr><td>Taux réduction : </td><td><input style='margin : 10px' type='number' name='taux_reduc' placeholder='Rentrez un taux de réduction'></td></tr>");
+				}
+				%>
 				
-				<tr>
-					<td><label for="trajet-select">ID Trajet :</label></td>
-						<td>
-							<select style='margin : 10px' name="trajet_id" id="trajet-select">
-								<option value="" disabled selected hidden>Choisir un trajet</option>
-									<%
-									ArrayList<Trajet> lesTrajets = Controller.selectAllTrajets();
-									
-									for (Trajet unTrajet : lesTrajets)
-									{
-										out.print("<option value=" + unTrajet.getId() + ">" + unTrajet.getId() + " -- " + unTrajet.getDestination() + "</option>");
-									}
-									%>
-							</select>
-						</td>
-				</tr>
 				<tr>
 					<td><label for="statut-select">Statut :</label></td>
 						<td>
@@ -60,8 +58,24 @@
 							</select>
 						</td>
 				</tr>
-				<tr><td><input type="submit" style="margin:10px;" id="bouton1" name="enregistrer" value="Enregistrer"></td>
-				<td><input type="submit" style="margin:10px;" name="retour" value="Retour"></td></tr>
+				
+				<%
+				if ( request.getParameter("personnaliser") != null )
+				{
+					out.print("<tr><td><input type='submit' style='margin:10px' id='bouton1' name='enregistrer_perso' value='Enregistrer'></td>");
+					out.print("<td><input type='submit' style='margin:10px;' name='annuler' value='Annuler la personnalisation'></td></tr>");
+				}
+				if ( request.getParameter("annuler") != null )
+				{
+					out.print("<tr><td><input type='submit' style='margin:10px' id='bouton1' name='enregistrer' value='Enregistrer'></td>");
+					out.print("<td><input type='submit' style='margin:10px;' name='personnaliser' value='Personnaliser les tarifs'></td></tr>");
+				}
+				if ( request.getParameter("personnaliser") == null && request.getParameter("annuler") == null )
+				{
+					out.print("<tr><td><input type='submit' style='margin:10px' id='bouton1' name='enregistrer' value='Enregistrer'></td>");
+					out.print("<td><input type='submit' style='margin:10px;' name='personnaliser' value='Personnaliser les tarifs'></td></tr>");
+				}
+				%>
 		</table>
 		</form>
 		<br/>
@@ -77,13 +91,15 @@
 		
 		ArrayList<Reservation> lesReservations = Controller.selectAllReservations();
 
-		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Tarif</th><th>Trajet ID</th><th>Statut</th></tr></thead><tbody>");
+		out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Destination</th><th>Tarif</th><th>Tarif (Réduction)</th><th>Taux réduction</th><th>Statut</th></tr></thead><tbody>");
 		for (Reservation uneReservation : lesReservations)
         {
             out.print("<tr><td>" + uneReservation.getId() 
             + "</td><td>" + uneReservation.getGroupe_id()
+            + "</td><td>" + uneReservation.getDestination()
             + "</td><td>" + uneReservation.getTarif() 
-            + "</td><td>" + uneReservation.getTrajet_id()
+            + "</td><td>" + uneReservation.getTarif_reduc() 
+            + "</td><td>" + uneReservation.getTaux_reduc() 
             + "</td><td>" + uneReservation.getStatut()
             + "</td><td><a href='reservation.jsp?edit=E&id=" + uneReservation.getId() + "'> EDITER </a></td>"
         	+ "</td><td><a href='reservation.jsp?supp=X&id=" + uneReservation.getId() + "'> SUPPRIMER </a></td></tr>");
@@ -108,26 +124,36 @@
 			response.sendRedirect("reservation.jsp");
 		}
 		
-		if ( request.getParameter("enregistrer") != null )
+		if ( request.getParameter("enregistrer_perso") != null )
 		{
 			int groupe_id = Integer.parseInt(request.getParameter("groupe_id"));
-			String tarif = request.getParameter("tarif");
-			int trajet_id = Integer.parseInt(request.getParameter("trajet_id"));
+			float tarif = Float.parseFloat(request.getParameter("tarif"));
+			float tarif_reduc = Float.parseFloat(request.getParameter("tarif_reduc"));
+			float taux_reduc = Float.parseFloat(request.getParameter("taux_reduc"));
 			String statut = request.getParameter("statut");
 			
-			uneReservation = new Reservation( groupe_id, tarif, trajet_id, statut );
+			uneReservation = new Reservation( groupe_id, tarif, tarif_reduc, taux_reduc, statut );
 			
 			//insertion
 			
 			Controller.insertReservation(uneReservation);
-			
-			out.print("Insertion dans la bdd réussie");
-			out.print( "<br/> Nouveau Trajet : " );
-			out.print( "" + uneReservation.consulter() );
 		}
-		if ( request.getParameter("retour") != null )
+		if ( request.getParameter("enregistrer") != null )
 		{
-			response.sendRedirect("menu.jsp");
+			int groupe_id = Integer.parseInt(request.getParameter("groupe_id"));
+			
+			float tarif = Controller.selectNb_personnes(groupe_id) * Controller.selectTarif(groupe_id);
+
+			float taux_reduc = Float.parseFloat(request.getParameter("taux_reduc"));
+			
+			float tarif_reduc = tarif -( tarif * taux_reduc / 100 );
+			String statut = request.getParameter("statut");
+			
+			uneReservation = new Reservation( groupe_id, tarif, tarif_reduc, taux_reduc, statut );
+			
+			//insertion
+			
+			Controller.insertReservation(uneReservation);
 		}
 		%>
 		</div>
