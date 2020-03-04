@@ -24,25 +24,25 @@
 	<div class="container-login100">
 		<div class="wrap-login100 p-t-0 p-b-80">
 			<form class="login100-form validate-form flex-sb flex-w">
-				<span class="login100-form-title p-b-51">
+				<span class="login100-form-title p-b-51" style="font-family: rubik;">
 					Login
 				</span>
 
 				<div class="wrap-input100 validate-input m-b-16">
-					<input class="input100" type="text" name="identifiant" required placeholder="Identifiant">
+					<input class="input100" type="text" name="identifiant" style="font-family: rubik;" required placeholder="Identifiant">
 					<span class="focus-input100"></span>
 				</div>
 				
 				<div class="wrap-input100 validate-input m-b-16">
-					<input class="input100" type="password" name="mdp" required placeholder="Mot de passe">
+					<input class="input100" type="password" name="mdp" style="font-family: rubik;" required placeholder="Mot de passe">
 					<span class="focus-input100"></span>
 				</div>
 
 				<div class="container-login100-form-btn m-t-17">
-					<input class="login100-form-btn" type='submit' name='valider' value='valider'>
+					<input class="login100-form-btn" type='submit' style="font-family: rubik;" name='valider' value='valider'>
 				</div>
 				<div class="container-login100-form-btn m-t-17">
-						<input class="login100-form-btn" type='submit' name='annuler' value='annuler'>
+						<input class="login100-form-btn" type='submit' style="font-family: rubik;" name='annuler' value='annuler'>
 				</div>
 
 			</form>
@@ -63,14 +63,14 @@
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-0 p-b-80">
 				<form class="login100-form validate-form flex-sb flex-w">
-					<span class="login100-form-title p-b-51">
+					<span class="login100-form-title p-b-51" style="font-family: rubik;">
 						Login
 					</span>
 
 					
 					<div class="wrap-input100 validate-input m-b-16">
 					<%
-						out.print("<input class='input100' type='text' name='identifiant' required placeholder='Identifiant' value=" + identifiant + ">");
+						out.print("<input class='input100' style='font-family: rubik;'  type='text' name='identifiant' required placeholder='Identifiant' value=" + identifiant + ">");
 					%>
 						<span class="focus-input100"></span>
 					</div>
@@ -78,16 +78,16 @@
 					
 					<div class="wrap-input100 validate-input m-b-16">
 					<%
-						out.print("<input class='input100' type='password' name='mdp' required placeholder='Mot de passe' value=" + mdp + ">");
+						out.print("<input class='input100' style='font-family: rubik;' type='password' name='mdp' required placeholder='Mot de passe' value=" + mdp + ">");
 					%>
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="container-login100-form-btn m-t-17">
-						<input class="login100-form-btn" type='submit' name='valider' value='menu'>
+						<input class="login100-form-btn" type='submit' style="font-family: rubik;" name='valider' value='menu'>
 					</div>
 					<div class="container-login100-form-btn m-t-17">
-						<input class="login100-form-btn" type='submit' name='deconnection' value='deconnection'>
+						<input class="login100-form-btn" type='submit' style="font-family: rubik;" name='deconnection' value='deconnection'>
 					</div>
 
 				</form>
@@ -104,25 +104,25 @@
 		<div class="container-login100">
 			<div class="wrap-login100 p-t-0 p-b-80">
 				<form class="login100-form validate-form flex-sb flex-w">
-					<span class="login100-form-title p-b-51">
+					<span class="login100-form-title p-b-51" style="font-family: rubik;">
 						Login
 					</span>
 					
 					<div class="wrap-input100 validate-input m-b-16">
-						<input class="input100" type="text" name="identifiant" required placeholder="Identifiant">
+						<input class="input100" type="text" style="font-family: rubik;" name="identifiant" required placeholder="Identifiant">
 						<span class="focus-input100"></span>
 					</div>
 					
 					<div class="wrap-input100 validate-input m-b-16">
-						<input class="input100" type="password" name="mdp" required placeholder="Mot de passe">
+						<input class="input100" type="password" style="font-family: rubik;" name="mdp" required placeholder="Mot de passe">
 						<span class="focus-input100"></span>
 					</div>
 
 					<div class="container-login100-form-btn m-t-17">
-						<input class="login100-form-btn" type='submit' name='valider' value='valider'>
+						<input class="login100-form-btn" type='submit' style="font-family: rubik;" name='valider' value='valider'>
 					</div>
 					<div class="container-login100-form-btn m-t-17">
-						<input class="login100-form-btn" type='submit' name='annuler' value='annuler'>
+						<input class="login100-form-btn" type='submit' style="font-family: rubik;" name='annuler' value='annuler'>
 					</div>
 
 				</form>
@@ -154,7 +154,7 @@
 			}
 			else
 			{
-				out.print("<h3 style='color:red;text-align: center;'>Veuillez vérifier les champs</h3>");
+				out.print("<h3 style= 'font-family:rubik; color:red; text-align: center;'>Veuillez vérifier les champs</h3>");
 			}
 		}
 		if( request.getParameter("deconnection") != null )

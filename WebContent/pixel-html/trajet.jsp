@@ -1,6 +1,4 @@
 
-		<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
-
 	<%@ include file="header.jsp" %>
 		<div class="row">
                     <div class="col-sm-12">
@@ -11,7 +9,7 @@
 				<tr><td style="font-size: 14px;font-weight: 500;">Tarif : </td><td><input style="margin:10px;" type="number" min="30" name="prix" required placeholder="Rentrez un prix"></td></tr>
 				<tr><td style="font-size: 14px;font-weight: 500;">Heure de depart : </td><td><input style="margin:10px;" type="time" name="heure_dep" required ></td></tr>
 				<tr><td style="font-size: 14px;font-weight: 500;">Heure d'arrivee : </td><td><input style="margin:10px;" type="time" name="heure_arr" required ></td></tr>
-				<tr><td style="font-size: 14px;font-weight: 500;">Date : </td><td><input type="date" style="margin:10px; margin:10px;width: 200px;height: 25px;" required name="date"></td></tr>
+				<tr><td style="font-size: 14px;font-weight: 500;">Date : </td><td><input type="date" style="margin:10px; margin:10px;width: 160px;height: 25px;" required name="date"></td></tr>
 				<tr><td style="font-size: 14px;font-weight: 500;">Aeroport de depart : </td><td><input style="margin:10px;" type="text" name="aeroport" required placeholder="Rentrez un aeroport"></td></tr>
 				<tr><td style="font-size: 14px;font-weight: 500;">Destination : </td><td><input style="margin:10px;" type="text" name="destination" required placeholder="Rentrez la destination"></td></tr>
 				<tr><td style="font-size: 14px;font-weight: 500;">Image : </td><td><input style="margin:10px;" type="text" name="image" required placeholder="Rentrez le nom de l'image"></td></tr>
@@ -21,7 +19,9 @@
 		</form>
 		<br/>
 		<br/></div>
+
 				
+
 		</div>
 		</div>
 		<%!

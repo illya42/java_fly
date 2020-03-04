@@ -6,12 +6,12 @@
 		<h2>Gestion des Administrateurs</h2>
 		<form method="post" style="margin-left: 40px;" action="">
 		<table>
-				<tr><td>Nom : </td><td><input style="margin:10px;" type="text" min="10" name="nom" placeholder="Rentrez un nom"></td></tr>
-				<tr><td>Prénom : </td><td><input style="margin:10px;" type="text" name="prenom" placeholder="Rentrez un prénom"></td></tr>
-				<tr><td>Identifiant : </td><td><input style="margin:10px;" type="text" name="identifiant" placeholder="Rentrez un identifiant"></td></tr>
-				<tr><td>Mot de passe : </td><td><input style="margin:10px;" type="text" name="mdp" placeholder="Rentrez un mot de passe"></td></tr>
+				<tr><td style="font-size: 14px;font-weight: 500;">Nom : </td><td><input style="margin:10px;" type="text" min="10" name="nom" placeholder="Rentrez un nom"></td></tr>
+				<tr><td style="font-size: 14px;font-weight: 500;">Prénom : </td><td><input style="margin:10px;" type="text" name="prenom" placeholder="Rentrez un prénom"></td></tr>
+				<tr><td style="font-size: 14px;font-weight: 500;">Identifiant : </td><td><input style="margin:10px;" type="text" name="identifiant" placeholder="Rentrez un identifiant"></td></tr>
+				<tr><td style="font-size: 14px;font-weight: 500;">Mot de passe : </td><td><input style="margin:10px;" type="text" name="mdp" placeholder="Rentrez un mot de passe"></td></tr>
 				<tr>
-					<td><label for="role-select">Rôle :</label></td>
+					<td><label  style="margin-bottom:0px" for="role-select">Rôle :</label></td>
 						<td>
 							<select style='margin : 10px' name="role" id="role-select">
 								<option value="groupe" disabled selected hidden>Choisir un rôle</option>
