@@ -50,7 +50,7 @@
 					out.print("<select style='margin : 10px;width: 171px;' name='statut' id='statut-select'>");
 						out.print("<option value='" + uneReservation.getStatut() + "' selected hidden> " + uneReservation.getStatut() + " </option>");
 						out.print("<option value='en cours'>En cours</option>");
-						out.print("<option value='valide'>ValidÃ©</option>");
+						out.print("<option value='valide'>Validé</option>");
 					out.print("</select>");
 				out.print("</td>");
 		out.print("</tr>");

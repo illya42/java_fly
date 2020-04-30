@@ -11,7 +11,7 @@
 		
 		<div class="row">
                     <div class="col-sm-12">
-                        <div class="white-box" style="display: inline-block;width: 450px;vertical-align: top;text-align: center;max-width: 100%;height: 330px;">
+                        <div class="white-box" style="display: inline-block;width: 450px;vertical-align: top;text-align: center;max-width: 100%;height: 360px;">
 		<h2>Gestion des Reservations</h2>
 		<form method="post" style="margin-left: 40px;" action="">
 		<table>				
@@ -55,7 +55,7 @@
 							<select style='margin : 10px;width: 171px;' name="statut" id="statut-select">
 								<option value="en cours" selected hidden>Choisir un statut</option>
 								<option value="en cours">En cours</option>
-								<option value="valide">ValidÃ©</option>
+								<option value="valide">Validé</option>
 							</select>
 						</td>
 				</tr>
@@ -125,7 +125,7 @@
 			
 			ArrayList<Reservation> lesReservations = Controller.selectAllReservations();
 	
-			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Destination</th><th>Tarif</th><th>Tarif (RÃ©duction)</th><th>Taux rÃ©duction</th><th>Statut</th></tr></thead><tbody>");
+			out.print("<div class='table-responsive'><table class='table'><thead><tr><th>ID</th><th>Groupe ID</th><th>Destination</th><th>Tarif</th><th>Tarif (Réduction)</th><th>Taux réduction</th><th>Statut</th></tr></thead><tbody>");
 			for (Reservation uneReservation : lesReservations)
 	        {
 	            out.print("<tr><td>" + uneReservation.getId() 
@@ -172,7 +172,7 @@
 				
 				Controller.insertReservation(uneReservation);
 	
-				out.print("Insertion dans la bdd rÃ©ussie");
+				out.print("Insertion dans la bdd réussie");
 				out.print( "<br/> Nouveau Trajet : " );
 				out.print( "" + uneReservation.consulter() );
 				response.sendRedirect("reservation.jsp");
@@ -194,6 +194,8 @@
 				//insertion
 				
 				Controller.insertReservation(uneReservation);
+				
+				response.sendRedirect("reservation.jsp");
 			}
 		}
 		%>

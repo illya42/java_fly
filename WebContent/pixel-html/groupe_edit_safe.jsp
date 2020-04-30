@@ -64,13 +64,13 @@
 					out.print("<select style='margin : 10px;width: 171px;' name='statut' id='statut-select'>");
 						out.print("<option value='" + unGroupe.getStatut() + "' selected hidden> " + unGroupe.getStatut() + " </option>");
 						out.print("<option value='en cours'>En cours</option>");
-						out.print("<option value='valide'>ValidÃ©</option>");
+						out.print("<option value='valide'>Validé</option>");
 					out.print("</select>");
 				out.print("</td>");
 		out.print("</tr>");
 	
 		out.print("<tr><td><input type='submit' name='modifier' style='margin:10px;' value='Modifier'></td>");
-		out.print("<td><input type='reset' style='margin-left: 90px;' name='rÃ©tablir' value='Annuler' onclick='reset();'></td></tr>");
+		out.print("<td><input type='reset' style='margin-left: 90px;' name='retablir' value='Annuler' onclick='reset();'></td></tr>");
 		out.print("</table>");
 		out.print("<tr><td><input type='submit' name='retour' value='Retour'></td></tr><br><br>");
 		out.print("</form>");
@@ -93,8 +93,8 @@
 			</div></div></div>
 			<div class="white-box">
 			<%
-			out.print("Modification rÃ©ussie");
-			out.print( "<br/> Groupe modifiÃ© : <br/>" );
+			out.print("Modification réussie");
+			out.print( "<br/> Groupe modifié : <br/>" );
 
 			
 			//parcourir les compte

@@ -363,12 +363,10 @@ public class Modele
 	{
 		ArrayList<Groupe> lesGroupesrech = new ArrayList<Groupe>();
 		
-		String requete = "select * from groupe where id like '%"+mot+"%'"
-				+ " or administrateur_id like '%" + mot +"%'"
-				+ " or id_trajet like '%" + mot +"%'"
-				+ " or nb_personnes like '%" + mot +"%'"
-				+ " or statut like '%" + mot +"%'"
+		String requete = "select g.id, g.administrateur_id, g.id_trajet, g.nb_personnes, t.destination, t.date, g.statut from groupe g, trajet t where g.id_trajet = t.id and "
+				+ "t.destination like '%" + mot +"%'"
 				+ ";";
+		
 		try 
 		{
 			uneBdd.seConnecter();
@@ -383,6 +381,8 @@ public class Modele
 						desRes.getInt("administrateur_id"),
 						desRes.getInt("id_trajet"),
 						desRes.getInt("nb_personnes"),
+						desRes.getString("destination"),
+						desRes.getString("date"),
 						desRes.getString("statut")
 						);
 				lesGroupesrech.add(unGroupe);
@@ -393,6 +393,8 @@ public class Modele
 		{
 			exp.printStackTrace();
 		}
+		System.out.println(requete);
+		
 		return lesGroupesrech;
 	}
 	

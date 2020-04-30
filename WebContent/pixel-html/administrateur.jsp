@@ -88,6 +88,7 @@
 			out.print("Insertion dans la bdd réussie");
 			out.print( "<br/> Nouveau Trajet : " );
 			out.print( "" + unAdministrateur.consulter() );
+			response.sendRedirect("administrateur.jsp");
 		}
 		if ( request.getParameter("retour") != null )
 		{
