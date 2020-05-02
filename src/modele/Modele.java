@@ -39,8 +39,7 @@ public class Modele
 	    Administrateur unAdministrateur = null;
 	    
 	    String requete = "select * from administrateur where identifiant = '" + identifiant + 
-	            "' and mdp = sha1('" 
-	            + mdp + "');";
+	            "' and mdp = '" + mdp + "';";
 	            
 	    uneBdd.seConnecter();
 	
@@ -110,8 +109,8 @@ public class Modele
 				+ unAdministrateur.getNom_admin()
 		+"','" + unAdministrateur.getPrenom_admin() 
 		+"','" + unAdministrateur.getIdentifiant()
-		+"',sha1('" + unAdministrateur.getMdp()
-		+"'),'" + unAdministrateur.getRole()
+		+"','" + unAdministrateur.getMdp()
+		+"','" + unAdministrateur.getRole()
 		+"');";
 		
 		executer (requete);
